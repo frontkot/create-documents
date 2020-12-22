@@ -22,6 +22,12 @@ const Invoice = () => {
                 <Form className='invoice-form'>
                 <Link to='/choose-document'>Вернуться к выбору документа</Link>
                 <InfoLabel text='Заполните следующие поля для формирования Счета-фактуры' className='invoice-info_label' />
+                <TextInput className='invoice-text_input' text='Номер счет-фактуры' id='invoiceNumber'/>
+                <DateInput className='invoice-date_input' text='Дата счет-фактуры' id='invoiceDate'/>
+                <DateInput className='invoice-date_input' text='Дата совершения оборота' id='dateOfTurover'/>
+                <TextInput className='invoice-text_input' text='Поставщик' id='provider'/>
+                <TextArea className='invoice-text_area' text='БИН и адрес места нахождения поставщика' id=''/>
+
 
                 </Form>
             )}
