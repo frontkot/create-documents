@@ -1,0 +1,13 @@
+.act {
+    &-form {
+        display: flex;
+        flex-direction: column;
+    }
+    &-info_label {
+        padding: 20px;
+    }
+    &-submit {
+        max-width: 250px;
+        margin: 0 auto;
+    }
+}
