@@ -26,7 +26,9 @@ const Invoice = () => {
                 <DateInput className='invoice-date_input' text='Дата счет-фактуры' id='invoiceDate'/>
                 <DateInput className='invoice-date_input' text='Дата совершения оборота' id='dateOfTurover'/>
                 <TextInput className='invoice-text_input' text='Поставщик' id='provider'/>
-                <TextArea className='invoice-text_area' text='БИН и адрес места нахождения поставщика' id=''/>
+                <TextInput className='invoice-text_input' text='Бин номер поставщика' id='provideraTaxNumber'/>
+
+                <TextArea className='invoice-text_area' text='Адрес места поставщика' id=''/>
 
 
                 </Form>
