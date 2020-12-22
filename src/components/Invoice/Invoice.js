@@ -30,7 +30,7 @@ const Invoice = () => {
 
                 <TextArea className='invoice-text_area' text='Адрес места поставщика' id=''/>
 
-
+                <SubmitButton disabled={true} text='Перейти к предпросмотру документа' className='invoice-submit'/>
                 </Form>
             )}
         </Formik>
