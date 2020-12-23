@@ -1,42 +1,68 @@
 import React from 'react';
 import Pdf from 'react-to-pdf';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { getData } from '../../store/inputData/selectors';
 
 const ref = React.createRef();
 
-const Payment = ({
-    // client,
-    // clientTaxNumber,
-    // executor,
-    // executorTaxNumber,
-    // contract,
-    // nameOfWorks,
-    // dateOfWorks,
-    // measure,
-    // quantity,
-    // unitPrice,
-    // price,
-    // actNumber,
-    // actDate,
-    // inventoryUsageInformation,
-    // numberOfPafes,
-    // documentsList,
-    // executerPosition,
-    // executerSignature,
-    // executerFullName,
-    // clientPosition,
-    // clientSignature,
-    // clientFullName,
-    // dateIfSignin
-}) => {
+const Payment = () => {
+    const data = useSelector(getData);
+    const {    
+        client,
+        clientTaxNumber,
+        executor,
+        executorTaxNumber,
+        contract,
+        nameOfWorks,
+        dateOfWorks,
+        measure,
+        quantity,
+        unitPrice,
+        price,
+        // actNumber,
+        // actDate,
+        // inventoryUsageInformation,
+        // numberOfPafes,
+        // documentsList,
+        executerPosition,
+        executerSignature,
+        executerFullName,
+        clientPosition,
+        clientSignature,
+        clientFullName,
+        dateIfSignin
+    } = data;
+
     return (
         <>
-            <Pdf targetRef={ref} filename="code-example.pdf">
-                {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
+            <Link to='/preview' className='go-button'>Вернуться на старницу превью документов</Link>
+            <Link to='/filling' className='go-button'>Вернуться к редактированию документов</Link>
+
+
+            <Pdf targetRef={ref} filename={`Счет на оплату № от.pdf`}>
+                {({ toPdf }) => <button onClick={toPdf}>Сохранить в ПДФ</button>}
             </Pdf>
-            <div ref={ref}>
-                <h1>Hello CodeSandbox</h1>
-                <h2>Start editing to see some magic happen!</h2>
+            <div ref={ref} className='invoice'>
+                <p>{client}</p>
+                <p>{clientTaxNumber}</p>
+                <p>{executor}</p>
+                <p>{executorTaxNumber}</p>
+                <p>{contract}</p>
+                <p>{nameOfWorks}</p>
+                <p>{dateOfWorks}</p>
+                <p>{measure}</p>
+                <p>{quantity}</p>
+                <p>{unitPrice}</p>
+                <p>{price}</p>
+
+                <p>{executerPosition}</p>
+                <p>{executerSignature}</p>
+                <p>{executerFullName}</p>
+                <p>{clientPosition}</p>
+                <p>{clientSignature}</p>
+                <p>{clientFullName}</p>
+                <p>{dateIfSignin}</p>
             </div>
         </>
     );

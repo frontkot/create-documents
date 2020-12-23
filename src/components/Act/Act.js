@@ -6,8 +6,7 @@ import { getData } from '../../store/inputData/selectors';
 
 const ref = React.createRef();
 
-const Act = ({
-}) => {
+const Act = () => {
     const data = useSelector(getData);
     const {    
         client,
@@ -38,14 +37,36 @@ const Act = ({
 
     return (
         <>
-            {/* <Link className='page404-button' onClick={history.goBack}>Вернуться назад</Link> */}
+            <Link to='/preview' className='go-button'>Вернуться на старницу превью документов</Link>
+            <Link to='/filling' className='go-button'>Вернуться к редактированию документов</Link>
 
-            <Pdf targetRef={ref} filename="code-example.pdf">
-                {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
+            <Pdf targetRef={ref} filename={`Aкт выполненых работ №${actNumber} от ${actDate}.pdf`}>
+                {({ toPdf }) => <button onClick={toPdf}>Сохранить в ПДФ</button>}
             </Pdf>
-            <div ref={ref}>
-                <h1>{client}</h1>
-                <h2>{clientTaxNumber}</h2>
+            <div ref={ref} className='act'>
+                <p>{client}</p>
+                <p>{clientTaxNumber}</p>
+                <p>{executor}</p>
+                <p>{executorTaxNumber}</p>
+                <p>{contract}</p>
+                <p>{nameOfWorks}</p>
+                <p>{dateOfWorks}</p>
+                <p>{measure}</p>
+                <p>{quantity}</p>
+                <p>{unitPrice}</p>
+                <p>{price}</p>
+                <p>{actNumber}</p>
+                <p>{actDate}</p>
+                <p>{inventoryUsageInformation}</p>
+                <p>{numberOfPafes}</p>
+                <p>{documentsList}</p>
+                <p>{executerPosition}</p>
+                <p>{executerSignature}</p>
+                <p>{executerFullName}</p>
+                <p>{clientPosition}</p>
+                <p>{clientSignature}</p>
+                <p>{clientFullName}</p>
+                <p>{dateIfSignin}</p>
             </div>
         </>
     );

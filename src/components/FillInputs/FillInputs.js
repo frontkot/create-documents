@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Formik, Form } from 'formik';
 import TextInput from '../form/TextInput/TextInput';
 import SubmitButton from '../form/SubmitButton/SubmitButton';
@@ -9,7 +9,7 @@ import DateInput from '../form/DateInput/DateInput';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getData, getIsAct, getIsInvoice, getIsPayment } from '../../store/inputData/selectors';
-import { updateData } from '../../store/inputData/actions';
+import { updateData, deleteData } from '../../store/inputData/actions';
 import { toggleIsAct, toggleIsInvoice, toggleIsPayment } from '../../store/inputData/actions';
 
 
@@ -22,49 +22,20 @@ const FillInputs = () => {
     const isPayment = useSelector(getIsPayment);
     const dispatch = useDispatch();
 
-
-    const initialValues = {
-        client: '',
-        clientTaxNumber: '',
-        executor: '',
-        executorTaxNumber: '',
-        contract: '',
-        nameOfWorks: '',
-        dateOfWorks: '',
-        measure: '',
-        quantity: '',
-        unitPrice: '',
-        price: '',
-        actNumber: '',
-        actDate: '',
-        inventoryUsageInformation: '',
-        numberOfPafes: '',
-        documentsList: '',
-        executerPosition: '',
-        executerSignature: '',
-        executerFullName: '',
-        clientPosition: '',
-        clientSignature: '',
-        clientFullName: '',
-        dateIfSigning: '',
-    }
-
-    useEffect(() => {
-        
-    })
-    
-
     const submitForm = (values) => {
         dispatch(updateData(values));
-        history.push('/preview')
+        history.push('/preview');
+    }
 
+    const clearForm = () => {
+        dispatch(deleteData());
+        window.location.reload();
     }
     
     return (
-        <>w
-            <Link to='/'>Вернуться на стартовую страницу</Link>
-            <Link to='/act'>Act</Link>
-
+        <>
+            <Link to='/' className='go-button'>Вернуться на стартовую страницу</Link>
+            <button className='clear-form_button' onClick={clearForm}>Очистить форму</button>
             <div className='form-header'>
                 <InfoLabel text='Выберите, какие документы вам требуются' className='form-info_label' />
                 <label className={isAct ? 'checkbox-label checkbox-label_active' : 'checkbox-label'}>
@@ -148,7 +119,14 @@ const FillInputs = () => {
 
                             </>
                         }
+                        
 
+                        {/* Счет-фактура */}
+                        {/* <TextInput className='form-text_input' text='Дата совершения оборота' id='dateOfOperation'/> */}
+
+                        
+                        
+                        {/* Общие поля */}
                         <div className='form-general_info'>
                         <div className='form-header'>
                                 <InfoLabel text='Блок подписи документа' className='form-info_label' />
@@ -164,9 +142,7 @@ const FillInputs = () => {
                             </div>
                         </div>
 
-                        {/* Счет-фактура */}
                         {/* Счет на оплату */}
-                        {/* Акт */}
 
 
                         {/* <div className='form-block'></div>

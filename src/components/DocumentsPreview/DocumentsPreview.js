@@ -10,18 +10,20 @@ const DocumentsPreview = () => {
 
     return (
         <>
+            <Link to='/filling' className='go-button'>Вернуться к редактированию документов</Link>
+
             {isAct &&
-                <Link to={'/act'} className='preview-page'>
+                <Link to={'/act'} className='go-button'>
                     Перейти к предпросмотру акта выполненых работ
                 </Link>
             }
             {isInvoice &&
-                <Link to={'/invoice'} className='preview-page'>
+                <Link to={'/invoice'} className='go-button'>
                     Перейти к предпросмотру счета-фактуры
                 </Link>
             }
             {isPayment &&
-                <Link to={'/payment'} className='preview-page'>
+                <Link to={'/payment'} className='go-button'>
                     Перейти к предпросмотру счета на оплату
                 </Link>
             }

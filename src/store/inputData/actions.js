@@ -1,16 +1,11 @@
 import * as actions from './types';
 
-// export const dataLoading = (isLoading) => ({
-//   type: actions.LOAD_DATA, 
-//   payload: isLoading
-// })
-
 export const updateData = (products) => ({
-  type: actions.UPDATE_DATA, 
+  type: actions.UPDATE_DATA,
   payload: products
 })
 
-export const daleteData = () => ({
+export const deleteData = () => ({
   type: actions.DELETE_DATA
 })
 
