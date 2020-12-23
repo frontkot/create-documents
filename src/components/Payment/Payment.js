@@ -11,27 +11,64 @@ const Payment = () => {
     const {    
         client,
         clientTaxNumber,
+        clientBINNumber,
+        clientAdress,
+        clientBank,
         executor,
         executorTaxNumber,
+        executorBINNumber,
+        executorAdress,
+        executorBank,
         contract,
-        nameOfWorks,
+        contractDate,
+        contractСonditions,
+        destination,
+        proxy,
+        departureMethod,
+        CMR,
+        shipper,
+        consignee,
+        nameOfGoods,
         dateOfWorks,
         measure,
         quantity,
         unitPrice,
+        withoutVAT,
+        VATRate,
+        VATTax,
+        exciseRate,
+        exciseTax,
         price,
-        // actNumber,
-        // actDate,
-        // inventoryUsageInformation,
-        // numberOfPafes,
-        // documentsList,
+        actNumber,
+        actDate,
+        inventoryUsageInformation,
+        numberOfPafes,
+        documentsList,
+        beneficiary,
+        beneficiaryTaxNumber,
+        beneficiaryIIK,
+        beneficiaryKbe,
+        beneficiaryBank,
+        beneficiaryBIK,
+        beneficiaryBankCode,
+        paymentNumber,
+        paymentDate,
+        totalPayableForAll,
+        includingVAT,
+        totalItems,
+        totalForAmount,
+        currency,
+        totalPayable,
         executerPosition,
         executerSignature,
         executerFullName,
         clientPosition,
         clientSignature,
         clientFullName,
-        dateIfSignin
+        dateOfSigning,
+        executivePersonSupplier,
+        executivePersonSupplierPosition,
+        сhiefAccountant,  
     } = data;
 
     return (
@@ -44,25 +81,25 @@ const Payment = () => {
                 {({ toPdf }) => <button onClick={toPdf}>Сохранить в ПДФ</button>}
             </Pdf>
             <div ref={ref} className='invoice'>
-                <p>{client}</p>
-                <p>{clientTaxNumber}</p>
-                <p>{executor}</p>
-                <p>{executorTaxNumber}</p>
-                <p>{contract}</p>
-                <p>{nameOfWorks}</p>
-                <p>{dateOfWorks}</p>
-                <p>{measure}</p>
-                <p>{quantity}</p>
-                <p>{unitPrice}</p>
-                <p>{price}</p>
+                {client && <p>{client}</p>}
+                {clientTaxNumber && <p>{clientTaxNumber}</p>}
+                {executor && <p>{executor}</p>}
+                {executorTaxNumber && <p>{executorTaxNumber}</p>}
+                {contract && <p>{contract}</p>}
+                {nameOfGoods && <p>{nameOfGoods}</p>}
+                {dateOfWorks && <p>{dateOfWorks}</p>}
+                {measure && <p>{measure}</p>}
+                {quantity && <p>{quantity}</p>}
+                {unitPrice && <p>{unitPrice}</p>}
+                {price && <p>{price}</p>}
 
-                <p>{executerPosition}</p>
-                <p>{executerSignature}</p>
-                <p>{executerFullName}</p>
-                <p>{clientPosition}</p>
-                <p>{clientSignature}</p>
-                <p>{clientFullName}</p>
-                <p>{dateIfSignin}</p>
+                {executerPosition && <p>{executerPosition}</p>}
+                {executerSignature && <p>{executerSignature}</p>}
+                {executerFullName && <p>{executerFullName}</p>}
+                {clientPosition && <p>{clientPosition}</p>}
+                {clientSignature && <p>{clientSignature}</p>}
+                {clientFullName && <p>{clientFullName}</p>}
+                {dateOfSigning && <p>{dateOfSigning}</p>}
             </div>
         </>
     );
