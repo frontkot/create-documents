@@ -1,10 +1,8 @@
 import React from 'react';
 import Page404 from '../pages/Page404/Page404';
 import { Route, Switch } from "react-router-dom";
-import ChooseDoc from '../pages/ChooseDoc/ChooseDoc';
 import StartPage from '../pages/StartPage/StartPage';
-import Act from '../components/Act/Act';
-import Invoice from '../components/Invoice/Invoice';
+import FillInputs from '../components/FillInputs/FillInputs';
 
 
 const Aproutes = () => {
@@ -12,11 +10,8 @@ const Aproutes = () => {
         <>
             <Switch>
                 <Route exact path='/' component={StartPage} />
-                <Route path='/choose-document' component={ChooseDoc} />
-                <Route path='/act' component={Act} />
-                <Route path='/invoice' component={Invoice} />
-                {/* <Route path='/payment' component={} /> */}
-                
+                <Route path='/filling' component={FillInputs} />
+                {/* <Route path='/preview' component={Preview} /> */}
                 <Route path='*' component={(routeProps) => <Page404 {...routeProps}/>} />
             </Switch>
         </>

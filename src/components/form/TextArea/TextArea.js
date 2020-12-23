@@ -5,7 +5,7 @@ const TextArea = ({
 }) => {
     return (
         <label htmlFor={id} className={className}>
-            {text}
+            <span className={`${className}_header`}>{text}</span>
             <textarea
                 // className={className}
                 // className={{touched.{id}} && errors.{id} ? 'form-error_warning' : ''}
