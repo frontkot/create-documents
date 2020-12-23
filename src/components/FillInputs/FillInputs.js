@@ -1,78 +1,90 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik, Form } from 'formik';
 import TextInput from '../form/TextInput/TextInput';
 import SubmitButton from '../form/SubmitButton/SubmitButton';
 import InfoLabel from '../form/InfoLabel/InfoLabel';
-import './FillInputs.scss'
+import './FillInputs.scss';
 import TextArea from '../form/TextArea/TextArea';
 import DateInput from '../form/DateInput/DateInput';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getData, getIsAct, getIsInvoice, getIsPayment } from '../../store/inputData/selectors';
+import { updateData } from '../../store/inputData/actions';
+import { toggleIsAct, toggleIsInvoice, toggleIsPayment } from '../../store/inputData/actions';
 
-const initialValues = {
-    client: '',
-    clientTaxNumber: '',
-    executor: '',
-    executorTaxNumber: '',
-    contract: '',
-    nameOfWorks: '',
-    dateOfWorks: '',
-    measure: '',
-    quantity: '',
-    unitPrice: '',
-    price: '',
-    actNumber: '',
-    actDate: '',
-    inventoryUsageInformation: '',
-    numberOfPafes: '',
-    documentsList: '',
-    executerPosition: '',
-    executerSignature: '',
-    executerFullName: '',
-    clientPosition: '',
-    clientSignature: '',
-    clientFullName: '',
-    dateIfSigning: '',
-
-
-
-}
 
 const FillInputs = () => {
-    const [isAct, setIsAct] = useState(false);
-    const [isInvoice, setIsInvoice] = useState(false);
-    const [isPayment, setIsPayment] = useState(false);
+    const history = useHistory();
+    
+    const data = useSelector(getData);
+    const isAct = useSelector(getIsAct);
+    const isInvoice = useSelector(getIsInvoice);
+    const isPayment = useSelector(getIsPayment);
+    const dispatch = useDispatch();
+
+
+    const initialValues = {
+        client: '',
+        clientTaxNumber: '',
+        executor: '',
+        executorTaxNumber: '',
+        contract: '',
+        nameOfWorks: '',
+        dateOfWorks: '',
+        measure: '',
+        quantity: '',
+        unitPrice: '',
+        price: '',
+        actNumber: '',
+        actDate: '',
+        inventoryUsageInformation: '',
+        numberOfPafes: '',
+        documentsList: '',
+        executerPosition: '',
+        executerSignature: '',
+        executerFullName: '',
+        clientPosition: '',
+        clientSignature: '',
+        clientFullName: '',
+        dateIfSigning: '',
+    }
+
+    useEffect(() => {
+        
+    })
     
 
     const submitForm = (values) => {
-        console.log(values)
+        dispatch(updateData(values));
+        history.push('/preview')
+
     }
     
     return (
-        <>
+        <>w
             <Link to='/'>Вернуться на стартовую страницу</Link>
+            <Link to='/act'>Act</Link>
+
             <div className='form-header'>
                 <InfoLabel text='Выберите, какие документы вам требуются' className='form-info_label' />
-            <label className='checkbox-label'>
-                <span>Акт выполненых работ</span>
-                <input type='checkbox' checked={isAct} onChange={() => setIsAct(!isAct)} />
-            </label>
-            <label className='checkbox-label'>
-                <span>Счет-фактура</span>
-                <input type='checkbox' checked={isInvoice} onChange={() => setIsInvoice(!isInvoice)} />
-            </label>
-            <label className='checkbox-label'>
-                <span>Счет на оплату</span>
-                <input type='checkbox' checked={isPayment} onChange={() => setIsPayment(!isPayment)} />
-            </label>
+                <label className={isAct ? 'checkbox-label checkbox-label_active' : 'checkbox-label'}>
+                    <span>Акт выполненых работ</span>
+                    <input type='checkbox' checked={isAct} onChange={() => dispatch(toggleIsAct(!isAct))} />
+                </label>
+                <label className={isInvoice ? 'checkbox-label checkbox-label_active' : 'checkbox-label'}>
+                    <span>Счет-фактура</span>
+                    <input type='checkbox' checked={isInvoice} onChange={() => dispatch(toggleIsInvoice(!isInvoice))} />
+                </label>
+                <label className={isPayment ? 'checkbox-label checkbox-label_active' : 'checkbox-label'}>
+                    <span>Счет на оплату</span>
+                    <input type='checkbox' checked={isPayment} onChange={() => dispatch(toggleIsPayment(!isPayment))} />
+                </label>
             </div>
 
             <Formik
-                initialValues={initialValues}
+                initialValues={data}
                 // validate={validate}
-                onSubmit={( values ) => {
-                        submitForm(values)
-                    }
-                }
+                onSubmit={submitForm}
             >
                 {({ errors, touched }) => (
                     <Form className='form-container'>
@@ -161,7 +173,11 @@ const FillInputs = () => {
                         <div className='form-block'></div>
                         <div className='form-block'></div> */}
 
-                        <SubmitButton disabled={!isAct && !isInvoice && !isPayment} text='Перейти к предпросмотру документа/-ов' className='form-submit'/>
+                        <SubmitButton 
+                            disabled={!isAct && !isInvoice && !isPayment} 
+                            text='Перейти к предпросмотру документа/-ов' 
+                            className='form-submit' 
+                        />
                     </Form>
                 )}
             </Formik>

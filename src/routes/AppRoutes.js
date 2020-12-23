@@ -3,6 +3,8 @@ import Page404 from '../pages/Page404/Page404';
 import { Route, Switch } from "react-router-dom";
 import StartPage from '../pages/StartPage/StartPage';
 import FillInputs from '../components/FillInputs/FillInputs';
+import DocumentsPreview from '../components/DocumentsPreview/DocumentsPreview';
+import Act from '../components/Act/Act';
 
 
 const Aproutes = () => {
@@ -11,7 +13,11 @@ const Aproutes = () => {
             <Switch>
                 <Route exact path='/' component={StartPage} />
                 <Route path='/filling' component={FillInputs} />
-                {/* <Route path='/preview' component={Preview} /> */}
+                <Route path='/preview' component={DocumentsPreview} />
+                <Route path='/act' component={Act} />
+                {/* <Route path='/invoice' component={Invoice} /> */}
+                {/* <Route path='/payment' component={Payment} /> */}
+
                 <Route path='*' component={(routeProps) => <Page404 {...routeProps}/>} />
             </Switch>
         </>

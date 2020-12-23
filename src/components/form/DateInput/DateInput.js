@@ -1,4 +1,5 @@
 import React from 'react';
+import { Field } from 'formik';
 
 const DateInput = ({
     text, id, className
@@ -6,7 +7,7 @@ const DateInput = ({
     return (
         <label htmlFor={id} className={className}>
             <span className={`${className}_header`}>{text}</span>
-            <input
+            <Field
                 id={id}
                 name={id}
                 type='date'

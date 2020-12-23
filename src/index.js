@@ -4,17 +4,16 @@ import './index.scss';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
-
-// import { Provider } from 'react-redux';
-// import store from './store/store';
+import store from './store/store';
+import { Provider } from 'react-redux';
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* <Provider store={store}> */}
+    <Provider store={store}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    {/* </Provider> */}
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
