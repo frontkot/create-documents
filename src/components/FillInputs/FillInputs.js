@@ -189,7 +189,7 @@ const FillInputs = () => {
                                     <TextInput className='form-text_input' text='Код заключения платежа банка бенефициара' id='beneficiaryBankCode'/>
                                 </div>
                                 <div className='form-header'>
-                                    <InfoLabel text='Поля для заполнения акта' className='form-info_label' />
+                                    <InfoLabel text='Поля для заполнения счета на оплату' className='form-info_label' />
                                 </div>
                                 <div className='form-block'>
                                     <TextInput className='form-text_input' text='Номер счета на оплату' id='paymentNumber'/>

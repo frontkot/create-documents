@@ -1,6 +1,6 @@
 .start-page {
     display: flex;
-    height: 100vh;
+    height: 50vh;
     justify-content: space-around;
     align-items: center;
 
@@ -10,7 +10,6 @@
         color: black;
         padding: 20px;
         border-radius: 10px;
-        margin-top: 50px;
         &:hover {
             background-color: rgb(80, 253, 158);
         }
