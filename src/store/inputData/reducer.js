@@ -50,7 +50,7 @@ const initialState = {
     includingVAT: '',
     totalItems: '',
     totalForAmount: '',
-    currency: '',
+    currency: 'KZT',
     totalPayable: '',
     executerPosition: '',
     executerSignature: '',

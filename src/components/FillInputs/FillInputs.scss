@@ -42,6 +42,11 @@
             
         }
     }
+    &-button_block {
+        display: flex;
+        justify-content: space-around;
+        margin: 0 50px;
+    }
 }
 
 .checkbox {
@@ -54,6 +59,19 @@
         border: 1px solid black;
         &_active {
             background-color: rgb(187, 255, 201);
+        }
+    }
+}
+
+@media screen and (max-width: 968px) {
+    .form {
+        &-block {
+            grid-template-columns: 1fr;
+        }
+        &-header {
+            justify-items: center;
+            grid-auto-flow: dense;
+            grid-template-columns: repeat(2, 1fr);
         }
     }
 }

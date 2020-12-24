@@ -34,8 +34,10 @@ const FillInputs = () => {
     
     return (
         <>
-            <Link to='/' className='go-button'>Вернуться на стартовую страницу</Link>
-            <button className='clear-form_button' onClick={clearForm}>Очистить форму</button>
+            <div className='form-button_block'>
+                <Link to='/' className='go-button'>Вернуться на стартовую страницу</Link>
+                <button className='clear-form_button' onClick={clearForm}>Очистить форму</button>
+            </div>
             <div className='form-header'>
                 <InfoLabel text='Выберите, какие документы вам требуются' className='form-info_label' />
                 <label className={isAct ? 'checkbox-label checkbox-label_active' : 'checkbox-label'}>
@@ -237,12 +239,13 @@ const FillInputs = () => {
                                 }
                             </div>
                         </div>
-
-                        <SubmitButton 
-                            disabled={!isAct && !isInvoice && !isPayment} 
-                            text='Перейти к предпросмотру документа/-ов' 
-                            className='form-submit' 
-                        />
+                        <div className='form-button_block'>
+                            <SubmitButton 
+                                disabled={!isAct && !isInvoice && !isPayment} 
+                                text='Перейти к предпросмотру документа/-ов' 
+                                className={!isAct && !isInvoice && !isPayment ? 'form-submit form-submit_disabled' : 'form-submit' }
+                            />
+                        </div>
                     </Form>
                 )}
             </Formik>
