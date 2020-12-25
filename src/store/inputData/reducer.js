@@ -1,5 +1,12 @@
 import * as actions from './types';
 
+const newDate = new Date();
+const month = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+const currentMonth = newDate.getMonth() + 1;
+const today = newDate.getDate() + '.' + currentMonth + '.' + newDate.getFullYear();
+const todayWithMonth = newDate.getDate() + ' ' + month[newDate.getMonth()] + ' ' + newDate.getFullYear();
+
+
 const initialState = {
   data: JSON.parse(localStorage.getItem('data-info')) || {
     client: '',
@@ -21,19 +28,10 @@ const initialState = {
     CMR: '',
     shipper: '',
     consignee: '',
-    nameOfGoods: '',
-    dateOfWorks: '',
-    measure: '',
-    quantity: '',
-    unitPrice: '',
-    withoutVAT: '',
-    VATRate: '',
-    VATTax: '',
-    exciseRate: '',
-    exciseTax: '',
-    price: '',
-    actNumber: '',
-    actDate: '',
+    actNumber: '1',
+    actDate: today,
+    invoiceNumber: '1',
+    invoiceDate: todayWithMonth,
     inventoryUsageInformation: '',
     numberOfPafes: '',
     documentsList: '',
@@ -44,8 +42,8 @@ const initialState = {
     beneficiaryBank: '',
     beneficiaryBIK: '',
     beneficiaryBankCode: '',
-    paymentNumber: '',
-    paymentDate: '',
+    paymentNumber: '1',
+    paymentDate: today,
     totalPayableForAll: '',
     includingVAT: '',
     totalItems: '',
@@ -58,10 +56,11 @@ const initialState = {
     clientPosition: '',
     clientSignature: '',
     clientFullName: '',
-    dateOfSigning: '',
+    dateOfSigning: today,
     executivePersonSupplier: '',
     executivePersonSupplierPosition: '',
     сhiefAccountant: '',  
+    tableInfo: [],
   },
   isAct: JSON.parse(localStorage.getItem('is-act')) || false,
   isInvoice:  JSON.parse(localStorage.getItem('is-invoice')) || false,
@@ -75,6 +74,9 @@ const reducer = (state = initialState, action) => {
     case actions.UPDATE_DATA:
       localStorage.setItem('data-info', JSON.stringify(action.payload))
       return { ...state, data: action.payload }
+    case actions.UPDATE_TABLE_DATA:
+      localStorage.setItem('table-info', JSON.stringify(action.payload))
+      return { ...state, tableInfo: action.payload }
     case actions.DELETE_DATA:
       localStorage.removeItem('data-info');
       localStorage.removeItem('is-act');
@@ -94,3 +96,20 @@ const reducer = (state = initialState, action) => {
 }
 
 export default reducer;
+
+
+// tableInfo: JSON.parse(localStorage.getItem('table-info')) || {tableInfo: {
+//   item: '',
+//   nameOfGoods: 'Что-то там',
+//   dateOfWorks: '',
+//   measure: '',
+//   quantity: '12',
+//   unitPrice: '',
+//   withoutVAT: '',
+//   VATRate: '',
+//   VATTax: '',
+//   exciseRate: '',
+//   exciseTax: '',
+//   price: '',
+// },
+// },

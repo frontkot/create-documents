@@ -19,7 +19,6 @@ const Aproutes = () => {
                 <Route path='/act' component={Act} />
                 <Route path='/invoice' component={Invoice} />
                 <Route path='/payment' component={Payment} />
-
                 <Route path='*' component={(routeProps) => <Page404 {...routeProps}/>} />
             </Switch>
         </>

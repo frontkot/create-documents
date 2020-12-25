@@ -4,14 +4,13 @@
         flex-direction: column;
         justify-content: space-between;
     }
-    &-block, &-header {
+    &-block, &-header, &-table_block {
         display: grid;
         justify-items: end;
         padding: 5px;
         margin: 5px 50px;
         border-radius: 5px;
         border: 2px dotted rgb(0, 0, 0);
-        flex-wrap: wrap;
         justify-content: space-evenly;
         align-items: center;
         box-shadow:  0px 0px 15px 0px rgba(50, 50, 50, 0.75);
@@ -25,6 +24,11 @@
     &-header {
         background-color: rgb(255, 198, 144);
     }
+    &-table_block {
+        margin: 5px 5px;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     &-info_label {
         padding: 5px;
         font-weight: 700;
@@ -33,19 +37,36 @@
         max-width: 250px;
         margin: 0 auto;
     }
-    &-text_input, &-date_input, &-text_area {
+    &-text_input {
         display: flex;
         align-items: center;
+        padding: 1px;
+        word-wrap: break-word;
         &_header {
             padding-right: 8px;
             text-align: end;
+
             
+        }
+        & input {
+            max-width: 12vw;
         }
     }
     &-button_block {
         display: flex;
         justify-content: space-around;
         margin: 0 50px;
+    }
+    &-table_item {
+        padding: 5px;
+        margin: 5px 50px;
+        border-radius: 5px;
+        border: 2px dotted rgb(0, 0, 0);
+        background-color: rgb(214, 224, 255);
+        display: grid;
+        grid-template-columns: 10% 82% 8%;
+        justify-items: center;
+        align-items: center;
     }
 }
 
@@ -63,15 +84,101 @@
     }
 }
 
+.go-button, .clear-form_button, .form-submit, .delete-item, .add-item {
+    background-color: white;
+    outline: none;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid black;
+    margin: 5px;
+    color: black;
+    transition: .5s;
+    max-width: 430px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+        &:hover {
+            background-color: rgb(162, 216, 255);
+        }
+}
+
+.form-submit, .add-item {
+    &:hover {
+        background-color: rgb(177, 255, 162);
+    }
+}
+
+.form-submit_disabled {
+    opacity: 0.5;
+    background-color: rgb(233, 233, 233);
+    cursor: not-allowed;
+    &:hover {
+        background-color: rgb(255, 162, 162);
+    }
+}
+
+.clear-form_button, .delete-item {
+    &:hover {
+        background-color: rgb(255, 162, 162);
+    }
+}
+.add-item {
+    margin: 0 auto;
+}
+
+.delete-item {
+    font-size: 13px;
+    padding: 3px 6px;
+}
+
 @media screen and (max-width: 968px) {
+    .go-button, .clear-form_button, .form-submit, .delete-item, .add-item {
+        font-size: 12px;
+            padding: 2px 5px;
+    }
+    .checkbox {
+        &-label {
+            font-size: 14px;
+            padding: 1px 2px;
+            width: 11rem;
+            justify-content: flex-end;
+        }
+    }
+    
     .form {
-        &-block {
-            grid-template-columns: 1fr;
+        &-block, &-header {
+            margin: 5px 25px;
+        }
+        &-block, &-table_block {
+            grid-template-columns: 95%;
         }
         &-header {
             justify-items: center;
             grid-auto-flow: dense;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr;
+        }
+        &-text_input {
+            font-size: 14px;
+            &_header {
+                font-size: 14px;
+                display: flex;
+            }
+            & input {
+                font-size: 12px;
+            }
+    
+        }
+        &-table_item {
+            display: flex;
+            flex-direction: column;
+            margin: 5px 25px;
+
+        }
+        &-info_label {
+            font-size: 16px;
         }
     }
 }

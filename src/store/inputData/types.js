@@ -4,3 +4,4 @@ export const DELETE_DATA = 'DELETE_DATA';
 export const IS_ACT = 'IS_ACT';
 export const IS_INVOICE = 'IS_INVOICE';
 export const IS_PAYMENT = 'IS_PAYMENT';
+export const UPDATE_TABLE_DATA = 'UPDATE_TABLE_DATA';

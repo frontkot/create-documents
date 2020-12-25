@@ -1,8 +1,13 @@
 import * as actions from './types';
 
-export const updateData = (products) => ({
+export const updateData = (data) => ({
   type: actions.UPDATE_DATA,
-  payload: products
+  payload: data
+})
+
+export const updateTableData = (data) => ({
+  type: actions.UPDATE_TABLE_DATA,
+  payload: data
 })
 
 export const deleteData = () => ({

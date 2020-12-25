@@ -2,7 +2,7 @@ import React from 'react';
 import { Field } from 'formik';
 
 const TextInput = ({
-    text, id, className, defaultValue
+    text, id, className, placeholder
 }) => {
     return (
         <label htmlFor={id} className={className}>
@@ -11,7 +11,7 @@ const TextInput = ({
                 id={id}
                 name={id}
                 type='text'
-                defaultValue={defaultValue}
+                placeholder={placeholder}
             />
         </label>
     );
