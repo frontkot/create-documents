@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Page, Text, View, Document, StyleSheet, Font } from '@react-pdf/renderer';
 import Regular from '../../utils/font/Roboto/Roboto-Regular.ttf';
 import Bold from '../../utils/font/Roboto/Roboto-Bold.ttf';
@@ -289,16 +289,15 @@ const styles = StyleSheet.create({
     border: 1,
     borderStyle: 'solid',
     margin: -0.5,
-    flexDirection: 'column',
-    alignItems: 'center',
+    // display: 'table-cell',
+    // verticalAlign: 'middle',
   },
   numDescr: {
-    height: 10,
     borderColor: 'black',
     border: 1,
     borderStyle: 'solid',
     margin: -0.5,
-
+    paddingTop:2,
   },
   textDescrPrices: {
     paddingTop: 12,
@@ -318,8 +317,30 @@ const styles = StyleSheet.create({
     border: 1,
     borderStyle: 'solid',
     margin: -0.5,
+  },
+  tableRow: {
+    flexDirection: 'row',
+    textAlign: 'center',
+    fontSize: 7,
+    alignItems: 'center',
+    // justifyContent: 'center',
 
   },
+  tableCell: {
+    // paddingTop: 4,
+    // paddingBottom: 2,
+    borderColor: 'black',
+    border: 1,
+    borderStyle: 'solid',
+    margin: -0.5,
+    // display: 'inline-block',
+    // marginTop: 'auto',
+    // marginBottom: 'auto'
+    flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+    
+  }
 
 
 
@@ -331,6 +352,63 @@ const styles = StyleSheet.create({
 });
 
 const Act = ({ client, clientTaxNumber, clientBINNumber, clientAdress, clientBank, executor, executorTaxNumber, executorBINNumber, executorAdress, executorBank, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, shipper, consignee, nameOfGoods, dateOfWorks, measure, quantity, unitPrice, withoutVAT, VATRate, VATTax, exciseRate, exciseTax, price, actNumber, actDate, inventoryUsageInformation, numberOfPafes, documentsList, beneficiary, beneficiaryTaxNumber, beneficiaryIIK, beneficiaryKbe, beneficiaryBank, beneficiaryBIK, beneficiaryBankCode, paymentNumber, paymentDate, totalPayableForAll, includingVAT, totalItems, totalForAmount, currency, totalPayable, executerPosition, executerSignature, executerFullName, clientPosition, clientSignature, clientFullName, dateOfSigning, executivePersonSupplier, executivePersonSupplierPosition, сhiefAccountant, tableInfo, }) => {
+  const [fullCost, setFullCost] = useState(0);
+  const [total, setTotal] = useState(0);
+  console.log('Full cost', fullCost)
+  console.log('Total nums', total)
+
+
+  const TableRow = ({
+    num, nameOfGoods, dateOfWorks, measure, quantity, unitPrice, price
+  }) => (
+    <View style={styles.tableRow}>
+      <View style={styles.firstCol}>
+        <Text style={styles.tableCell}>{num}</Text>
+      </View>
+      <View style={styles.secondCol}>
+        <Text style={styles.tableCell}>{nameOfGoods}</Text>
+      </View>    
+      <View style={styles.thirdCol}>
+        <Text style={styles.tableCell}>{dateOfWorks}</Text>
+      </View>
+      <View style={styles.fourthCol}>
+        <Text style={styles.tableCell}> </Text>
+      </View>
+      <View style={styles.fifthCol}>
+        <Text style={styles.tableCell}>{measure}</Text>
+      </View>
+      <View style={styles.sixthCol}>
+        <Text style={styles.tableCell}>{quantity}</Text>
+      </View>
+      <View style={styles.seventhCol}>
+        <Text style={styles.tableCell}>{unitPrice}</Text>
+      </View>
+      <View style={styles.eighthCol}>
+        <Text style={styles.tableCell}>{price}</Text>
+      </View>
+    </View>
+  )
+
+  const tableArr = tableInfo.map((i, index) => {
+    const cost = i.quantity*i.unitPrice
+    // setFullCost(cost + fullCost);
+    console.log(cost)
+    // setFullCost(i.quantity*i.unitPrice+fullCost);
+    // setTotal(total + (index+1));
+    return (
+      <TableRow 
+        key={index}
+        num={index+1}
+        nameOfGoods={i.nameOfGoods}
+        dateOfWorks={i.dateOfWorks}
+        measure={i.measure}
+        quantity={i.quantity}
+        unitPrice={i.unitPrice}
+        price={i.quantity*i.unitPrice}
+      />
+    )
+  })
+
   return (
     <Document>
         <Page size='A4' style={styles.page}>
@@ -424,10 +502,16 @@ const Act = ({ client, clientTaxNumber, clientBINNumber, clientAdress, clientBan
     
             
           </View>
-  
+        </View>
+        <View style={styles}>
+          {tableArr}
+        </View>
+
+        {/* <View style={styles}>
           <Text>
           </Text>
-        </View>
+        </View> */}
+
 
 
 
@@ -473,10 +557,6 @@ const Act = ({ client, clientTaxNumber, clientBINNumber, clientAdress, clientBan
           <Text style={styles.fullNameDescr}>расшифровка подписи</Text>
         </View>
 
-        <View style={styles}>
-          <Text>
-          </Text>
-        </View>
 
         </Page>
     </Document>
