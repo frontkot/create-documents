@@ -15,25 +15,24 @@ const DocumentsPreview = () => {
                 <Link to='/filling' className='go-button'>Вернуться к редактированию документов</Link>
                 <p>На данный момент дступна только черновая версия акта выполненых работ.</p>
 
-                {isAct && <Link to={'/preview-documents'} className='go-button'>
+                {isAct && <Link to={'/preview-act'} className='go-button'>
                         Перейти к предпросмотру акта выполненых работ
                     </Link>
                 }
-                {/* {isAct &&
-                    <Link to={'/act'} className='go-button'>
-                        Перейти к предпросмотру акта выполненых работ
-                    </Link>
-                } */}
-                {/* {isInvoice &&
-                    <Link to={'/invoice'} className='go-button'>
+                {isInvoice &&
+                    <>
+                    {/* <Link to={'/invoice'} className='go-button'>
                         Перейти к предпросмотру счета-фактуры
-                    </Link>
+                    </Link> */}
+                    </>
                 }
                 {isPayment &&
-                    <Link to={'/payment'} className='go-button'>
+                    <>
+                    {/* <Link to={'/payment'} className='go-button'>
                         Перейти к предпросмотру счета на оплату
-                    </Link>
-                } */}
+                    </Link> */}
+                    </>
+                }
             </div>
         </>
     );

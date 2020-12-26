@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Formik, Form, FieldArray } from 'formik';
 import TextInput from '../form/TextInput/TextInput';
 import SubmitButton from '../form/SubmitButton/SubmitButton';
@@ -97,9 +97,6 @@ const FillInputs = () => {
                                         <TextInput className='form-text_input' text='Дата счета на оплату' id='paymentDate'/>
                                 </div>
                             }
-
-
-
                         </div>
 
                         {/* Общие поля */}
@@ -178,9 +175,8 @@ const FillInputs = () => {
                         </div>
                         {/* Таблица */}
                         <div className='form-header'>
-                                <InfoLabel text='Таблица товаров и услуг' className='form-info_label' />
+                            <InfoLabel text='Таблица товаров и услуг' className='form-info_label' />
                         </div>
-
                         <FieldArray 
                             name='tableInfo'>
                             {arrayHelpers => (
@@ -220,8 +216,6 @@ const FillInputs = () => {
                                 </>
                             )}
                         </FieldArray>
-                        
-
 
                         {/* Счет на оплату */}
                         {isPayment &&
