@@ -13,13 +13,18 @@ const DocumentsPreview = () => {
         <>  
             <div className='doc-preview'>
                 <Link to='/filling' className='go-button'>Вернуться к редактированию документов</Link>
+                <p>На данный момент дступна только черновая версия акта выполненых работ.</p>
 
-                {isAct &&
-                    <Link to={'/act'} className='go-button'>
+                {isAct && <Link to={'/preview-documents'} className='go-button'>
                         Перейти к предпросмотру акта выполненых работ
                     </Link>
                 }
-                {isInvoice &&
+                {/* {isAct &&
+                    <Link to={'/act'} className='go-button'>
+                        Перейти к предпросмотру акта выполненых работ
+                    </Link>
+                } */}
+                {/* {isInvoice &&
                     <Link to={'/invoice'} className='go-button'>
                         Перейти к предпросмотру счета-фактуры
                     </Link>
@@ -28,7 +33,7 @@ const DocumentsPreview = () => {
                     <Link to={'/payment'} className='go-button'>
                         Перейти к предпросмотру счета на оплату
                     </Link>
-                }
+                } */}
             </div>
         </>
     );
