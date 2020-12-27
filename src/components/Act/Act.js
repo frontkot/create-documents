@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Page, Text, View, Document, StyleSheet, Font } from '@react-pdf/renderer';
 import Regular from '../../utils/font/Roboto/Roboto-Regular.ttf';
 import Bold from '../../utils/font/Roboto/Roboto-Bold.ttf';
 import Italic from '../../utils/font/Roboto/Roboto-Italic.ttf';
-// import BoldItalic from '../../utils/font/Roboto/Roboto-BoldItalic.ttf';
 
 
 Font.register({
@@ -21,11 +20,6 @@ Font.register({
         fontWeight: 'normal',
         fontStyle: 'italic'
       },
-      // {
-      //   src: '../../utils/font/Roboto/Roboto-BoldItalic.ttf',
-      //   fontWeight: 'bold',
-      //   fontStyle: 'italic'
-      // }
     ]
 
 })
@@ -258,7 +252,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     textAlign: 'center',
   },
-  firstCol: {
+  firstCol: { 
     width: '5vw',
   },
   secondCol: {
@@ -289,8 +283,6 @@ const styles = StyleSheet.create({
     border: 1,
     borderStyle: 'solid',
     margin: -0.5,
-    // display: 'table-cell',
-    // verticalAlign: 'middle',
   },
   numDescr: {
     borderColor: 'black',
@@ -323,24 +315,26 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 7,
     alignItems: 'center',
-    // justifyContent: 'center',
-
   },
   tableCell: {
-    // paddingTop: 4,
-    // paddingBottom: 2,
+    paddingTop: 3,
     borderColor: 'black',
     border: 1,
     borderStyle: 'solid',
     margin: -0.5,
-    // display: 'inline-block',
-    // marginTop: 'auto',
-    // marginBottom: 'auto'
-    flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-    
-  }
+    height: 20,
+  },
+  tableFull: {
+    paddingTop: 2,
+    width: '63.15vw',
+    borderColor: 'black',
+    paddingRight: 10,
+    fontWeight: 'bold',
+    border: 1,
+    borderStyle: 'solid',
+    margin: -0.5,
+    textAlign: 'right',
+  },
 
 
 
@@ -352,15 +346,21 @@ const styles = StyleSheet.create({
 });
 
 const Act = ({ client, clientTaxNumber, clientBINNumber, clientAdress, clientBank, executor, executorTaxNumber, executorBINNumber, executorAdress, executorBank, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, shipper, consignee, nameOfGoods, dateOfWorks, measure, quantity, unitPrice, withoutVAT, VATRate, VATTax, exciseRate, exciseTax, price, actNumber, actDate, inventoryUsageInformation, numberOfPafes, documentsList, beneficiary, beneficiaryTaxNumber, beneficiaryIIK, beneficiaryKbe, beneficiaryBank, beneficiaryBIK, beneficiaryBankCode, paymentNumber, paymentDate, totalPayableForAll, includingVAT, totalItems, totalForAmount, currency, totalPayable, executerPosition, executerSignature, executerFullName, clientPosition, clientSignature, clientFullName, dateOfSigning, executivePersonSupplier, executivePersonSupplierPosition, сhiefAccountant, tableInfo, }) => {
-  const [fullCost, setFullCost] = useState(0);
-  const [total, setTotal] = useState(0);
-  console.log('Full cost', fullCost)
-  console.log('Total nums', total)
+  const allCosts = tableInfo.map((i) => i.quantity*i.unitPrice);
+  const allQuantity = tableInfo.map((i) => +i.quantity);
+  const sumOfArrItems = (arr) => {
+    let sum=0; 
+    if(arr.length !== 0) {
+      for(let i=0; i<arr.length; i++) {
+        sum = sum+parseInt(arr[i])
+      } 
+    }
+    return sum;
+  }
+  const fullCost = sumOfArrItems(allCosts);
+  const total = sumOfArrItems(allQuantity);
 
-
-  const TableRow = ({
-    num, nameOfGoods, dateOfWorks, measure, quantity, unitPrice, price
-  }) => (
+  const TableRow = ({ num, nameOfGoods, dateOfWorks, measure, quantity, unitPrice, price}) => (
     <View style={styles.tableRow}>
       <View style={styles.firstCol}>
         <Text style={styles.tableCell}>{num}</Text>
@@ -390,11 +390,6 @@ const Act = ({ client, clientTaxNumber, clientBINNumber, clientAdress, clientBan
   )
 
   const tableArr = tableInfo.map((i, index) => {
-    const cost = i.quantity*i.unitPrice
-    // setFullCost(cost + fullCost);
-    console.log(cost)
-    // setFullCost(i.quantity*i.unitPrice+fullCost);
-    // setTotal(total + (index+1));
     return (
       <TableRow 
         key={index}
@@ -503,9 +498,24 @@ const Act = ({ client, clientTaxNumber, clientBINNumber, clientAdress, clientBan
             
           </View>
         </View>
-        <View style={styles}>
+        <View>
           {tableArr}
+          <View style={styles.tableRow}>
+            <View style={styles.tableFull}>
+              <Text>Итого:</Text>
+            </View>
+            <View style={styles.sixthCol}>
+              <Text style={styles.numDescr}>{total}</Text>
+            </View>
+            <View style={styles.seventhCol}>
+              <Text style={styles.numDescr}>x</Text>
+            </View>
+            <View style={styles.eighthCol}>
+              <Text style={styles.numDescr}>{fullCost}</Text>
+            </View>
+          </View>
         </View>
+
 
         {/* <View style={styles}>
           <Text>
