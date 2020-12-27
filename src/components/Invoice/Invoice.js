@@ -1,106 +1,165 @@
 import React from 'react';
-// import Pdf from 'react-to-pdf';
-import { Link } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
-// import { getData } from '../../store/inputData/selectors';
+import { Page, Text, View, Document, StyleSheet, Font, Image } from '@react-pdf/renderer';
+import Regular from '../../utils/font/Roboto/Roboto-Regular.ttf';
+import Bold from '../../utils/font/Roboto/Roboto-Bold.ttf';
+import Italic from '../../utils/font/Roboto/Roboto-Italic.ttf';
 
-// const ref = React.createRef();
+Font.register({
+    family: 'Roboto',
+    fonts: [
+        {
+            src: Regular
+        },
+        {
+            src: Bold,
+            fontWeight: 'bold'
+        },
+        {
+            src: Italic,
+            fontWeight: 'normal',
+            fontStyle: 'italic'
+        },
+    ]
+})
 
-const Invoice = () => {
-    // const data = useSelector(getData);
-    // const {    
-    //     client,
-    //     clientTaxNumber,
-    //     clientBINNumber,
-    //     clientAdress,
-    //     clientBank,
-    //     executor,
-    //     executorTaxNumber,
-    //     executorBINNumber,
-    //     executorAdress,
-    //     executorBank,
-    //     contract,
-    //     contractDate,
-    //     contractСonditions,
-    //     destination,
-    //     proxy,
-    //     departureMethod,
-    //     CMR,
-    //     shipper,
-    //     consignee,
-    //     nameOfGoods,
-    //     dateOfWorks,
-    //     measure,
-    //     quantity,
-    //     unitPrice,
-    //     withoutVAT,
-    //     VATRate,
-    //     VATTax,
-    //     exciseRate,
-    //     exciseTax,
-    //     price,
-    //     actNumber,
-    //     actDate,
-    //     inventoryUsageInformation,
-    //     numberOfPafes,
-    //     documentsList,
-    //     beneficiary,
-    //     beneficiaryTaxNumber,
-    //     beneficiaryIIK,
-    //     beneficiaryKbe,
-    //     beneficiaryBank,
-    //     beneficiaryBIK,
-    //     beneficiaryBankCode,
-    //     paymentNumber,
-    //     paymentDate,
-    //     totalPayableForAll,
-    //     includingVAT,
-    //     totalItems,
-    //     totalForAmount,
-    //     currency,
-    //     totalPayable,
-    //     executerPosition,
-    //     executerSignature,
-    //     executerFullName,
-    //     clientPosition,
-    //     clientSignature,
-    //     clientFullName,
-    //     dateOfSigning,
-    //     executivePersonSupplier,
-    //     executivePersonSupplierPosition,
-    //     сhiefAccountant,  
-    // } = data;
+const styles = StyleSheet.create({
+    page: {
+        padding: 20,
+        fontFamily: 'Roboto',
+        fontSize: 8
+    },
+    
+})
+
+const Invoice = ({ procedureDate, actNumber, actDate, invoiceNumber, invoiceDate, paymentNumber, paymentDate, client, clientTaxNumber, clientBINNumber, clientAdress, clientBank, executor, executorTaxNumber, executorBINNumber, executorAdress, executorBank, beneficiary, beneficiaryTaxNumber, beneficiaryIIK, beneficiaryKbe, beneficiaryBank, beneficiaryBIK, beneficiaryBankCode, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, shipper, consignee, totalPayableForAll, includingVAT, totalItems, totalForAmount, currency, totalPayable, inventoryUsageInformation, numberOfPafes, documentsList, executerPosition, executerFullName, clientPosition, clientFullName, dateOfSigning, executivePersonSupplier, executivePersonSupplierPosition, сhiefAccountant, executerSignature, clientSignature, tableInfo,}) => {
+    // const allCosts = tableInfo.map((i) => i.quantity*i.unitPrice);
+    // const allQuantity = tableInfo.map((i) => +i.quantity);
+    // const sumOfArrItems = (arr) => {
+    //   let sum=0; 
+    //   if(arr.length !== 0) {
+    //     for(let i=0; i<arr.length; i++) {
+    //       sum = sum+parseInt(arr[i])
+    //     } 
+    //   }
+    //   return sum;
+    // }
+    // const fullCost = sumOfArrItems(allCosts);
+    // const total = sumOfArrItems(allQuantity);
 
     return (
-        <>
-            <Link to='/preview' className='go-button'>Вернуться на старницу превью документов</Link>
-            <Link to='/filling' className='go-button'>Вернуться к редактированию документов</Link>
+        <Document>
+            <Page size='A4' style={styles.page}>
+                <View style={styles.docHeader}>
+                    <Text>Счет-фактура №</Text>
+                    <Text>{invoiceNumber}</Text>
+                    <Text>от</Text>
+                    <Text>{invoiceDate}</Text>
+                </View>
+                <View>
+                    <Text>Дата совершения оборота:</Text>
+                    <Text>{procedureDate}</Text>
+                </View>
+                <View>
+                    <Text>Поставщик</Text>
+                    <Text>{executor}</Text>
+                </View>
+                <View>
+                    <Text>БИН и адрес места нахождения поставщика: </Text>
+                    <Text>БИН: </Text>
+                    <Text>{executorBINNumber}, </Text>
+                    <Text>{executorAdress}</Text>
+                </View>
+                <View>
+                    <Text>ИИК поставщик: </Text>
+                    <Text>{executorTaxNumber}</Text>
+                    <Text>в банке  </Text>
 
-            {/* <Pdf targetRef={ref} filename={`Счет-фактура № от.pdf`}>
-                {({ toPdf }) => <button onClick={toPdf}>Сохранить в ПДФ</button>}
-            </Pdf>
-            <div ref={ref} className='invoice'>
-                {client && <p>{client}</p>}
-                {clientTaxNumber && <p>{clientTaxNumber}</p>}
-                {executor && <p>{executor}</p>}
-                {executorTaxNumber && <p>{executorTaxNumber}</p>}
-                {contract && <p>{contract}</p>}
-                {nameOfGoods && <p>{nameOfGoods}</p>}
-                {dateOfWorks && <p>{dateOfWorks}</p>}
-                {measure && <p>{measure}</p>}
-                {quantity && <p>{quantity}</p>}
-                {unitPrice && <p>{unitPrice}</p>}
-                {price && <p>{price}</p>}
+                </View>
+                <View>
+                    <Text>Договор (контракт) на поставку товаров (работ, услуг): </Text>
+                    <Text>{contract} </Text>
+                    <Text>от </Text>
+                    <Text>{contractDate}</Text>
 
-                {executerPosition && <p>{executerPosition}</p>}
-                {executerSignature && <p>{executerSignature}</p>}
-                {executerFullName && <p>{executerFullName}</p>}
-                {clientPosition && <p>{clientPosition}</p>}
-                {clientSignature && <p>{clientSignature}</p>}
-                {clientFullName && <p>{clientFullName}</p>}
-                {dateOfSigning && <p>{dateOfSigning}</p>}
-            </div> */}
-        </>
+                </View>
+                <View>
+                    <Text>Условия оплаты по договору (контракту): </Text>
+                    <Text>{contractСonditions}</Text>
+                </View>
+                <View>
+                    <Text>Пункт назначения поставляемых товаров (работ, услуг): </Text>
+                    <Text>{}</Text>
+                </View>
+                <View>
+                    <Text>Поставка товаров (работ,услуг) осуществлена по доверенности: </Text>
+                    <Text>{}</Text>
+                </View>
+                <View>
+                    <Text>Способ отправления: </Text>
+                    <Text>{}</Text>
+                </View>
+                <View>
+                    <Text>Товарно-транспортная накладная: </Text>
+                    <Text>{CMR}</Text>
+                </View>
+                <View>
+                    <Text>Грузоотправитель: </Text>
+                    <Text>БИН: </Text>
+                    <Text>{executorBINNumber}, </Text>
+                    <Text>{executorAdress}</Text>
+
+                </View>
+                <View>
+                    <Text>Грузоотправитель: </Text>
+                    <Text>БИН: </Text>
+                    <Text>{clientBINNumber}, </Text>
+                    <Text>{clientAdress}</Text>
+                </View>
+                <View>
+                    <Text>Получатель: </Text>
+                    <Text>{client}</Text>
+                </View>
+                <View>
+                    <Text>БИН и адрес места нахождения получателя: </Text>
+                    <Text>БИН: </Text>
+                    <Text>{clientBINNumber}, </Text>
+                    <Text>{clientAdress}</Text>
+                </View>
+                <View>
+                    <Text>ИИК получателя: </Text>
+                    <Text>{clientTaxNumber}, </Text>
+                    <Text>в банке  </Text>
+
+                </View>
+
+
+                <View>
+                    <Text>Поставщик</Text>
+                    <Text>{}</Text>
+                </View>
+
+
+                <View>
+                    <Text>Поставщик</Text>
+                    <Text>{}</Text>
+                </View>
+
+
+
+
+
+
+                <View>
+                    <Text></Text>
+                </View>
+                <View>
+                    <Text></Text>
+                </View>
+
+            </Page>
+        </Document>
+
+
     );
 };
 

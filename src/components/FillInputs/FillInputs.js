@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getData, getIsAct, getIsInvoice, getIsPayment } from '../../store/inputData/selectors';
 import { updateData, deleteData } from '../../store/inputData/actions';
 import { toggleIsAct, toggleIsInvoice, toggleIsPayment } from '../../store/inputData/actions';
+import ImageInput from '../form/ImageInput/ImageInput';
 
 const FillInputs = () => {
 
@@ -37,6 +38,7 @@ const FillInputs = () => {
     );
 
     const submitForm = (values) => {
+        console.log(values)
         dispatch(updateData(values));
         history.push('/preview');
     }
@@ -256,12 +258,10 @@ const FillInputs = () => {
                         </div>
                             <div className='form-block'>
                                 <TextInput className='form-text_input' text='Сдал (должность исполнителя)' id='executerPosition'/>
-                                <TextInput className='form-text_input' text='Подпись исполнителя' id='executerSignature'/>
                                 <TextInput className='form-text_input' text='ФИО исполнителя (расшифровка подписи)' id='executerFullName'/>
                                 {isAct &&
                                     <>
                                         <TextInput className='form-text_input' text='Принял (должность заказчика)' id='clientPosition'/>
-                                        <TextInput className='form-text_input' text='Подпись заказчика' id='clientSignature'/>
                                         <TextInput className='form-text_input' text='ФИО заказчика (расшифровка подписи)' id='clientFullName'/>
                                         <TextInput className='form-text_input' text='Дата подписания' id='dateOfSigning'/>
                                     </>
@@ -273,6 +273,11 @@ const FillInputs = () => {
                                         <TextInput className='form-text_input' text='Главный бухгалтер' id='сhiefAccountant'/>
                                     </>
                                 }
+                                <ImageInput className='form-text_input' text='Подпись исполнителя' id='executerSignature'/>
+                                {isAct && 
+                                    <ImageInput className='form-text_input' text='Подпись заказчика' id='clientSignature'/>
+                                }
+
                             </div>
                         </div>
                         

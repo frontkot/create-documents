@@ -1,107 +1,72 @@
 import React from 'react';
-// import Pdf from 'react-to-pdf';
-import { Link } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
-// import { getData } from '../../store/inputData/selectors';
+import { Page, Text, View, Document, StyleSheet, Font, Image } from '@react-pdf/renderer';
+import Regular from '../../utils/font/Roboto/Roboto-Regular.ttf';
+import Bold from '../../utils/font/Roboto/Roboto-Bold.ttf';
+import Italic from '../../utils/font/Roboto/Roboto-Italic.ttf';
 
-// const ref = React.createRef();
+Font.register({
+    family: 'Roboto',
+    fonts: [
+        {
+            src: Regular
+        },
+        {
+            src: Bold,
+            fontWeight: 'bold'
+        },
+        {
+            src: Italic,
+            fontWeight: 'normal',
+            fontStyle: 'italic'
+        },
+    ]
+})
 
-const Payment = () => {
-    // const data = useSelector(getData);
-    // const {    
-    //     client,
-    //     clientTaxNumber,
-    //     clientBINNumber,
-    //     clientAdress,
-    //     clientBank,
-    //     executor,
-    //     executorTaxNumber,
-    //     executorBINNumber,
-    //     executorAdress,
-    //     executorBank,
-    //     contract,
-    //     contractDate,
-    //     contractСonditions,
-    //     destination,
-    //     proxy,
-    //     departureMethod,
-    //     CMR,
-    //     shipper,
-    //     consignee,
-    //     nameOfGoods,
-    //     dateOfWorks,
-    //     measure,
-    //     quantity,
-    //     unitPrice,
-    //     withoutVAT,
-    //     VATRate,
-    //     VATTax,
-    //     exciseRate,
-    //     exciseTax,
-    //     price,
-    //     actNumber,
-    //     actDate,
-    //     inventoryUsageInformation,
-    //     numberOfPafes,
-    //     documentsList,
-    //     beneficiary,
-    //     beneficiaryTaxNumber,
-    //     beneficiaryIIK,
-    //     beneficiaryKbe,
-    //     beneficiaryBank,
-    //     beneficiaryBIK,
-    //     beneficiaryBankCode,
-    //     paymentNumber,
-    //     paymentDate,
-    //     totalPayableForAll,
-    //     includingVAT,
-    //     totalItems,
-    //     totalForAmount,
-    //     currency,
-    //     totalPayable,
-    //     executerPosition,
-    //     executerSignature,
-    //     executerFullName,
-    //     clientPosition,
-    //     clientSignature,
-    //     clientFullName,
-    //     dateOfSigning,
-    //     executivePersonSupplier,
-    //     executivePersonSupplierPosition,
-    //     сhiefAccountant,  
-    // } = data;
+const styles = StyleSheet.create({
+    page: {
+        padding: 20,
+        fontFamily: 'Roboto',
+        fontSize: 8
+    },
+    
+})
+
+const Payment = ({ client, clientTaxNumber, clientBINNumber, clientAdress, clientBank, executor, executorTaxNumber, executorBINNumber, executorAdress, executorBank, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, shipper, consignee, nameOfGoods, dateOfWorks, measure, quantity, unitPrice, withoutVAT, VATRate, VATTax, exciseRate, exciseTax, price, actNumber, actDate, inventoryUsageInformation, numberOfPafes, documentsList, beneficiary, beneficiaryTaxNumber, beneficiaryIIK, beneficiaryKbe, beneficiaryBank, beneficiaryBIK, beneficiaryBankCode, paymentNumber, paymentDate, totalPayableForAll, includingVAT, totalItems, totalForAmount, currency, totalPayable, executerPosition, executerSignature, executerFullName, clientPosition, clientSignature, clientFullName, dateOfSigning, executivePersonSupplier, executivePersonSupplierPosition, сhiefAccountant, tableInfo}) => {
+    // const allCosts = tableInfo.map((i) => i.quantity*i.unitPrice);
+    // const allQuantity = tableInfo.map((i) => +i.quantity);
+    // const sumOfArrItems = (arr) => {
+    //   let sum=0; 
+    //   if(arr.length !== 0) {
+    //     for(let i=0; i<arr.length; i++) {
+    //       sum = sum+parseInt(arr[i])
+    //     } 
+    //   }
+    //   return sum;
+    // }
+    // const fullCost = sumOfArrItems(allCosts);
+    // const total = sumOfArrItems(allQuantity);
 
     return (
-        <>
-            <Link to='/preview' className='go-button'>Вернуться на старницу превью документов</Link>
-            <Link to='/filling' className='go-button'>Вернуться к редактированию документов</Link>
+        <Document>
+            <Page size='A4' style={styles.page}>
+                <View>
+                    <Text></Text>
+                </View>
 
 
-            {/* <Pdf targetRef={ref} filename={`Счет на оплату № от.pdf`}>
-                {({ toPdf }) => <button onClick={toPdf}>Сохранить в ПДФ</button>}
-            </Pdf>
-            <div ref={ref} className='invoice'>
-                {client && <p>{client}</p>}
-                {clientTaxNumber && <p>{clientTaxNumber}</p>}
-                {executor && <p>{executor}</p>}
-                {executorTaxNumber && <p>{executorTaxNumber}</p>}
-                {contract && <p>{contract}</p>}
-                {nameOfGoods && <p>{nameOfGoods}</p>}
-                {dateOfWorks && <p>{dateOfWorks}</p>}
-                {measure && <p>{measure}</p>}
-                {quantity && <p>{quantity}</p>}
-                {unitPrice && <p>{unitPrice}</p>}
-                {price && <p>{price}</p>}
 
-                {executerPosition && <p>{executerPosition}</p>}
-                {executerSignature && <p>{executerSignature}</p>}
-                {executerFullName && <p>{executerFullName}</p>}
-                {clientPosition && <p>{clientPosition}</p>}
-                {clientSignature && <p>{clientSignature}</p>}
-                {clientFullName && <p>{clientFullName}</p>}
-                {dateOfSigning && <p>{dateOfSigning}</p>}
-            </div> */}
-        </>
+
+                <View>
+                    <Text></Text>
+                </View>
+                <View>
+                    <Text></Text>
+                </View>
+
+            </Page>
+        </Document>
+
+
     );
 };
 

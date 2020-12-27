@@ -4,11 +4,9 @@ import { Route, Switch } from "react-router-dom";
 import StartPage from '../pages/StartPage/StartPage';
 import FillInputs from '../components/FillInputs/FillInputs';
 import DocumentsPreview from '../components/DocumentsPreview/DocumentsPreview';
-import Act from '../components/Act/Act';
-import Invoice from '../components/Invoice/Invoice';
-import Payment from '../components/Payment/Payment';
 import PreviewAct from '../components/PreviewAct/PreviewAct';
-
+import PreviewInvoice from '../components/PreviewInvoice/PreviewInvoice';
+import PreviewPayment from '../components/PreviewPayment/PreviewPayment';
 
 const Aproutes = () => {
     return (
@@ -17,10 +15,9 @@ const Aproutes = () => {
                 <Route exact path='/' component={StartPage} />
                 <Route path='/filling' component={FillInputs} />
                 <Route path='/preview' component={DocumentsPreview} />
-                <Route path='/act' component={Act} />
                 <Route path='/preview-act' component={PreviewAct} />
-                <Route path='/invoice' component={Invoice} />
-                <Route path='/payment' component={Payment} />
+                <Route path='/preview-invoice' component={PreviewInvoice} />
+                <Route path='/preview-payment' component={PreviewPayment} />
                 <Route path='*' component={(routeProps) => <Page404 {...routeProps}/>} />
             </Switch>
         </>

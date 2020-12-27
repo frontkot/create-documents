@@ -1,5 +1,5 @@
 import React from 'react';
-import { Page, Text, View, Document, StyleSheet, Font } from '@react-pdf/renderer';
+import { Page, Text, View, Document, StyleSheet, Font, Image } from '@react-pdf/renderer';
 import Regular from '../../utils/font/Roboto/Roboto-Regular.ttf';
 import Bold from '../../utils/font/Roboto/Roboto-Bold.ttf';
 import Italic from '../../utils/font/Roboto/Roboto-Italic.ttf';
@@ -21,7 +21,6 @@ Font.register({
         fontStyle: 'italic'
       },
     ]
-
 })
 
 const styles = StyleSheet.create({
@@ -283,6 +282,7 @@ const styles = StyleSheet.create({
     border: 1,
     borderStyle: 'solid',
     margin: -0.5,
+    display: 'table',
   },
   numDescr: {
     borderColor: 'black',
@@ -338,14 +338,10 @@ const styles = StyleSheet.create({
 
 
 
-
-
-
-
   // table: { display: 'table', width: 'auto', borderStyle: 'solid', borderWidth: 1, borderRightWidth: 0, borderBottomWidth: 0 }, tableRow: { margin: 'auto', flexDirection: 'row' }, tableCol: { width: '25%', borderStyle: 'solid', borderWidth: 1, borderLeftWidth: 0, borderTopWidth: 0 }, tableCell: { margin: 'auto', marginTop: 5, fontSize: 10 }
 });
 
-const Act = ({ client, clientTaxNumber, clientBINNumber, clientAdress, clientBank, executor, executorTaxNumber, executorBINNumber, executorAdress, executorBank, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, shipper, consignee, nameOfGoods, dateOfWorks, measure, quantity, unitPrice, withoutVAT, VATRate, VATTax, exciseRate, exciseTax, price, actNumber, actDate, inventoryUsageInformation, numberOfPafes, documentsList, beneficiary, beneficiaryTaxNumber, beneficiaryIIK, beneficiaryKbe, beneficiaryBank, beneficiaryBIK, beneficiaryBankCode, paymentNumber, paymentDate, totalPayableForAll, includingVAT, totalItems, totalForAmount, currency, totalPayable, executerPosition, executerSignature, executerFullName, clientPosition, clientSignature, clientFullName, dateOfSigning, executivePersonSupplier, executivePersonSupplierPosition, сhiefAccountant, tableInfo, }) => {
+const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, contractDate, actNumber, actDate, inventoryUsageInformation, numberOfPafes, documentsList, executerPosition, executerSignature, executerFullName, clientPosition, clientSignature, clientFullName, tableInfo, }) => {
   const allCosts = tableInfo.map((i) => i.quantity*i.unitPrice);
   const allQuantity = tableInfo.map((i) => +i.quantity);
   const sumOfArrItems = (arr) => {
@@ -359,7 +355,6 @@ const Act = ({ client, clientTaxNumber, clientBINNumber, clientAdress, clientBan
   }
   const fullCost = sumOfArrItems(allCosts);
   const total = sumOfArrItems(allQuantity);
-
   const TableRow = ({ num, nameOfGoods, dateOfWorks, measure, quantity, unitPrice, price}) => (
     <View style={styles.tableRow}>
       <View style={styles.firstCol}>
@@ -403,6 +398,28 @@ const Act = ({ client, clientTaxNumber, clientBINNumber, clientAdress, clientBan
       />
     )
   })
+  
+  const imgSignature = () => {
+    var base64 = localStorage["file"];
+    var base64Parts = base64.split(",");
+    var fileFormat = base64Parts[0].split(";")[1];
+    var fileContent = base64Parts[1];
+    var file = new File([fileContent], "file name here", {type: fileFormat});
+
+    var reader = new FileReader();
+
+    var imgtag = document.getElementById("imgSign");
+    imgtag.title = file.name;
+  
+    reader.onload = function(event) {
+      imgtag.src = event.target.result;
+    };
+  
+    reader.readAsDataURL(file);
+
+    // return file;
+  }
+
 
   return (
     <Document>
@@ -516,16 +533,6 @@ const Act = ({ client, clientTaxNumber, clientBINNumber, clientAdress, clientBan
           </View>
         </View>
 
-
-        {/* <View style={styles}>
-          <Text>
-          </Text>
-        </View> */}
-
-
-
-
-
         <View style={styles.inventoryInfo}><Text>Сведения об использовании запасов, полученных от заказчика</Text><Text style={styles.inventoryData}>{inventoryUsageInformation}</Text></View>
         <View><Text style={styles.inventoryDescr}>наименование, количество, стоимость</Text></View>
         <View style={styles.appendix}>
@@ -568,6 +575,9 @@ const Act = ({ client, clientTaxNumber, clientBINNumber, clientAdress, clientBan
         </View>
 
 
+        {/* <View style={styles.signature}>
+          <Image src={imgSignature} id='imgSign'/>
+        </View> */}
         </Page>
     </Document>
   );
