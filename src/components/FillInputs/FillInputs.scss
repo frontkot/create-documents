@@ -138,10 +138,14 @@
 
 .form-submit_disabled {
     opacity: 0.5;
-    background-color: rgb(233, 233, 233);
+    background-color: rgb(93, 93, 93);
+    box-shadow: 0 3px 0 0 #3a3a3a;
+
     cursor: not-allowed;
     &:hover {
-        background-color: rgb(255, 162, 162);
+        background-color: rgba(175, 0, 0, 0.659);
+        box-shadow: 0 3px 0 0 #460000e3;
+
     }
 }
 
