@@ -3,6 +3,7 @@ import { Page, Text, View, Document, StyleSheet, Font, Image } from '@react-pdf/
 import Regular from '../../utils/font/Roboto/Roboto-Regular.ttf';
 import Bold from '../../utils/font/Roboto/Roboto-Bold.ttf';
 import Italic from '../../utils/font/Roboto/Roboto-Italic.ttf';
+import { string } from 'prop-types';
 
 Font.register({
     family: 'Roboto',
@@ -173,24 +174,58 @@ const styles = StyleSheet.create({
     bottomRowNum: {
         flexDirection: 'row',
     },
+
+    tableRow: {
+        textAlign: 'center',
+        fontSize: 7,
+        flexDirection: 'row',
+    },
+    tableCell: {
+    borderColor: 'black',
+    border: 1,
+    borderStyle: 'solid',
+    margin: -0.5,
+    height: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    },
+    totalInfo: {
+        width: '41.15vw',
+        borderColor: 'black',
+        border: 1,
+        borderStyle: 'solid',
+        margin: -0.5,
+        textAlign: 'left',
+        paddingLeft: 3,
+        fontWeight: 'bold',
+    },
+    
 })
 
 const Invoice = ({ procedureDate, actNumber, actDate, invoiceNumber, invoiceDate, paymentNumber, paymentDate, client, clientTaxNumber, clientBINNumber, clientAdress, clientBank, clientIIKNumber, clientBIKBank, executor, executorIIK, executorBINNumber, executorAdress, executorBank, executorTaxNumber, executorKbe, executorBIK, executorBankCode, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, shipper, consignee, totalPayableForAll, includingVAT, totalItems, totalForAmount, currency, totalPayable, inventoryUsageInformation, numberOfPafes, documentsList, executorPosition, executorFullName, clientPosition, clientFullName, dateOfSigning, executivePersonSupplier, executivePersonSupplierPosition, сhiefAccountant, executerSignature, clientSignature, tableInfo,}) => {
     const allCosts = tableInfo.map((i) => i.quantity*i.unitPrice);
-    const allQuantity = tableInfo.map((i) => +i.quantity);
+    const allVAT = tableInfo.map((i) => isNaN(i.VATRate) ? 0 : (i.VATRate/100*i.quantity*i.unitPrice))
+    const allExciseRate = tableInfo.map((i) => isNaN(i.exciseRate) ? 0 : (i.exciseRate/100*i.quantity*i.unitPrice))
+
     const sumOfArrItems = (arr) => {
         let sum=0; 
+        console.log(arr)
         if(arr.length !== 0) {
             for(let i=0; i<arr.length; i++) {
-            sum = sum+parseInt(arr[i])
+            sum = sum+arr[i];
             } 
         }
         return sum;
     }
-    const fullCost = sumOfArrItems(allCosts);
-    const total = sumOfArrItems(allQuantity);
 
-    const TableRow = ({ num, nameOfGoods, dateOfWorks, measure, quantity, unitPrice, price}) => (
+    const fullCost = sumOfArrItems(allCosts);
+    const totalVAT = Math.ceil(sumOfArrItems(allVAT)) === 0 ? ' ' : sumOfArrItems(allVAT);
+    const totalExciseRate = Math.ceil(sumOfArrItems(allExciseRate)) === 0 ? ' ' : sumOfArrItems(allExciseRate);
+    console.log(totalExciseRate)
+    console.log(totalVAT)
+
+
+    const TableRow = ({ num, nameOfGoods, VATRate, measure, quantity, unitPrice, exciseRate}) => (
         <View style={styles.tableRow}>
           <View style={styles.firstCol}>
             <View style={styles.tableCell}>
@@ -204,36 +239,66 @@ const Invoice = ({ procedureDate, actNumber, actDate, invoiceNumber, invoiceDate
           </View>    
           <View style={styles.thirdCol}>
             <View style={styles.tableCell}>
-              <Text>{dateOfWorks} </Text>
+              <Text>{measure} </Text>
             </View>
           </View>
           <View style={styles.fourthCol}>
             <View style={styles.tableCell}>
-              <Text> </Text>
+              <Text>{quantity} </Text>
             </View>
           </View>
           <View style={styles.fifthCol}>
             <View style={styles.tableCell}>
-              <Text>{measure} </Text>
+              <Text>{unitPrice} </Text>
             </View>
           </View>
           <View style={styles.sixthCol}>
             <View style={styles.tableCell}>
-              <Text>{quantity} </Text>
+              <Text>{unitPrice*quantity} </Text>
             </View>
           </View>
           <View style={styles.seventhCol}>
             <View style={styles.tableCell}>
-              <Text>{unitPrice} </Text>
+              <Text>{VATRate} </Text>
             </View>
           </View>
           <View style={styles.eighthCol}>
             <View style={styles.tableCell}>
-              <Text>{price}</Text>
+              <Text>{(isNaN(VATRate)) ? ' ' : unitPrice*quantity*VATRate/100}</Text>
+            </View>
+          </View>
+          <View style={styles.ninethCol}>
+            <View style={styles.tableCell}>
+              <Text>{(isNaN(+VATRate)) ? ' ' : ((VATRate/100 + 1)*unitPrice*quantity)}</Text>
+            </View>
+          </View>
+          <View style={styles.tenthCol}>
+            <View style={styles.tableCell}>
+              <Text>{exciseRate}</Text>
+            </View>
+          </View>
+          <View style={styles.eleventhCol}>
+            <View style={styles.tableCell}>
+              <Text>{isNaN(+exciseRate) ? ' ' : (unitPrice*quantity + unitPrice*exciseRate/100)}</Text>
             </View>
           </View>
         </View>
       )
+
+    const tableArr = tableInfo.map((i, index) => (
+      <TableRow 
+        key={index}
+        num={index+1}
+        nameOfGoods={i.nameOfGoods}
+        VATRate={i.VATRate}
+        measure={i.measure}
+        quantity={i.quantity}
+        unitPrice={i.unitPrice}
+        exciseRate={i.exciseRate}
+      />
+    )
+  )
+
     
 
     return (
@@ -331,8 +396,6 @@ const Invoice = ({ procedureDate, actNumber, actDate, invoiceNumber, invoiceDate
                     <Text>БИК </Text>
                     <Text>{clientBIKBank}</Text>
                 </View>
-
-
                 <View style={styles.tableHeader}>
                     <View style={styles.firstCol}>
                         <View style={styles.mainRow}>
@@ -439,29 +502,42 @@ const Invoice = ({ procedureDate, actNumber, actDate, invoiceNumber, invoiceDate
                 </View>
                 <View>
 
-                    {/* <View>{tableArr}</View> */}
-
+                    <View>{tableArr}</View>
                     <View style={styles.tableRow}>
-                        <View>
-                            <Text>Всего по счету</Text>
+                        <View style={styles.totalInfo}>
+                            <View>
+                                <Text>Всего по счету:</Text>
+                            </View>
                         </View>
                         <View style={styles.sixthCol}>
-                            <Text>{}</Text>
+                            <View style={styles.numsRow}>
+                                <Text>{fullCost}</Text>
+                            </View>
                         </View>
                         <View style={styles.seventhCol}>
-                            <Text>{}</Text>
+                            <View style={styles.numsRow}>
+                                <Text> </Text>
+                            </View>
                         </View>
                         <View style={styles.eighthCol}>
-                            <Text>{}</Text>
+                            <View style={styles.numsRow}>
+                                <Text>{totalVAT}</Text>
+                            </View>
                         </View>
                         <View style={styles.ninethCol}>
-                            <Text>{}</Text>
+                            <View style={styles.numsRow}>
+                                <Text>{fullCost + totalVAT}</Text>
+                            </View>
                         </View>
                         <View style={styles.tenthCol}>
-                            <Text>{}</Text>
+                            <View style={styles.numsRow}>
+                                <Text> </Text>
+                            </View>
                         </View>
                         <View style={styles.eleventhCol}>
-                            <Text>{}</Text>
+                            <View style={styles.numsRow}>
+                                <Text>{totalExciseRate}</Text>
+                            </View>
                         </View>
 
                     </View>
