@@ -288,15 +288,6 @@ const styles = StyleSheet.create({
     fontSize: 7,
     flexDirection: 'row',
   },
-  tableCell: {
-    borderColor: 'black',
-    border: 1,
-    borderStyle: 'solid',
-    margin: -0.5,
-    height: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   tableFull: {
     width: '63.15vw',
     borderColor: 'black',
@@ -307,7 +298,12 @@ const styles = StyleSheet.create({
     margin: -0.5,
     textAlign: 'right',
   },
-
+  numsRowBottom: {
+    border: 1,
+    borderStyle: 'solid',
+    borderColor: 'black',
+    margin: -0.5,
+  },
   mainRow: {
     height: 70,
     border: 1,
@@ -341,10 +337,115 @@ const styles = StyleSheet.create({
     border: 1,
     borderStyle: 'solid',
     borderColor: 'black',
-    margin: -0.5,
+    marginLeft: -0.5,
+    marginRight: -0.5,
+    marginTop: -0.5,
+
   },
   bottomRowNum: {
       flexDirection: 'row',
+  },
+  tableRowGoods: {
+    flexDirection: 'row',
+    marginTop: -0.5,
+    marginBottom: -0.5,
+    width: '100%',
+
+  },
+  firstColCell: {
+    width: '5.54%',
+    border: 1,
+    borderStyle: 'solid',
+    borderColor: 'black',
+    margin: -0.5,
+    height: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 2,
+  },
+  secondColCell: {
+    width: '24.8%',
+    border: 1,
+    borderStyle: 'solid',
+    borderColor: 'black',
+    margin: -0.5,
+    height: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 2,
+
+  },
+  thirdColCell: {
+    width: '10.95%',
+    border: 1,
+    borderStyle: 'solid',
+    borderColor: 'black',
+    margin: -0.5,
+    height: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 2,
+
+
+  },
+  fourthColCell: {
+    width: '19.45%',
+    border: 1,
+    borderStyle: 'solid',
+    borderColor: 'black',
+    margin: -0.5,
+    height: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  fifthColCell: {
+    width: '7.67%',
+    border: 1,
+    borderStyle: 'solid',
+    borderColor: 'black',
+    margin: -0.5,
+    height: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  sixthColCell: {
+    width: '9.85%',
+    border: 1,
+    borderStyle: 'solid',
+    borderColor: 'black',
+    margin: -0.5,
+    height: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  seventhColCell: {
+    width: '12%',
+    border: 1,
+    borderStyle: 'solid',
+    borderColor: 'black',
+    margin: -0.5,
+    height: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  eighthColCell: {
+    width: '10.87%',
+    border: 1,
+    borderStyle: 'solid',
+    borderColor: 'black',
+    margin: -0.5,
+    height: '100%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+
   },
 
 
@@ -365,43 +466,43 @@ const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, c
   const fullCost = sumOfArrItems(allCosts);
   const total = sumOfArrItems(allQuantity);
   const TableRow = ({ num, nameOfGoods, dateOfWorks, measure, quantity, unitPrice, price}) => (
-    <View style={styles.tableRow}>
-      <View style={styles.firstCol}>
+    <View style={styles.tableRowGoods}>
+      <View style={styles.firstColCell}>
         <View style={styles.tableCell}>
           <Text>{num} </Text>
         </View>
       </View>
-      <View style={styles.secondCol}>
+      <View style={styles.secondColCell}>
         <View style={styles.tableCell}>
           <Text>{nameOfGoods} </Text>
         </View>
       </View>    
-      <View style={styles.thirdCol}>
+      <View style={styles.thirdColCell}>
         <View style={styles.tableCell}>
           <Text>{dateOfWorks} </Text>
         </View>
       </View>
-      <View style={styles.fourthCol}>
+      <View style={styles.fourthColCell}>
         <View style={styles.tableCell}>
           <Text> </Text>
         </View>
       </View>
-      <View style={styles.fifthCol}>
+      <View style={styles.fifthColCell}>
         <View style={styles.tableCell}>
           <Text>{measure} </Text>
         </View>
       </View>
-      <View style={styles.sixthCol}>
+      <View style={styles.sixthColCell}>
         <View style={styles.tableCell}>
           <Text>{quantity} </Text>
         </View>
       </View>
-      <View style={styles.seventhCol}>
+      <View style={styles.seventhColCell}>
         <View style={styles.tableCell}>
           <Text>{unitPrice} </Text>
         </View>
       </View>
-      <View style={styles.eighthCol}>
+      <View style={styles.eighthColCell}>
         <View style={styles.tableCell}>
           <Text>{price}</Text>
         </View>
@@ -588,17 +689,17 @@ const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, c
               <Text>Итого:</Text>
             </View>
             <View style={styles.sixthCol}>
-              <View style={styles.numsRow}>
+              <View style={styles.numsRowBottom}>
                 <Text>{total}</Text>
               </View>
             </View>
             <View style={styles.seventhCol}>
-              <View style={styles.numsRow}>
+              <View style={styles.numsRowBottom}>
                 <Text>x</Text>
               </View>
             </View>
             <View style={styles.eighthCol}>
-              <View style={styles.numsRow}>
+              <View style={styles.numsRowBottom}>
                 <Text>{fullCost}</Text>
                 </View>
             </View>
