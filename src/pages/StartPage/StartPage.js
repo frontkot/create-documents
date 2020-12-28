@@ -12,7 +12,7 @@ const StartPage = () => {
     const clearForm = (e) => {
         e.preventDefault()
         dispatch(deleteData());
-        history.push('/filling')
+        history.push('/filling');
     }
 
     return (

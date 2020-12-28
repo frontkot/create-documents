@@ -121,6 +121,11 @@
     
         }
 }
+.go-button {
+    max-width: 240px;
+    padding: 10px 10px;
+    font-size: 15px;
+}
 
 .form-submit, .add-item {
     &:hover {
@@ -133,7 +138,6 @@
     opacity: 0.5;
     background-color: rgb(93, 93, 93);
     box-shadow: 0 3px 0 0 #3a3a3a;
-
     cursor: not-allowed;
     &:hover {
         background-color: rgba(175, 0, 0, 0.659);
@@ -150,7 +154,9 @@
     }
 }
 .clear-form_button {
-    padding: 17px 10px;
+    padding: 22.5px 10px;
+    font-size: 15px;
+
 }
 .add-item {
     margin: 0 auto;
@@ -165,8 +171,12 @@
 @media screen and (max-width: 968px) {
     .go-button, .clear-form_button, .form-submit, .delete-item, .add-item {
         font-size: 12px;
-            padding: 2px 5px;
+        padding: 2px 5px;
     }
+    .form-submit {
+        padding: 20px 5px;
+    }
+
     .checkbox {
         &-label {
             font-size: 14px;
@@ -209,4 +219,27 @@
             font-size: 16px;
         }
     }
+}
+
+@media screen and (max-width: 450px) {
+    .checkbox {
+        &-label {
+            font-size: 12px;
+            padding: 1px 2px;
+            width: 10rem;
+            justify-content: flex-end;
+        }
+    }
+    .form {
+        &-button_block {
+            margin: 0 20px;
+
+        }
+    }
+    .clear-form_button {
+        padding: 17px 10px;
+    }
+
+    
+
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, FieldArray } from 'formik';
 import TextInput from '../form/TextInput/TextInput';
 import SubmitButton from '../form/SubmitButton/SubmitButton';
@@ -12,9 +12,9 @@ import { toggleIsAct, toggleIsInvoice, toggleIsPayment } from '../../store/input
 import ImageInput from '../form/ImageInput/ImageInput';
 
 const FillInputs = () => {
-
+    const dataFromDb = useSelector(getData);
+    const [data, setData] = useState(dataFromDb)
     const history = useHistory();
-    const data = useSelector(getData);
     const isAct = useSelector(getIsAct);
     const isInvoice = useSelector(getIsInvoice);
     const isPayment = useSelector(getIsPayment);
@@ -34,13 +34,13 @@ const FillInputs = () => {
     );
 
     const submitForm = (values) => {
-        console.log(values)
         dispatch(updateData(values));
         history.push('/preview');
     }
 
     const clearForm = () => {
         dispatch(deleteData());
+        setData(dataFromDb);
         window.location.reload();
     }
 
