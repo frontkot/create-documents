@@ -31,7 +31,7 @@ const initialState = {
     actNumber: '1',
     actDate: today,
     invoiceNumber: '1',
-    invoiceDate: todayWithMonth,
+    invoiceDate: `${todayWithMonth} г.`,
     inventoryUsageInformation: '',
     numberOfPafes: '',
     documentsList: '',

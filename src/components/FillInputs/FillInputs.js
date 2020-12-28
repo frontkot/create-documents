@@ -91,6 +91,7 @@ const FillInputs = () => {
                                 <div className='form-block'>
                                         <TextInput className='form-text_input' text='Номер счета-фактуры' id='invoiceNumber'/>
                                         <TextInput className='form-text_input' text='Дата счета-фактуры' id='invoiceDate'/>
+                                        <TextInput className='form-text_input' text='Дата совершения процедуры' id='procedureDate'/>
                                 </div>
                             }
                             {isPayment && 
@@ -109,12 +110,16 @@ const FillInputs = () => {
                             <InfoLabel text='Заказчик/Покупатель' className='form-info_label' />
                             <div className='form-block'>
                                 <TextInput className='form-text_input' text='Заказчик/Покупатель' id='client'/>
-                                <TextInput className='form-text_input' text='ИНН Заказчика/Покупателя' id='clientTaxNumber'/>
                                 <TextInput className='form-text_input' text='БИН Заказчика/Покупателя' id='clientBINNumber'/>
-                                {isInvoice && 
+
+
+
+                                {(isInvoice || isPayment) &&
                                     <>
-                                        <TextInput className='form-text_input' text='Адрес Получателя' id='clientAdress'/>
+                                        <TextInput className='form-text_input' text='Адрес Поупателя/Получателя' id='clientAdress'/>
                                         <TextInput className='form-text_input' text='Банк получателя' id='clientBank'/>
+                                        <TextInput className='form-text_input' text='ИИК Заказчика/Покупателя' id='clientIIKNumber'/>
+                                        <TextInput className='form-text_input' text='БИКбанка' id='clientBIKBank'/>
                                     </>
                                 }
 
@@ -123,27 +128,28 @@ const FillInputs = () => {
                             <InfoLabel text='Исполнитель/Поставщик' className='form-info_label' />
                             <div className='form-block'>
                                 <TextInput className='form-text_input' text='Исполнитель/Поставщик' id='executor'/>
-                                <TextInput className='form-text_input' text='ИНН Исполнителя/Поставщика' id='executorTaxNumber'/>
                                 <TextInput className='form-text_input' text='БИН Исполнителя/Поставщика' id='executorBINNumber'/>
                                 {isInvoice && 
                                     <>
                                         <TextInput className='form-text_input' text='Адрес Исполнителя/Поставщика' id='executorAdress'/>
-                                        <TextInput className='form-text_input' text='Банк поставщика' id='executorBank'/>
                                     </>
                                 }
-                                {isPayment && 
+                                {isPayment || isInvoice &&
                                     <>
-                                    {/* <div className='form-header'>
-                                        <InfoLabel text='Инфо Бенефициара' className='form-info_label' />
-                                    </div> */}
+                                        <TextInput className='form-text_input' text='ИИК бенефициара (исполнителя)' id='executorIIK'/>
+                                    </>
+                                }
+                                {isInvoice && 
+                                        <TextInput className='form-text_input' text='Банк бенефициара (исполнителя)' id='executorBank'/>
+                                }
+                                {isPayment &&
+                                    <>
                                     {/* <div className='form-block'> */}
                                         {/* <TextInput className='form-text_input' text='Бенефициар' id='beneficiary'/>  Одно и то же, что и Исполнитель*/}
                                         {/* <TextInput className='form-text_input' text='БИН бенефициара' id='beneficiaryTaxNumber'/>  Бин ИСПОЛНИТЕЛЯ*/}
-                                    <TextInput className='form-text_input' text='ИИК бенефициара' id='beneficiaryIIK'/>
-                                    <TextInput className='form-text_input' text='Кбе бенефициара' id='beneficiaryKbe'/>
-                                    <TextInput className='form-text_input' text='Банк бенефициара' id='beneficiaryBank'/>
-                                    <TextInput className='form-text_input' text='БИК Банка бенефициара' id='beneficiaryBIK'/>
-                                    <TextInput className='form-text_input' text='Код заключения платежа банка бенефициара' id='beneficiaryBankCode'/>
+                                    <TextInput className='form-text_input' text='Кбе бенефициара (исполнителя)' id='executorKbe'/>
+                                    <TextInput className='form-text_input' text='БИК Банка бенефициара (исполнителя)' id='executorBankBIK'/>
+                                    <TextInput className='form-text_input' text='Код заключения платежа банка бенефициара (исполнителя)' id='executorBankCode'/>
                                     {/* </div> */}
                                     </>
                                 }
@@ -256,27 +262,40 @@ const FillInputs = () => {
                         <div className='form-header'>
                                 <InfoLabel text='Блок подписи документа' className='form-info_label' />
                         </div>
+                            <InfoLabel text='Исполнитель/Поставщик' className='form-info_label' />
                             <div className='form-block'>
-                                <TextInput className='form-text_input' text='Сдал (должность исполнителя)' id='executerPosition'/>
-                                <TextInput className='form-text_input' text='ФИО исполнителя (расшифровка подписи)' id='executerFullName'/>
-                                {isAct &&
+                                <TextInput className='form-text_input' text='Сдал (должность исполнителя)' id='executorPosition'/>
+                                <TextInput className='form-text_input' text='ФИО исполнителя (расшифровка подписи)' id='executorFullName'/>
+                                {/* <ImageInput className='form-text_input' text='Подпись исполнителя' id='executerSignature'/> */}
+                                {/* {isInvoice && 
+                                    <>
+                                        <TextInput className='form-text_input' text='ВЫДАЛ (ответственное лицо поставщика)' id='executivePersonSupplier'/>
+                                        <TextInput className='form-text_input' text='Должность (кто выдал)' id='executivePersonSupplierPosition'/>
+                                    </>
+                                } */}
+
+                            </div>
+
+                            <InfoLabel text='Заказчик/Получатель' className='form-info_label' />
+                            <div className='form-block'>
+                                {(isAct || isInvoice) &&
                                     <>
                                         <TextInput className='form-text_input' text='Принял (должность заказчика)' id='clientPosition'/>
                                         <TextInput className='form-text_input' text='ФИО заказчика (расшифровка подписи)' id='clientFullName'/>
-                                        <TextInput className='form-text_input' text='Дата подписания' id='dateOfSigning'/>
+                                        {/* <ImageInput className='form-text_input' text='Подпись заказчика' id='clientSignature'/> */}
                                     </>
                                 }
                                 {isInvoice && 
                                     <>
-                                        <TextInput className='form-text_input' text='ВЫДАЛ (ответственное лицо поставщика)' id='executivePersonSupplier'/>
-                                        <TextInput className='form-text_input' text='Должность (кто выдал)' id='executivePersonSupplierPosition'/>
-                                        <TextInput className='form-text_input' text='Главный бухгалтер' id='сhiefAccountant'/>
+                                        <TextInput className='form-text_input' text='Главный бухгалтер ФИО' id='сhiefAccountant'/>
+                                    {/* <ImageInput className='form-text_input' text='Подпись бухгалтера' id='executerSignature'/> */}
                                     </>
                                 }
-                                <ImageInput className='form-text_input' text='Подпись исполнителя' id='executerSignature'/>
+
                                 {isAct && 
-                                    <ImageInput className='form-text_input' text='Подпись заказчика' id='clientSignature'/>
+                                    <TextInput className='form-text_input' text='Дата подписания' id='dateOfSigning'/>
                                 }
+
 
                             </div>
                         </div>

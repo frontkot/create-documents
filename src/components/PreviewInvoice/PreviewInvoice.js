@@ -49,8 +49,8 @@ const PreviewAct = () => {
         inventoryUsageInformation,
         numberOfPafes,
         documentsList,
-        executerPosition,
-        executerFullName,
+        executorPosition,
+        executorFullName,
         clientPosition,
         clientFullName,
         dateOfSigning,
@@ -61,6 +61,10 @@ const PreviewAct = () => {
         clientSignature,
         tableInfo,
         procedureDate,
+        executorIIK,
+        clientIIKNumber,
+        clientBIKBank,
+
      } = data;
         
     return (
@@ -77,6 +81,8 @@ const PreviewAct = () => {
                     clientBINNumber={clientBINNumber}
                     clientAdress={clientAdress}
                     clientBank={clientBank}
+                    clientIIKNumber={clientIIKNumber}
+                    clientBIKBank={clientBIKBank}
                     executor={executor}
                     executorTaxNumber={executorTaxNumber}
                     executorBINNumber={executorBINNumber}
@@ -94,7 +100,8 @@ const PreviewAct = () => {
                     contractСonditions={contractСonditions}
                     destination={destination}
                     proxy={proxy}
-                    departureMethod={CMR}
+                    departureMethod={departureMethod}
+                    CMR={CMR}
                     shipper={shipper}
                     consignee={consignee}
                     totalPayableForAll={totalPayableForAll}
@@ -106,8 +113,8 @@ const PreviewAct = () => {
                     inventoryUsageInformation={inventoryUsageInformation}
                     numberOfPafes={numberOfPafes}
                     documentsList={documentsList}
-                    executerPosition={executerPosition}
-                    executerFullName={executerFullName}
+                    executorPosition={executorPosition}
+                    executorFullName={executorFullName}
                     clientPosition={clientPosition}
                     clientFullName={clientFullName}
                     dateOfSigning={dateOfSigning}
@@ -118,6 +125,8 @@ const PreviewAct = () => {
                     clientSignature={clientSignature}
                     tableInfo={tableInfo}
                     procedureDate={procedureDate}
+                    executorIIK={executorIIK}
+                    
 
                 />}
             >

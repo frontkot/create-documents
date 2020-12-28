@@ -28,134 +28,372 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto',
         fontSize: 8
     },
-    
+    docHeader: {
+        flexDirection: 'row',
+        fontSize: 13,
+        fontWeight: 'bold',
+        justifyContent: 'center',
+        paddingTop: 15,
+        paddingBottom: 15,
+    },
+    simpleRow: {
+        flexDirection: 'row',
+        width: '100%',
+        borderBottom: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        paddingTop: 1,
+    }, 
+    simpleRowBold: {
+        flexDirection: 'row',
+        width: '100%',
+        borderBottom: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        paddingTop: 1,
+        fontWeight: 'bold',
+    }, 
+    underSimpleRow: {
+        fontStyle: 'italic',
+        fontSize: 7,
+        textAlign: "center",
+    },
+    tableHeader: {
+        paddingTop: 10,
+        flexDirection: 'row',
+    },
+    signatureBlock: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 10,
+        marginBottom: 10,
+    },
+    signatureRightSide: {
+        width: '50%',
+    },
+    signatureLeftSide: {
+        width: '35%',
+    },
+    signatureRowBold: {
+        fontWeight: 'bold',
+        flexDirection: 'row',
+        paddingTop: 1,
+    },
+    signatureUnderRow:{
+        textAlign: 'center',
+        fontStyle: 'italic',
+        fontSize: 7,
+
+    },
+    signatureRowLine: {
+        borderColor: 'black',
+        borderStyle: 'solid',
+        borderBottom: 1,
+        width: '100%',
+        paddingTop: 1,
+
+    }
+
+
+
 })
 
-const Invoice = ({ procedureDate, actNumber, actDate, invoiceNumber, invoiceDate, paymentNumber, paymentDate, client, clientTaxNumber, clientBINNumber, clientAdress, clientBank, executor, executorTaxNumber, executorBINNumber, executorAdress, executorBank, beneficiary, beneficiaryTaxNumber, beneficiaryIIK, beneficiaryKbe, beneficiaryBank, beneficiaryBIK, beneficiaryBankCode, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, shipper, consignee, totalPayableForAll, includingVAT, totalItems, totalForAmount, currency, totalPayable, inventoryUsageInformation, numberOfPafes, documentsList, executerPosition, executerFullName, clientPosition, clientFullName, dateOfSigning, executivePersonSupplier, executivePersonSupplierPosition, сhiefAccountant, executerSignature, clientSignature, tableInfo,}) => {
-    // const allCosts = tableInfo.map((i) => i.quantity*i.unitPrice);
-    // const allQuantity = tableInfo.map((i) => +i.quantity);
-    // const sumOfArrItems = (arr) => {
-    //   let sum=0; 
-    //   if(arr.length !== 0) {
-    //     for(let i=0; i<arr.length; i++) {
-    //       sum = sum+parseInt(arr[i])
-    //     } 
-    //   }
-    //   return sum;
-    // }
-    // const fullCost = sumOfArrItems(allCosts);
-    // const total = sumOfArrItems(allQuantity);
+const Invoice = ({ procedureDate, actNumber, actDate, invoiceNumber, invoiceDate, paymentNumber, paymentDate, client, clientTaxNumber, clientBINNumber, clientAdress, clientBank, clientIIKNumber, clientBIKBank, executor, executorIIK, executorBINNumber, executorAdress, executorBank, executorTaxNumber, executorKbe, executorBIK, executorBankCode, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, shipper, consignee, totalPayableForAll, includingVAT, totalItems, totalForAmount, currency, totalPayable, inventoryUsageInformation, numberOfPafes, documentsList, executorPosition, executorFullName, clientPosition, clientFullName, dateOfSigning, executivePersonSupplier, executivePersonSupplierPosition, сhiefAccountant, executerSignature, clientSignature, tableInfo,}) => {
+    const allCosts = tableInfo.map((i) => i.quantity*i.unitPrice);
+    const allQuantity = tableInfo.map((i) => +i.quantity);
+    const sumOfArrItems = (arr) => {
+        let sum=0; 
+        if(arr.length !== 0) {
+            for(let i=0; i<arr.length; i++) {
+            sum = sum+parseInt(arr[i])
+            } 
+        }
+        return sum;
+    }
+    const fullCost = sumOfArrItems(allCosts);
+    const total = sumOfArrItems(allQuantity);
 
     return (
         <Document>
             <Page size='A4' style={styles.page}>
                 <View style={styles.docHeader}>
-                    <Text>Счет-фактура №</Text>
-                    <Text>{invoiceNumber}</Text>
-                    <Text>от</Text>
+                    <Text>Счет-фактура № </Text>
+                    <Text>{invoiceNumber} </Text>
+                    <Text>от </Text>
                     <Text>{invoiceDate}</Text>
                 </View>
-                <View>
-                    <Text>Дата совершения оборота:</Text>
+                <View style={styles.simpleRow}>
+                    <Text>Дата совершения оборота: </Text>
                     <Text>{procedureDate}</Text>
                 </View>
-                <View>
-                    <Text>Поставщик</Text>
+                <View style={styles.simpleRowBold}>
+                    <Text>Поставщик: </Text>
                     <Text>{executor}</Text>
                 </View>
-                <View>
+                <View style={styles.simpleRow}>
                     <Text>БИН и адрес места нахождения поставщика: </Text>
                     <Text>БИН: </Text>
                     <Text>{executorBINNumber}, </Text>
                     <Text>{executorAdress}</Text>
                 </View>
-                <View>
+                <View style={styles.simpleRow}>
                     <Text>ИИК поставщик: </Text>
-                    <Text>{executorTaxNumber}</Text>
-                    <Text>в банке  </Text>
-
+                    <Text>{executorIIK} </Text>
+                    <Text>в банке </Text>
+                    <Text>{executorBank} </Text>
                 </View>
-                <View>
+                <View style={styles.simpleRow}>
                     <Text>Договор (контракт) на поставку товаров (работ, услуг): </Text>
                     <Text>{contract} </Text>
                     <Text>от </Text>
                     <Text>{contractDate}</Text>
 
                 </View>
-                <View>
+                <View style={styles.simpleRow}>
                     <Text>Условия оплаты по договору (контракту): </Text>
                     <Text>{contractСonditions}</Text>
                 </View>
-                <View>
+                <View style={styles.simpleRow}>
                     <Text>Пункт назначения поставляемых товаров (работ, услуг): </Text>
-                    <Text>{}</Text>
+                    <Text>{destination}</Text>
                 </View>
-                <View>
+                <View style={styles.underSimpleRow}>
+                    <Text>государство, регион, область, город, район</Text>
+                </View>
+                <View style={styles.simpleRow}>
                     <Text>Поставка товаров (работ,услуг) осуществлена по доверенности: </Text>
-                    <Text>{}</Text>
+                    <Text>{proxy}</Text>
                 </View>
-                <View>
+                <View style={styles.simpleRow}>
                     <Text>Способ отправления: </Text>
-                    <Text>{}</Text>
+                    <Text>{departureMethod}</Text>
                 </View>
-                <View>
+                <View style={styles.simpleRow}>
                     <Text>Товарно-транспортная накладная: </Text>
                     <Text>{CMR}</Text>
                 </View>
-                <View>
+                <View style={styles.simpleRow}>
                     <Text>Грузоотправитель: </Text>
                     <Text>БИН: </Text>
                     <Text>{executorBINNumber}, </Text>
                     <Text>{executorAdress}</Text>
-
                 </View>
-                <View>
+                <View style={styles.underSimpleRow}>
+                    <Text>(БИН, наименование и адрес)</Text>
+                </View>
+                <View style={styles.simpleRow}>
                     <Text>Грузоотправитель: </Text>
                     <Text>БИН: </Text>
                     <Text>{clientBINNumber}, </Text>
                     <Text>{clientAdress}</Text>
                 </View>
-                <View>
+                <View style={styles.underSimpleRow}>
+                    <Text>(БИН, наименование и адрес)</Text>
+                </View>
+                <View style={styles.simpleRowBold}>
                     <Text>Получатель: </Text>
                     <Text>{client}</Text>
                 </View>
-                <View>
+                <View style={styles.simpleRow}>
                     <Text>БИН и адрес места нахождения получателя: </Text>
                     <Text>БИН: </Text>
                     <Text>{clientBINNumber}, </Text>
                     <Text>{clientAdress}</Text>
                 </View>
-                <View>
+                <View style={styles.simpleRow}>
                     <Text>ИИК получателя: </Text>
-                    <Text>{clientTaxNumber}, </Text>
+                    <Text>{clientIIKNumber}, </Text>
                     <Text>в банке  </Text>
-
+                    <Text>{clientBank} </Text>
+                    <Text>БИК </Text>
+                    <Text>{clientBIKBank}</Text>
                 </View>
 
+
+                <View style={styles.tableHeader}>
+                    <View style={styles}>
+                        <View style={styles}>
+                            <Text>№ п/п</Text>
+                        </View>
+                        <View style={styles.firstCol}>
+                            <Text>1</Text>
+                        </View>
+                    </View>
+                    <View style={styles}>
+                        <View style={styles}>
+                            <Text>Наименование товаров (работ, услуг)</Text>
+                        </View>
+                        <View style={styles.secondCol}>
+                            <Text>2</Text>
+                        </View>
+                    </View>
+                    <View style={styles}>
+                        <View style={styles}>
+                            <Text>Ед. изм.</Text>
+                        </View>
+                        <View style={styles.thirdCol}>
+                            <Text>3</Text>
+                        </View>
+                    </View>
+                    <View style={styles}>
+                        <View style={styles}>
+                            <Text>Кол-во (объем)</Text>
+                        </View>
+                        <View style={styles.fourthCol}>
+                            <Text>4</Text>
+                        </View>
+                    </View>
+                    <View style={styles}>
+                        <View style={styles}>
+                            <Text>Цена (KZT)</Text>
+                        </View>
+                        <View style={styles.fifthCol}>
+                            <Text>5</Text>
+                        </View>
+                    </View>
+                    <View style={styles}>
+                        <View style={styles}>
+                            <Text>Стоимость товаров (работ, услуг) без НДС</Text>
+                        </View>
+                        <View style={styles.sixthCol}>
+                            <Text>6</Text>
+                        </View>
+                    </View>
+                    <View style={styles}>
+                        <View style={styles}>
+                            <Text>НДС</Text>
+                        </View>
+                        <View style={styles}>
+                            <View style={styles}>
+                                <View style={styles}>
+                                    <Text>Cтавка</Text>
+                                </View>
+                                <View style={styles}>
+                                    <Text>Сумма</Text>
+                                </View>
+                            </View>
+                            <View style={styles}>
+                                <View style={styles.seventhCol}>
+                                    <Text>7</Text>
+                                </View>
+                                <View style={styles.eightsCol}>
+                                    <Text>8</Text>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={styles}>
+                        <View style={styles}>
+                            <Text>Всего стоимость реализации</Text>
+                        </View>
+                        <View style={styles.ninethCol}>
+                            <Text>9</Text>
+                        </View>
+                    </View>
+                    <View style={styles}>
+                        <View style={styles}>
+                            <Text>Акциз</Text>
+                        </View>
+                        <View style={styles}>
+                            <View style={styles}>
+                                <View style={styles}>
+                                    <Text>Ставка</Text>
+                                </View>
+                                <View style={styles}>
+                                    <Text>Сумма</Text>
+                                </View>
+                            </View>
+                            <View style={styles}>
+                                <View style={styles.tenthCol}>
+                                    <Text>10</Text>
+                                </View>
+                                <View style={styles.eleventhCol}>
+                                    <Text>11</Text>
+                                </View>
+                            </View>
+                        </View>
+                    </View>
+                </View>
+                <View>
+
+                    {/* <View>{tableArr}</View> */}
+
+                    <View style={styles.tableRow}>
+                        <View>
+                            <Text>Всего по счету</Text>
+                        </View>
+                        <View style={styles.sixthCol}>
+                            <Text>{}</Text>
+                        </View>
+                        <View style={styles.seventhCol}>
+                            <Text>{}</Text>
+                        </View>
+                        <View style={styles.eighthCol}>
+                            <Text>{}</Text>
+                        </View>
+                        <View style={styles.ninethCol}>
+                            <Text>{}</Text>
+                        </View>
+                        <View style={styles.tenthCol}>
+                            <Text>{}</Text>
+                        </View>
+                        <View style={styles.eleventhCol}>
+                            <Text>{}</Text>
+                        </View>
+
+                    </View>
+                </View>
+
+                <View style={styles.signatureBlock}>
+                    <View style={styles.signatureRightSide}>
+                        <View style={styles.signatureRowBold}>
+                            <Text>Директор: </Text>
+                            <Text>{clientFullName} </Text>
+                        </View>
+                        <View style={styles.signatureRowLine}>
+                            <Text> </Text>
+                        </View>
+                        <View style={styles.signatureUnderRow}>
+                            <Text>(Ф.И.О., подпись)</Text>
+                        </View>
+                        <View style={styles.signatureRowBold}>
+                            <Text>Главный бухгалтер: </Text>
+                            <Text>{сhiefAccountant} </Text>
+                        </View>
+                        <View style={styles.signatureRowLine}>
+                            <Text> </Text>
+                        </View>
+                        <View style={styles.signatureUnderRow}>
+                            <Text>(Ф.И.О., подпись)</Text>
+                        </View>
+                    </View>
+
+                    <View style={styles.signatureLeftSide}>
+                        <View style={styles.signatureRowBold}>
+                            <Text>ВЫДАЛ (ответственное лицо поставщика)</Text>
+                        </View>
+                        <View style={styles.signatureRowLine}>
+                            <Text>{executorPosition} </Text>
+                        </View>
+                        <View style={styles.signatureUnderRow}>
+                            <Text>(должность)</Text>
+                        </View>
+                        <View style={styles.signatureRowBold}>
+                            <Text> </Text>
+                        </View>
+                        <View style={styles.signatureRowLine}> 
+                            <Text>{executorFullName} </Text>
+                        </View>
+
+                        <View style={styles.signatureUnderRow}>
+                            <Text>(Ф.И.О., подпись)</Text>
+                        </View>
+                    </View>
+                </View>
 
                 <View>
-                    <Text>Поставщик</Text>
-                    <Text>{}</Text>
+                    <Text>Примечание: Без печати недействительно. Оригинал (первый экземпляр) - покупателю. Копия (второй экземпляр) - поставщику.</Text>
                 </View>
-
-
-                <View>
-                    <Text>Поставщик</Text>
-                    <Text>{}</Text>
-                </View>
-
-
-
-
-
-
-                <View>
-                    <Text></Text>
-                </View>
-                <View>
-                    <Text></Text>
-                </View>
-
             </Page>
         </Document>
 
