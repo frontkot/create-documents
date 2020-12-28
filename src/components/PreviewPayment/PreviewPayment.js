@@ -8,16 +8,29 @@ const PreviewAct = () => {
     const docName = 'Payment.pdf';
     const data = useSelector(getData);
     const {
+        actNumber,
+        actDate,
+        invoiceNumber,
+        invoiceDate,
+        procedureDate,
+        paymentNumber,
+        paymentDate,
         client,
-        clientTaxNumber,
         clientBINNumber,
         clientAdress,
         clientBank,
+        clientIIKNumber,
+        clientBIKBank,
         executor,
-        executorTaxNumber,
         executorBINNumber,
         executorAdress,
+        executorIIK,
         executorBank,
+        beneficiary,
+        beneficiaryTaxNumber,
+        executorKbe,
+        executorBankBIK,
+        executorBankCode,
         contract,
         contractDate,
         contractСonditions,
@@ -27,64 +40,54 @@ const PreviewAct = () => {
         CMR,
         shipper,
         consignee,
-        nameOfGoods,
-        dateOfWorks,
-        measure,
-        quantity,
-        unitPrice,
-        withoutVAT,
-        VATRate,
-        VATTax,
-        exciseRate,
-        exciseTax,
-        price,
-        actNumber,
-        actDate,
-        inventoryUsageInformation,
-        numberOfPafes,
-        documentsList,
-        beneficiary,
-        beneficiaryTaxNumber,
-        beneficiaryIIK,
-        beneficiaryKbe,
-        beneficiaryBank,
-        beneficiaryBIK,
-        beneficiaryBankCode,
-        paymentNumber,
-        paymentDate,
         totalPayableForAll,
         includingVAT,
         totalItems,
         totalForAmount,
         currency,
         totalPayable,
-        executerPosition,
+        inventoryUsageInformation,
+        numberOfPafes,
+        documentsList,
+        executorPosition,
+        executorFullName,
         executerSignature,
-        executerFullName,
-        clientPosition,
-        clientSignature,
-        clientFullName,
-        dateOfSigning,
         executivePersonSupplier,
         executivePersonSupplierPosition,
+        clientPosition,
+        clientFullName,
+        clientSignature,
         сhiefAccountant,
-        tableInfo
+        dateOfSigning,
+        tableInfo,
      } = data;
         
     return (
             <BlobProvider document={
             <Payment
-                fileName={docName}
+                actNumber={actNumber}
+                actDate={actDate}
+                invoiceNumber={invoiceNumber}
+                invoiceDate={invoiceDate}
+                procedureDate={procedureDate}
+                paymentNumber={paymentNumber}
+                paymentDate={paymentDate}
                 client={client}
-                clientTaxNumber={clientTaxNumber}
                 clientBINNumber={clientBINNumber}
                 clientAdress={clientAdress}
                 clientBank={clientBank}
+                clientIIKNumber={clientIIKNumber}
+                clientBIKBank={clientBIKBank}
                 executor={executor}
-                executorTaxNumber={executorTaxNumber}
                 executorBINNumber={executorBINNumber}
                 executorAdress={executorAdress}
+                executorIIK={executorIIK}
                 executorBank={executorBank}
+                beneficiary={beneficiary}
+                beneficiaryTaxNumber={beneficiaryTaxNumber}
+                executorKbe={executorKbe}
+                executorBankBIK={executorBankBIK}
+                executorBankCode={executorBankCode}
                 contract={contract}
                 contractDate={contractDate}
                 contractСonditions={contractСonditions}
@@ -94,47 +97,25 @@ const PreviewAct = () => {
                 CMR={CMR}
                 shipper={shipper}
                 consignee={consignee}
-                nameOfGoods={nameOfGoods}
-                dateOfWorks={dateOfWorks}
-                measure={measure}
-                quantity={quantity}
-                unitPrice={unitPrice}
-                withoutVAT={withoutVAT}
-                VATRate={VATRate}
-                VATTax={VATTax}
-                exciseRate={exciseRate}
-                exciseTax={exciseTax}
-                price={price}
-                actNumber={actNumber}
-                actDate={actDate}
-                inventoryUsageInformation={inventoryUsageInformation}
-                numberOfPafes={numberOfPafes}
-                documentsList={documentsList}
-                beneficiary={beneficiary}
-                beneficiaryTaxNumber={beneficiaryTaxNumber}
-                beneficiaryIIK={beneficiaryIIK}
-                beneficiaryKbe={beneficiaryKbe}
-                beneficiaryBank={beneficiaryBank}
-                beneficiaryBIK={beneficiaryBIK}
-                beneficiaryBankCode={beneficiaryBankCode}
-                paymentNumber={paymentNumber}
-                paymentDate={paymentDate}
                 totalPayableForAll={totalPayableForAll}
                 includingVAT={includingVAT}
                 totalItems={totalItems}
                 totalForAmount={totalForAmount}
                 currency={currency}
                 totalPayable={totalPayable}
-                executerPosition={executerPosition}
+                inventoryUsageInformation={inventoryUsageInformation}
+                numberOfPafes={numberOfPafes}
+                documentsList={documentsList}
+                executorPosition={executorPosition}
+                executorFullName={executorFullName}
                 executerSignature={executerSignature}
-                executerFullName={executerFullName}
-                clientPosition={clientPosition}
-                clientSignature={clientSignature}
-                clientFullName={clientFullName}
-                dateOfSigning={dateOfSigning}
                 executivePersonSupplier={executivePersonSupplier}
                 executivePersonSupplierPosition={executivePersonSupplierPosition}
-                сhiefAccountant={сhiefAccountant}     
+                clientPosition={clientPosition}
+                clientFullName={clientFullName}
+                clientSignature={clientSignature}
+                сhiefAccountant={сhiefAccountant}
+                dateOfSigning={dateOfSigning}  
                 tableInfo={tableInfo}               
                 />}
             >

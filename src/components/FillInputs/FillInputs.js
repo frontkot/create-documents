@@ -28,12 +28,8 @@ const FillInputs = () => {
             measure: '',
             quantity: '',
             unitPrice: '',
-            // withoutVAT: '',
             VATRate: '',
-            // VATTax: '',
             exciseRate: '',
-            // exciseTax: '',
-            // price: '',
         }
     );
 
@@ -129,12 +125,12 @@ const FillInputs = () => {
                             <div className='form-block'>
                                 <TextInput className='form-text_input' text='Исполнитель/Поставщик' id='executor'/>
                                 <TextInput className='form-text_input' text='БИН Исполнителя/Поставщика' id='executorBINNumber'/>
-                                {isInvoice && 
+                                {(isPayment || isInvoice) &&
                                     <>
                                         <TextInput className='form-text_input' text='Адрес Исполнителя/Поставщика' id='executorAdress'/>
                                     </>
                                 }
-                                {isPayment || isInvoice &&
+                                {(isPayment || isInvoice) &&
                                     <>
                                         <TextInput className='form-text_input' text='ИИК бенефициара (исполнителя)' id='executorIIK'/>
                                     </>
@@ -158,7 +154,7 @@ const FillInputs = () => {
                             <InfoLabel text='Договор' className='form-info_label' />
                             <div className='form-block'>
                                 <TextInput className='form-text_input' text='Договор (контракт)' id='contract'/>
-                                {isInvoice && 
+                                {(isPayment || isInvoice) &&
                                     <>
                                         <TextInput className='form-text_input' text='Дата заключения договора (контракта)' id='contractDate'/>
                                         <TextInput className='form-text_input' text='Уловия оплаты по договору (контракту)' id='contractСonditions'/>
@@ -194,18 +190,23 @@ const FillInputs = () => {
                                                 <InfoLabel text={`${index+1} товар`} className='form-info_label' />
                                                 <div className='form-table_block'>
                                                     <TextInput className='form-text_input' text='Наименование товаров (работ, услуг)' id={`tableInfo[${index}].nameOfGoods`}/>
+                                                    {isPayment &&
+                                                        <TextInput className='form-text_input' text='Код товара' id={`tableInfo[${index}].productCode`}/>
+                                                    }
                                                     {isAct && 
                                                         <TextInput className='form-text_input' text='Дата выполнения работ' id={`tableInfo[${index}].dateOfWorks`}/>
                                                     }
                                                     <TextInput className='form-text_input' text='Единица измерения' id={`tableInfo[${index}].measure`} placeholder='ед./шт.'/>
                                                     <TextInput className='form-text_input' text='Количество товаров' id={`tableInfo[${index}].quantity`} />
                                                     <TextInput className='form-text_input' text='Цена за единицу' id={`tableInfo[${index}].unitPrice`}/>
-                                                    {isInvoice &&
+                                                    {(isInvoice || isPayment)&&
                                                         <>
                                                         {/* <TextInput className='form-text_input' text='Стоимость товаров без НДС' id={`[${index}].withoutVAT`}/> */}
                                                         <TextInput className='form-text_input' text='Ставка НДС' id={`tableInfo[${index}].VATRate`}/>
                                                         {/* <TextInput className='form-text_input' text='Сумма НДС' id={`tableInfo[${index}].VATTax`}/> */}
-                                                        <TextInput className='form-text_input' text='Ставка акциза' id={`tableInfo[${index}].exciseRate`}/>
+                                                        {isInvoice &&
+                                                            <TextInput className='form-text_input' text='Ставка акциза' id={`tableInfo[${index}].exciseRate`}/>
+                                                        }
                                                         {/* <TextInput className='form-text_input' text='Сумма акциза' id={`tableInfo[${index}].exciseTax`}/> */}
                                                         </>
                                                     }
@@ -276,28 +277,25 @@ const FillInputs = () => {
 
                             </div>
 
-                            <InfoLabel text='Заказчик/Получатель' className='form-info_label' />
-                            <div className='form-block'>
-                                {(isAct || isInvoice) &&
-                                    <>
-                                        <TextInput className='form-text_input' text='Принял (должность заказчика)' id='clientPosition'/>
-                                        <TextInput className='form-text_input' text='ФИО заказчика (расшифровка подписи)' id='clientFullName'/>
-                                        {/* <ImageInput className='form-text_input' text='Подпись заказчика' id='clientSignature'/> */}
-                                    </>
-                                }
-                                {isInvoice && 
-                                    <>
-                                        <TextInput className='form-text_input' text='Главный бухгалтер ФИО' id='сhiefAccountant'/>
-                                    {/* <ImageInput className='form-text_input' text='Подпись бухгалтера' id='executerSignature'/> */}
-                                    </>
-                                }
-
-                                {isAct && 
-                                    <TextInput className='form-text_input' text='Дата подписания' id='dateOfSigning'/>
-                                }
-
-
-                            </div>
+                            {(isAct || isInvoice) &&
+                                <>
+                                    <InfoLabel text='Заказчик/Получатель' className='form-info_label' />
+                                    <div className='form-block'>
+                                    <TextInput className='form-text_input' text='Принял (должность заказчика)' id='clientPosition'/>
+                                    <TextInput className='form-text_input' text='ФИО заказчика (расшифровка подписи)' id='clientFullName'/>
+                                    {/* <ImageInput className='form-text_input' text='Подпись заказчика' id='clientSignature'/> */}
+                                    {isInvoice && 
+                                        <>
+                                            <TextInput className='form-text_input' text='Главный бухгалтер ФИО' id='сhiefAccountant'/>
+                                        {/* <ImageInput className='form-text_input' text='Подпись бухгалтера' id='executerSignature'/> */}
+                                        </>
+                                    }
+                                    {isAct && 
+                                        <TextInput className='form-text_input' text='Дата подписания' id='dateOfSigning'/>
+                                    }
+                                    </div>
+                                </>
+                            }
                         </div>
                         
                         <div className='form-button_block'>

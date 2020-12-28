@@ -3,7 +3,6 @@ import { Page, Text, View, Document, StyleSheet, Font, Image } from '@react-pdf/
 import Regular from '../../utils/font/Roboto/Roboto-Regular.ttf';
 import Bold from '../../utils/font/Roboto/Roboto-Bold.ttf';
 import Italic from '../../utils/font/Roboto/Roboto-Italic.ttf';
-import { string } from 'prop-types';
 
 Font.register({
     family: 'Roboto',
@@ -94,45 +93,46 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         textAlign: 'center',
         alignItems: 'center',
+        width: '100%',
     },
     firstCol: {
-        width: '3vw'
+        width: '3%'
     },
     secondCol: {
-        width: '18vw'
+        width: '26%'
     },
     thirdCol: {
-        width: '5vw'
+        width: '5%'
     },
     fourthCol: {
-        width: '7vw'
+        width: '7%'
     },
     fifthCol: {
-        width: '8vw'
+        width: '9%'
     },
     sixthCol: {
-        width: '10vw'
+        width: '12%'
     },
     sevAndEghCol: {
-        width: '16vw'
+        width: '14%'
     },
     seventhCol: {
-        width: '8vw'
+        width: '50%'
     },
     eighthCol: {
-        width: '8vw'
+        width: '50%'
     },
     ninethCol: {
-        width: '10vw'
+        width: '10%'
     },
     tenAndElevCol: {
-        width: '16vw'
+        width: '14%'
     },
     tenthCol: {
-        width: '8vw'
+        width: '50%'
     },
     eleventhCol: {
-        width: '8vw'
+        width: '50%'
     },
     mainRow: {
         height: 50,
@@ -169,28 +169,27 @@ const styles = StyleSheet.create({
         border: 1,
         borderStyle: 'solid',
         borderColor: 'black',
-        margin: -0.5,
+        marginTop: -0.5,
+        marginRight: -0.5,
+        marginLeft: -0.5,
     },
     bottomRowNum: {
         flexDirection: 'row',
     },
-
     tableRow: {
         textAlign: 'center',
         fontSize: 7,
         flexDirection: 'row',
     },
-    tableCell: {
-    borderColor: 'black',
-    border: 1,
-    borderStyle: 'solid',
-    margin: -0.5,
-    height: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
+    tableRowCell: {
+        fontSize: 7,
+        flexDirection: 'row',
+        marginTop: -0.5,
+        marginBottom: -0.5,
+        width: '100%',
     },
     totalInfo: {
-        width: '41.15vw',
+        width: '50.18%',
         borderColor: 'black',
         border: 1,
         borderStyle: 'solid',
@@ -199,10 +198,190 @@ const styles = StyleSheet.create({
         paddingLeft: 3,
         fontWeight: 'bold',
     },
+    firstColCell: {
+        width: '3.16%',
+        border: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin: -0.5,
+        height: '100%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    secondColCell: {
+        width: '26.18%',
+        border: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin: -0.5,
+        height: '100%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    thirdColCell: {
+        width: '5.2%',
+        border: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin: -0.5,
+        height: '100%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+
+    },
+    fourthColCell: {
+        width: '7.18%',
+        border: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin: -0.5,
+        height: '100%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+
+    },
+    fifthColCell: {
+        width: '9.18%',
+        border: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin: -0.5,
+        height: '100%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+
+    },
+    sixthColCell: {
+        width: '12.18%',
+        border: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin: -0.5,
+        height: '100%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+
+    },
+    seventhColCell: {
+        width: '7.18%',
+        border: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin: -0.5,
+        height: '100%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+
+    },
+    eighthColCell: {
+        width: '7.18%',
+        border: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin: -0.5,
+        height: '100%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+
+    },
+    ninethColCell: {
+        width: '10.18%',
+        border: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin: -0.5,
+        height: '100%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+
+    },
+    tenthColCell: {
+        width: '7.18%',
+        border: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin: -0.5,
+        height: '100%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+
+    },
+    eleventhColCell: {
+        width: '7.18%',
+        border: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin: -0.5,
+        height: '100%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+
+    },
+    sixthColBottom: {
+        width: '12.18%',
+        border: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin: -0.5,
+
+
+    },
+    seventhColBottom: {
+        width: '7.18%',
+        border: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin: -0.5,
+
+    },
+    eighthColBottom: {
+        width: '7.18%',
+        border: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin: -0.5,
+
+    },
+    ninethColBottom: {
+        width: '10.18%',
+        border: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin: -0.5,
+
+    },
+    tenthColBottom: {
+        width: '7.18%',
+        border: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin: -0.5,
+
+    },
+    eleventhColBottom: {
+        width: '7.18%',
+        border: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin: -0.5,
+
+    },
+
     
 })
 
-const Invoice = ({ procedureDate, actNumber, actDate, invoiceNumber, invoiceDate, paymentNumber, paymentDate, client, clientTaxNumber, clientBINNumber, clientAdress, clientBank, clientIIKNumber, clientBIKBank, executor, executorIIK, executorBINNumber, executorAdress, executorBank, executorTaxNumber, executorKbe, executorBIK, executorBankCode, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, shipper, consignee, totalPayableForAll, includingVAT, totalItems, totalForAmount, currency, totalPayable, inventoryUsageInformation, numberOfPafes, documentsList, executorPosition, executorFullName, clientPosition, clientFullName, dateOfSigning, executivePersonSupplier, executivePersonSupplierPosition, сhiefAccountant, executerSignature, clientSignature, tableInfo,}) => {
+const Invoice = ({ procedureDate, invoiceNumber, invoiceDate, client, clientBINNumber, clientAdress, clientBank, clientIIKNumber, clientBIKBank, executor, executorIIK, executorBINNumber, executorAdress, executorBank, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, executorPosition, executorFullName, clientPosition, clientFullName, dateOfSigning, executivePersonSupplier, executivePersonSupplierPosition, сhiefAccountant, executerSignature, clientSignature, tableInfo,}) => {
     const allCosts = tableInfo.map((i) => i.quantity*i.unitPrice);
     const allVAT = tableInfo.map((i) => isNaN(i.VATRate) ? 0 : (i.VATRate/100*i.quantity*i.unitPrice))
     const allExciseRate = tableInfo.map((i) => isNaN(i.exciseRate) ? 0 : (i.exciseRate/100*i.quantity*i.unitPrice))
@@ -221,63 +400,60 @@ const Invoice = ({ procedureDate, actNumber, actDate, invoiceNumber, invoiceDate
     const fullCost = sumOfArrItems(allCosts);
     const totalVAT = Math.ceil(sumOfArrItems(allVAT)) === 0 ? ' ' : sumOfArrItems(allVAT);
     const totalExciseRate = Math.ceil(sumOfArrItems(allExciseRate)) === 0 ? ' ' : sumOfArrItems(allExciseRate);
-    console.log(totalExciseRate)
-    console.log(totalVAT)
-
 
     const TableRow = ({ num, nameOfGoods, VATRate, measure, quantity, unitPrice, exciseRate}) => (
-        <View style={styles.tableRow}>
-          <View style={styles.firstCol}>
+        <View style={styles.tableRowCell}>
+          <View style={styles.firstColCell}>
             <View style={styles.tableCell}>
               <Text>{num} </Text>
             </View>
           </View>
-          <View style={styles.secondCol}>
+          <View style={styles.secondColCell}>
             <View style={styles.tableCell}>
               <Text>{nameOfGoods} </Text>
             </View>
           </View>    
-          <View style={styles.thirdCol}>
+          <View style={styles.thirdColCell}>
             <View style={styles.tableCell}>
               <Text>{measure} </Text>
             </View>
           </View>
-          <View style={styles.fourthCol}>
+          <View style={styles.fourthColCell}>
             <View style={styles.tableCell}>
               <Text>{quantity} </Text>
             </View>
           </View>
-          <View style={styles.fifthCol}>
+          <View style={styles.fifthColCell}>
             <View style={styles.tableCell}>
               <Text>{unitPrice} </Text>
             </View>
           </View>
-          <View style={styles.sixthCol}>
+          <View style={styles.sixthColCell}>
             <View style={styles.tableCell}>
               <Text>{unitPrice*quantity} </Text>
             </View>
           </View>
-          <View style={styles.seventhCol}>
+          <View style={styles.seventhColCell}>
             <View style={styles.tableCell}>
               <Text>{VATRate} </Text>
             </View>
           </View>
-          <View style={styles.eighthCol}>
+          <View style={styles.eighthColCell}>
             <View style={styles.tableCell}>
               <Text>{(isNaN(VATRate)) ? ' ' : unitPrice*quantity*VATRate/100}</Text>
             </View>
           </View>
-          <View style={styles.ninethCol}>
+          <View style={styles.ninethColCell}>
             <View style={styles.tableCell}>
               <Text>{(isNaN(+VATRate)) ? ' ' : ((VATRate/100 + 1)*unitPrice*quantity)}</Text>
             </View>
           </View>
-          <View style={styles.tenthCol}>
+          <View style={styles.tenthColCell}>
             <View style={styles.tableCell}>
               <Text>{exciseRate}</Text>
             </View>
           </View>
-          <View style={styles.eleventhCol}>
+          <View style={styles.eleventhColCell}>
             <View style={styles.tableCell}>
               <Text>{isNaN(+exciseRate) ? ' ' : (unitPrice*quantity + unitPrice*exciseRate/100)}</Text>
             </View>
@@ -501,7 +677,6 @@ const Invoice = ({ procedureDate, actNumber, actDate, invoiceNumber, invoiceDate
                     </View>
                 </View>
                 <View>
-
                     <View>{tableArr}</View>
                     <View style={styles.tableRow}>
                         <View style={styles.totalInfo}>
@@ -509,33 +684,33 @@ const Invoice = ({ procedureDate, actNumber, actDate, invoiceNumber, invoiceDate
                                 <Text>Всего по счету:</Text>
                             </View>
                         </View>
-                        <View style={styles.sixthCol}>
-                            <View style={styles.numsRow}>
+                        <View style={styles.sixthColBottom}>
+                            <View style={styles.numsRowTotal}>
                                 <Text>{fullCost}</Text>
                             </View>
                         </View>
-                        <View style={styles.seventhCol}>
-                            <View style={styles.numsRow}>
+                        <View style={styles.seventhColBottom}>
+                            <View style={styles.numsRowTotal}>
                                 <Text> </Text>
                             </View>
                         </View>
-                        <View style={styles.eighthCol}>
-                            <View style={styles.numsRow}>
+                        <View style={styles.eighthColBottom}>
+                            <View style={styles.numsRowTotal}>
                                 <Text>{totalVAT}</Text>
                             </View>
                         </View>
-                        <View style={styles.ninethCol}>
-                            <View style={styles.numsRow}>
+                        <View style={styles.ninethColBottom}>
+                            <View style={styles.numsRowTotal}>
                                 <Text>{fullCost + totalVAT}</Text>
                             </View>
                         </View>
-                        <View style={styles.tenthCol}>
-                            <View style={styles.numsRow}>
+                        <View style={styles.tenthColBottom}>
+                            <View style={styles.numsRowTotal}>
                                 <Text> </Text>
                             </View>
                         </View>
-                        <View style={styles.eleventhCol}>
-                            <View style={styles.numsRow}>
+                        <View style={styles.eleventhColBottom}>
+                            <View style={styles.numsRowTotal}>
                                 <Text>{totalExciseRate}</Text>
                             </View>
                         </View>
