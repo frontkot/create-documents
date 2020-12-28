@@ -58,10 +58,6 @@ const styles = StyleSheet.create({
         fontSize: 7,
         textAlign: "center",
     },
-    tableHeader: {
-        paddingTop: 10,
-        flexDirection: 'row',
-    },
     signatureBlock: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -91,11 +87,92 @@ const styles = StyleSheet.create({
         borderBottom: 1,
         width: '100%',
         paddingTop: 1,
+    },
+    tableHeader: {
+        marginTop: 10,
+        flexDirection: 'row',
+        textAlign: 'center',
+        alignItems: 'center',
+    },
+    firstCol: {
+        width: '3vw'
+    },
+    secondCol: {
+        width: '18vw'
+    },
+    thirdCol: {
+        width: '5vw'
+    },
+    fourthCol: {
+        width: '7vw'
+    },
+    fifthCol: {
+        width: '8vw'
+    },
+    sixthCol: {
+        width: '10vw'
+    },
+    sevAndEghCol: {
+        width: '16vw'
+    },
+    seventhCol: {
+        width: '8vw'
+    },
+    eighthCol: {
+        width: '8vw'
+    },
+    ninethCol: {
+        width: '10vw'
+    },
+    tenAndElevCol: {
+        width: '16vw'
+    },
+    tenthCol: {
+        width: '8vw'
+    },
+    eleventhCol: {
+        width: '8vw'
+    },
+    mainRow: {
+        height: 50,
+        border: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin: -0.5,
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    topRow: {
+        height: 31,
+        border: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin: -0.5,
+        flexDirection: 'row',
+        alignItems: 'center',
 
-    }
+
+    }, 
+    bottomRow: {
+        height: 20,
+        border: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin: -0.5,
+        flexDirection: 'row',
+        alignItems: 'center',
 
 
-
+    },
+    numsRow: {
+        border: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        margin: -0.5,
+    },
+    bottomRowNum: {
+        flexDirection: 'row',
+    },
 })
 
 const Invoice = ({ procedureDate, actNumber, actDate, invoiceNumber, invoiceDate, paymentNumber, paymentDate, client, clientTaxNumber, clientBINNumber, clientAdress, clientBank, clientIIKNumber, clientBIKBank, executor, executorIIK, executorBINNumber, executorAdress, executorBank, executorTaxNumber, executorKbe, executorBIK, executorBankCode, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, shipper, consignee, totalPayableForAll, includingVAT, totalItems, totalForAmount, currency, totalPayable, inventoryUsageInformation, numberOfPafes, documentsList, executorPosition, executorFullName, clientPosition, clientFullName, dateOfSigning, executivePersonSupplier, executivePersonSupplierPosition, сhiefAccountant, executerSignature, clientSignature, tableInfo,}) => {
@@ -112,6 +189,52 @@ const Invoice = ({ procedureDate, actNumber, actDate, invoiceNumber, invoiceDate
     }
     const fullCost = sumOfArrItems(allCosts);
     const total = sumOfArrItems(allQuantity);
+
+    const TableRow = ({ num, nameOfGoods, dateOfWorks, measure, quantity, unitPrice, price}) => (
+        <View style={styles.tableRow}>
+          <View style={styles.firstCol}>
+            <View style={styles.tableCell}>
+              <Text>{num} </Text>
+            </View>
+          </View>
+          <View style={styles.secondCol}>
+            <View style={styles.tableCell}>
+              <Text>{nameOfGoods} </Text>
+            </View>
+          </View>    
+          <View style={styles.thirdCol}>
+            <View style={styles.tableCell}>
+              <Text>{dateOfWorks} </Text>
+            </View>
+          </View>
+          <View style={styles.fourthCol}>
+            <View style={styles.tableCell}>
+              <Text> </Text>
+            </View>
+          </View>
+          <View style={styles.fifthCol}>
+            <View style={styles.tableCell}>
+              <Text>{measure} </Text>
+            </View>
+          </View>
+          <View style={styles.sixthCol}>
+            <View style={styles.tableCell}>
+              <Text>{quantity} </Text>
+            </View>
+          </View>
+          <View style={styles.seventhCol}>
+            <View style={styles.tableCell}>
+              <Text>{unitPrice} </Text>
+            </View>
+          </View>
+          <View style={styles.eighthCol}>
+            <View style={styles.tableCell}>
+              <Text>{price}</Text>
+            </View>
+          </View>
+        </View>
+      )
+    
 
     return (
         <Document>
@@ -211,103 +334,103 @@ const Invoice = ({ procedureDate, actNumber, actDate, invoiceNumber, invoiceDate
 
 
                 <View style={styles.tableHeader}>
-                    <View style={styles}>
-                        <View style={styles}>
+                    <View style={styles.firstCol}>
+                        <View style={styles.mainRow}>
                             <Text>№ п/п</Text>
                         </View>
-                        <View style={styles.firstCol}>
+                        <View style={styles.numsRow}>
                             <Text>1</Text>
                         </View>
                     </View>
-                    <View style={styles}>
-                        <View style={styles}>
+                    <View style={styles.secondCol}>
+                        <View style={styles.mainRow}>
                             <Text>Наименование товаров (работ, услуг)</Text>
                         </View>
-                        <View style={styles.secondCol}>
+                        <View style={styles.numsRow}>
                             <Text>2</Text>
                         </View>
                     </View>
-                    <View style={styles}>
-                        <View style={styles}>
+                    <View style={styles.thirdCol}>
+                        <View style={styles.mainRow}>
                             <Text>Ед. изм.</Text>
                         </View>
-                        <View style={styles.thirdCol}>
+                        <View style={styles.numsRow}>
                             <Text>3</Text>
                         </View>
                     </View>
-                    <View style={styles}>
-                        <View style={styles}>
+                    <View style={styles.fourthCol}>
+                        <View style={styles.mainRow}>
                             <Text>Кол-во (объем)</Text>
                         </View>
-                        <View style={styles.fourthCol}>
+                        <View style={styles.numsRow}>
                             <Text>4</Text>
                         </View>
                     </View>
-                    <View style={styles}>
-                        <View style={styles}>
+                    <View style={styles.fifthCol}>
+                        <View style={styles.mainRow}>
                             <Text>Цена (KZT)</Text>
                         </View>
-                        <View style={styles.fifthCol}>
+                        <View style={styles.numsRow}>
                             <Text>5</Text>
                         </View>
                     </View>
-                    <View style={styles}>
-                        <View style={styles}>
+                    <View style={styles.sixthCol}>
+                        <View style={styles.mainRow}>
                             <Text>Стоимость товаров (работ, услуг) без НДС</Text>
                         </View>
-                        <View style={styles.sixthCol}>
+                        <View style={styles.numsRow}>
                             <Text>6</Text>
                         </View>
                     </View>
-                    <View style={styles}>
-                        <View style={styles}>
+                    <View style={styles.sevAndEghCol}>
+                        <View style={styles.topRow}>
                             <Text>НДС</Text>
                         </View>
-                        <View style={styles}>
-                            <View style={styles}>
-                                <View style={styles}>
+                        <View style={styles.bottomRowNum}>
+                            <View style={styles.seventhCol}>
+                                <View style={styles.bottomRow}>
                                     <Text>Cтавка</Text>
                                 </View>
-                                <View style={styles}>
-                                    <Text>Сумма</Text>
-                                </View>
-                            </View>
-                            <View style={styles}>
-                                <View style={styles.seventhCol}>
+                                <View style={styles.numsRow}>
                                     <Text>7</Text>
                                 </View>
-                                <View style={styles.eightsCol}>
+                            </View>
+                            <View style={styles.eighthCol}>
+                                <View style={styles.bottomRow}>
+                                    <Text>Сумма</Text>
+                                </View>
+                                <View style={styles.numsRow}>
                                     <Text>8</Text>
                                 </View>
                             </View>
                         </View>
                     </View>
-                    <View style={styles}>
-                        <View style={styles}>
+                    <View style={styles.ninethCol}>
+                        <View style={styles.mainRow}>
                             <Text>Всего стоимость реализации</Text>
                         </View>
-                        <View style={styles.ninethCol}>
+                        <View style={styles.numsRow}>
                             <Text>9</Text>
                         </View>
                     </View>
-                    <View style={styles}>
-                        <View style={styles}>
+                    <View style={styles.tenAndElevCol}>
+                        <View style={styles.topRow}>
                             <Text>Акциз</Text>
                         </View>
-                        <View style={styles}>
-                            <View style={styles}>
-                                <View style={styles}>
+                        <View style={styles.bottomRowNum}>
+                            <View style={styles.tenthCol}>
+                                <View style={styles.bottomRow}>
                                     <Text>Ставка</Text>
                                 </View>
-                                <View style={styles}>
-                                    <Text>Сумма</Text>
-                                </View>
-                            </View>
-                            <View style={styles}>
-                                <View style={styles.tenthCol}>
+                                <View style={styles.numsRow}>
                                     <Text>10</Text>
                                 </View>
-                                <View style={styles.eleventhCol}>
+                            </View>
+                            <View style={styles.eleventhCol}>
+                                <View style={styles.bottomRow}>
+                                    <Text>Сумма</Text>
+                                </View>
+                                <View style={styles.numsRow}>
                                     <Text>11</Text>
                                 </View>
                             </View>

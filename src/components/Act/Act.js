@@ -122,24 +122,29 @@ const styles = StyleSheet.create({
     marginTop: 3,
     flexDirection: 'row',
   },
-  actData: {
-    maxWidth: 70,
-    textAlign: 'center',
-    paddingTop: 10,
-
+  actDataLeft: {
+    width: 50,
+    textAlign: 'center'
+  },  
+  actDataRight: {
+    width: 50,
+    textAlign: 'center'
   },  
   actInfoHeader: {
-    marginBottom: -1,
-    paddingTop: 2,
+    margin: -0.5,
+    paddingRight: 2,
+    paddingLeft: 2,
     border: 1,
     borderStyle: 'solid',
     borderColor: 'black',
-    marginLeft: -1,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   actInfoContent: {
-    paddingTop: 2,
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin: -0.5,
     fontWeight: 'bold',
-    marginLeft: -1,
     border: 1,
     borderStyle: 'solid',
     borderColor: 'black',
@@ -246,10 +251,9 @@ const styles = StyleSheet.create({
     marginTop: 15,
     flexDirection: 'row',
     fontSize: 7,
-  },
-  tableDescr: {
-    flexDirection: 'row',
     textAlign: 'center',
+    alignItems: 'center',
+
   },
   firstCol: { 
     width: '5vw',
@@ -266,6 +270,10 @@ const styles = StyleSheet.create({
   fifthCol: {
     width: '7vw',
   },
+  sixSevenEightCol: {
+    flexDirection: 'column',
+    width: "30vw"
+  },
   sixthCol: {
     width: '9vw',
   },
@@ -275,57 +283,21 @@ const styles = StyleSheet.create({
   eighthCol: {
     width: '10vw',
   },
-  textDescr: {
-    height: 66,
-    padding: 3,
-    borderColor: 'black',
-    border: 1,
-    borderStyle: 'solid',
-    margin: -0.5,
-    display: 'table',
-  },
-  numDescr: {
-    borderColor: 'black',
-    border: 1,
-    borderStyle: 'solid',
-    margin: -0.5,
-    paddingTop:2,
-  },
-  textDescrPrices: {
-    paddingTop: 12,
-    height: 33.5,
-    width: '100.5%',
-    textAlign: 'center',
-    borderColor: 'black',
-    border: 1,
-    borderStyle: 'solid',
-    margin: -0.5,
-
-  },
-  textDescrCol: {
-    paddingTop: 12,
-    height: 33.5,
-    borderColor: 'black',
-    border: 1,
-    borderStyle: 'solid',
-    margin: -0.5,
-  },
   tableRow: {
-    flexDirection: 'row',
     textAlign: 'center',
     fontSize: 7,
-    alignItems: 'center',
+    flexDirection: 'row',
   },
   tableCell: {
-    paddingTop: 3,
     borderColor: 'black',
     border: 1,
     borderStyle: 'solid',
     margin: -0.5,
     height: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   tableFull: {
-    paddingTop: 2,
     width: '63.15vw',
     borderColor: 'black',
     paddingRight: 10,
@@ -336,9 +308,46 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
 
+  mainRow: {
+    height: 70,
+    border: 1,
+    borderStyle: 'solid',
+    borderColor: 'black',
+    margin: -0.5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: 2,
+    paddingRight: 2,
+  },
+  topRow: {
+    height: 36,
+    border: 1,
+    borderStyle: 'solid',
+    borderColor: 'black',
+    margin: -0.5,
+    flexDirection: 'row',
+    alignItems: 'center',
+  }, 
+  bottomRow: {
+    height: 35,
+    border: 1,
+    borderStyle: 'solid',
+    borderColor: 'black',
+    margin: -0.5,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  numsRow: {
+    border: 1,
+    borderStyle: 'solid',
+    borderColor: 'black',
+    margin: -0.5,
+  },
+  bottomRowNum: {
+      flexDirection: 'row',
+  },
 
 
-  // table: { display: 'table', width: 'auto', borderStyle: 'solid', borderWidth: 1, borderRightWidth: 0, borderBottomWidth: 0 }, tableRow: { margin: 'auto', flexDirection: 'row' }, tableCol: { width: '25%', borderStyle: 'solid', borderWidth: 1, borderLeftWidth: 0, borderTopWidth: 0 }, tableCell: { margin: 'auto', marginTop: 5, fontSize: 10 }
 });
 
 const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, contractDate, actNumber, actDate, inventoryUsageInformation, numberOfPafes, documentsList, executerPosition, executerSignature, executerFullName, clientPosition, clientSignature, clientFullName, tableInfo, }) => {
@@ -358,28 +367,44 @@ const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, c
   const TableRow = ({ num, nameOfGoods, dateOfWorks, measure, quantity, unitPrice, price}) => (
     <View style={styles.tableRow}>
       <View style={styles.firstCol}>
-        <Text style={styles.tableCell}>{num}</Text>
+        <View style={styles.tableCell}>
+          <Text>{num} </Text>
+        </View>
       </View>
       <View style={styles.secondCol}>
-        <Text style={styles.tableCell}>{nameOfGoods}</Text>
+        <View style={styles.tableCell}>
+          <Text>{nameOfGoods} </Text>
+        </View>
       </View>    
       <View style={styles.thirdCol}>
-        <Text style={styles.tableCell}>{dateOfWorks}</Text>
+        <View style={styles.tableCell}>
+          <Text>{dateOfWorks} </Text>
+        </View>
       </View>
       <View style={styles.fourthCol}>
-        <Text style={styles.tableCell}> </Text>
+        <View style={styles.tableCell}>
+          <Text> </Text>
+        </View>
       </View>
       <View style={styles.fifthCol}>
-        <Text style={styles.tableCell}>{measure}</Text>
+        <View style={styles.tableCell}>
+          <Text>{measure} </Text>
+        </View>
       </View>
       <View style={styles.sixthCol}>
-        <Text style={styles.tableCell}>{quantity}</Text>
+        <View style={styles.tableCell}>
+          <Text>{quantity} </Text>
+        </View>
       </View>
       <View style={styles.seventhCol}>
-        <Text style={styles.tableCell}>{unitPrice}</Text>
+        <View style={styles.tableCell}>
+          <Text>{unitPrice} </Text>
+        </View>
       </View>
       <View style={styles.eighthCol}>
-        <Text style={styles.tableCell}>{price}</Text>
+        <View style={styles.tableCell}>
+          <Text>{price}</Text>
+        </View>
       </View>
     </View>
   )
@@ -462,59 +487,100 @@ const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, c
           </View>
 
           <View style={styles.actInfo}>
-            <View style={styles.actData}>
-              <Text style={styles.actInfoHeader}>Номер документа</Text>
-              <Text style={styles.actInfoContent}>{actNumber}</Text>
+            <View style={styles.actDataRight}>
+              <View style={styles.actInfoHeader}>
+                <Text>Номер документа</Text>
+              </View>
+              <View style={styles.actInfoContent}>
+                <Text>{actNumber} </Text>
+              </View>
             </View>
-            <View style={styles.actData}>
-              <Text style={styles.actInfoHeader}>Дата составления</Text>
-              <Text style={styles.actInfoContent}>{actDate}</Text>
+            <View style={styles.actDataLeft}>
+              <View style={styles.actInfoHeader}>
+                <Text>Дата составления</Text>
+              </View>
+              <View style={styles.actInfoContent}>
+                <Text>{actDate} </Text>
+              </View>
             </View>
           </View>
         </View>
         
         {/* Table Here */}              
         <View style={styles.tableHeader}>
-          <View style={styles.tableHeadDesrc}>
-            <View style={styles.tableDescr}>
-              <View style={styles.firstCol}>
-                <Text style={styles.textDescr}>Номер по порядку</Text><Text style={styles.numDescr}>1</Text>
-              </View>
-              <View style={styles.secondCol}>
-                <Text style={styles.textDescr}>Наименование работ (услуг) (в разрезе их подвидов в соответствии с технической спецификацией, заданием, графиком выполнения работ (услуг) при их наличии)</Text><Text style={styles.numDescr}>2</Text>
-              </View>
-              <View style={styles.thirdCol}>
-                <Text style={styles.textDescr}>Дата выполнения работ (оказания услуг)</Text><Text style={styles.numDescr}>3</Text>
-              </View>
-              <View style={styles.fourthCol}>
-                <Text style={styles.textDescr}>Сведения об отчете о научных исследованиях, маркетинговых, консультационных и прочих услугах (дата, номер, количество страниц) (при их наличии)</Text><Text style={styles.numDescr}>4</Text>
-              </View>
-              <View style={styles.fifthCol}>
-                <Text style={styles.textDescr}>Единица измерения</Text><Text style={styles.numDescr}>5</Text>
-              </View>
+          <View style={styles.firstCol}>
+            <View style={styles.mainRow}>
+                <Text>Номер по порядку</Text>
+            </View>
+            <View style={styles.numsRow}>
+                <Text>1</Text>
             </View>
           </View>
-          <View style={styles.tableDescrPrices}>
-            <View  style={styles.tableDescrPricesCell}>
-              <Text style={styles.textDescrPrices}>Выполнено работ (оказано услуг)</Text>
+          <View style={styles.secondCol}>
+            <View style={styles.mainRow}>
+              <Text>Наименование работ (услуг) (в разрезе их подвидов в соответствии с технической спецификацией, заданием, графиком выполнения работ (услуг) при их наличии)</Text>
             </View>
-            <View>
-              <View style={styles.tableDescr}>
-                <View style={styles.sixthCol}>
-                  <Text style={styles.textDescrCol}>количество</Text><Text style={styles.numDescr}>6</Text>
+            <View style={styles.numsRow}>
+              <Text>2</Text>
+            </View>
+          </View>
+          <View style={styles.thirdCol}>
+            <View style={styles.mainRow}>
+              <Text>Дата выполнения работ (оказания услуг)</Text>
+            </View>
+            <View style={styles.numsRow}>
+              <Text>3</Text>
+            </View>
+          </View>
+          <View style={styles.fourthCol}>
+            <View style={styles.mainRow}>
+              <Text>Сведения об отчете о научных исследованиях, маркетинговых, консультационных и прочих услугах (дата, номер, количество страниц) (при их наличии)</Text>
+            </View>
+            <View style={styles.numsRow}>
+              <Text>4</Text>
+            </View>
+          </View>
+          <View style={styles.fifthCol}>
+            <View style={styles.mainRow}>
+              <Text>Единица измерения</Text>
+            </View>
+            <View style={styles.numsRow}>
+              <Text>5</Text>
+            </View>
+          </View>
+          <View style={styles.sixSevenEightCol}>
+            <View style={styles.topRow}>
+                <Text>Выполнено работ (оказано услуг)</Text>
+            </View>
+            <View style={styles.bottomRowNum}>
+              <View style={styles.sixthCol}>
+                <View style={styles.bottomRow}>
+                  <Text>количество</Text>
                 </View>
-                <View style={styles.seventhCol}>
-                  <Text style={styles.textDescrCol}>цена за единицу</Text><Text style={styles.numDescr}>7</Text>
+                <View style={styles.numsRow}>
+                  <Text>6</Text>
                 </View>
-                <View style={styles.eighthCol}>
-                  <Text style={styles.textDescrCol}>стоимость</Text><Text style={styles.numDescr}>8</Text>
+              </View>
+              <View style={styles.seventhCol}>
+                <View style={styles.bottomRow}>
+                  <Text>цена за единицу</Text>
+                </View>
+                <View style={styles.numsRow}>
+                  <Text>7</Text>
+                </View>
+              </View>
+              <View style={styles.eighthCol}>
+                <View style={styles.bottomRow}>
+                  <Text>стоимость</Text>
+                </View>
+                <View style={styles.numsRow}>
+                  <Text>8</Text>
                 </View>
               </View>
             </View>
-    
-            
-          </View>
+          </View>           
         </View>
+
         <View>
           {tableArr}
           <View style={styles.tableRow}>
@@ -522,13 +588,19 @@ const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, c
               <Text>Итого:</Text>
             </View>
             <View style={styles.sixthCol}>
-              <Text style={styles.numDescr}>{total}</Text>
+              <View style={styles.numsRow}>
+                <Text>{total}</Text>
+              </View>
             </View>
             <View style={styles.seventhCol}>
-              <Text style={styles.numDescr}>x</Text>
+              <View style={styles.numsRow}>
+                <Text>x</Text>
+              </View>
             </View>
             <View style={styles.eighthCol}>
-              <Text style={styles.numDescr}>{fullCost}</Text>
+              <View style={styles.numsRow}>
+                <Text>{fullCost}</Text>
+                </View>
             </View>
           </View>
         </View>
