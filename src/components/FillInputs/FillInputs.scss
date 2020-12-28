@@ -40,8 +40,9 @@
     &-text_input {
         display: flex;
         align-items: center;
-        padding: 1px;
+        padding: 2px;
         word-wrap: break-word;
+
         &_header {
             padding-right: 8px;
             text-align: end;
@@ -49,7 +50,23 @@
             
         }
         & input {
+        }
+        &-area {
             max-width: 12vw;
+            // background-color: red;
+            border:none;
+            background-image:none;
+            background-color:rgb(243, 243, 243);
+            box-shadow: 1px 1px 3px 1px #8a8a8a;
+            outline: none;
+            border-radius: 5px;
+            border-bottom: 1px solid rgb(241, 93, 93);
+            
+            &:focus {
+                background-color: rgb(182, 255, 164);
+                box-shadow: 1px 1px 10px 1px #8a8a8a;
+                border-bottom: 1px solid rgb(118, 241, 93);
+            }
         }
     }
     &-button_block {

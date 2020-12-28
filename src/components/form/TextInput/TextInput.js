@@ -12,6 +12,7 @@ const TextInput = ({
                 name={id}
                 type='text'
                 placeholder={placeholder}
+                className={`${className}-area`}
             />
         </label>
     );
