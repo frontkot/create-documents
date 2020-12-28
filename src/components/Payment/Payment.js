@@ -153,7 +153,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginTop: -0.5,
         marginBottom: -0.5,
-
     },  
     firstCol: {
         width: '4%',
