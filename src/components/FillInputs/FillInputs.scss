@@ -17,12 +17,10 @@
     }
     &-header {
         grid-auto-flow: column;
+        background-color: rgba(190, 35, 35, 0.272);
     }
     &-block {
         grid-template-columns: repeat(2, 1fr);
-    }
-    &-header {
-        background-color: rgb(255, 198, 144);
     }
     &-table_block {
         margin: 5px 5px;
@@ -46,14 +44,9 @@
         &_header {
             padding-right: 8px;
             text-align: end;
-
-            
-        }
-        & input {
         }
         &-area {
             max-width: 12vw;
-            // background-color: red;
             border:none;
             background-image:none;
             background-color:rgb(243, 243, 243);
@@ -79,7 +72,7 @@
         margin: 5px 50px;
         border-radius: 5px;
         border: 2px dotted rgb(0, 0, 0);
-        background-color: rgb(214, 224, 255);
+        background-color: rgb(180, 199, 253);
         display: grid;
         grid-template-columns: 10% 82% 8%;
         justify-items: center;
