@@ -3,6 +3,7 @@ import Invoice from '../Invoice/Invoice';
 import { useSelector } from 'react-redux';
 import { getData } from '../../store/inputData/selectors';
 import { BlobProvider } from '@react-pdf/renderer';
+import { Link } from 'react-router-dom';
 
 const PreviewAct = () => {
     const docName = 'Invoice.pdf';
@@ -68,6 +69,12 @@ const PreviewAct = () => {
      } = data;
         
     return (
+        <>
+            <div className='preview-button_block'>
+                <Link to='/filling' className='go-button'>На страницу заполнения документов</Link>
+                <Link to='/preview' className='go-button'>Обратно к предпросмотру документов</Link>
+            </div>
+
             <BlobProvider document={
             <Invoice
                     actNumber={actNumber}
@@ -132,6 +139,7 @@ const PreviewAct = () => {
             >
                 {({ url }) => <iframe src={url} style={{ width: '100%', height: '80vh' }} />}
             </BlobProvider>
+        </>
     );
 };
 

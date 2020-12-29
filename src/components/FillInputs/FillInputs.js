@@ -19,6 +19,8 @@ const FillInputs = () => {
     const isInvoice = useSelector(getIsInvoice);
     const isPayment = useSelector(getIsPayment);
     const dispatch = useDispatch();  
+    const [isSignature, setIsSignature] = useState(false);
+    const [isAdditionalInfo, setIsAdditionalInfo] = useState(false);
     
     const emptyItem = () => (
         {
@@ -150,7 +152,6 @@ const FillInputs = () => {
                                     </>
                                 }
                             </div>
-
                             <InfoLabel text='Договор' className='form-info_label' />
                             <div className='form-block'>
                                 <TextInput className='form-text_input' text='Договор (контракт)' id='contract'/>
@@ -162,20 +163,6 @@ const FillInputs = () => {
                                 }
                             </div>
 
-
-                            {isInvoice &&
-                                <>
-                                    <InfoLabel text='Доставка товара' className='form-info_label' />
-                                    <div className='form-block'>
-                                        <TextInput className='form-text_input' text='Пункт назначения' id='destination'/>
-                                        <TextInput className='form-text_input' text='Поставка по довренности' id='proxy'/>
-                                        <TextInput className='form-text_input' text='Способ отправления' id='departureMethod'/>
-                                        <TextInput className='form-text_input' text='Товарно-транспортная накладная' id='CMR'/>
-                                        {/* <TextInput className='form-text_input' text='Грузоотправитель' id='shipper'/> Брать инфо из Исполнителя! */}
-                                        {/* <TextInput className='form-text_input' text='Грузополучатель' id='consignee'/>  Брать инфо из Заказчика!*/}
-                                    </div>
-                                </>
-                            }
                         </div>
                         {/* Таблица */}
                         <div className='form-header'>
@@ -227,34 +214,56 @@ const FillInputs = () => {
                         </FieldArray>
 
                         {/* Счет на оплату */}
-                        {isPayment &&
+                        <div className='form-header'>
                             <>
-                                <div className='form-header'>
-                                    <InfoLabel text='Доп инфо заполнения таблицы товаров(услуг) счета на оплату' className='form-info_label' />
-                                </div>
-                                <div className='form-block'>
-                                    <TextInput className='form-text_input' text='Итого' id='totalPayableForAll' value />
-                                    {/* <TextInput className='form-text_input' text='В том числе НДС' id='includingVAT' value /> */}
-                                    {/* <TextInput className='form-text_input' text='Всего наименований' id='totalItems' value /> */}
-                                    {/* <TextInput className='form-text_input' text='На сумму' id='totalForAmount' value /> */}
-                                    <TextInput className='form-text_input' text='Валюта' id='currency' />
-                                    <TextInput className='form-text_input' text='Всего к оплате(прописью)' id='totalPayable'/>
-                                </div>
+                                <InfoLabel text='Доп инфо для заполнения документов' className='form-info_label' />
+                                <button className='is-open' onClick={(e) => {e.preventDefault();setIsAdditionalInfo(!isAdditionalInfo)}}>{isAdditionalInfo ? 'Свернуть' : 'Развернуть'}</button>
                             </>
-                        }
-
-                        {/* Акт */}
-                        {isAct && 
+                        </div>
+                        {isAdditionalInfo &&
                             <>
-                                <div className='form-header'>
-                                    <InfoLabel text='Доп инфо для заполнения акта' className='form-info_label' />
-                                </div>
-                                <InfoLabel text='Приложение' className='form-info_label' />
-                                <div className='form-block'>
-                                    <TextInput className='form-text_input' text='Сведения об использовании запасов, полученных от заказчика' id='inventoryUsageInformation'/>
-                                    <TextInput className='form-text_input' text='Перечень документации на сколько страниц' id='numberOfPafes'/>
-                                    <TextInput className='form-text_input' text='Перечень документов' id='documentsList'/>
-                                </div>
+                                {isInvoice &&
+                                    <>
+                                        <InfoLabel text='Доставка товара' className='form-info_label' />
+                                        <div className='form-block'>
+                                            <TextInput className='form-text_input' text='Пункт назначения' id='destination'/>
+                                            <TextInput className='form-text_input' text='Поставка по довренности' id='proxy'/>
+                                            <TextInput className='form-text_input' text='Способ отправления' id='departureMethod'/>
+                                            <TextInput className='form-text_input' text='Товарно-транспортная накладная' id='CMR'/>
+                                            {/* <TextInput className='form-text_input' text='Грузоотправитель' id='shipper'/> Брать инфо из Исполнителя! */}
+                                            {/* <TextInput className='form-text_input' text='Грузополучатель' id='consignee'/>  Брать инфо из Заказчика!*/}
+                                        </div>
+                                    </>
+                                }
+
+                                {isPayment &&
+                                    <>
+                                        <InfoLabel text='Итоговая инфо для счета на оплату' className='form-info_label' />
+                                        <div className='form-block'>
+                                            <TextInput className='form-text_input' text='Итого' id='totalPayableForAll' value />
+                                            {/* <TextInput className='form-text_input' text='В том числе НДС' id='includingVAT' value /> */}
+                                            {/* <TextInput className='form-text_input' text='Всего наименований' id='totalItems' value /> */}
+                                            {/* <TextInput className='form-text_input' text='На сумму' id='totalForAmount' value /> */}
+                                            <TextInput className='form-text_input' text='Валюта' id='currency' />
+                                            <TextInput className='form-text_input' text='Всего к оплате(прописью)' id='totalPayable'/>
+                                        </div>
+                                    </>
+                                }
+
+                                {/* Акт */}
+                                {isAct && 
+                                    <>
+                                        {/* <div className='form-header'>
+                                            <InfoLabel text='Доп инфо для заполнения акта' className='form-info_label' />
+                                        </div> */}
+                                        <InfoLabel text='Приложение' className='form-info_label' />
+                                        <div className='form-block'>
+                                            <TextInput className='form-text_input' text='Сведения об использовании запасов, полученных от заказчика' id='inventoryUsageInformation'/>
+                                            <TextInput className='form-text_input' text='Перечень документации на сколько страниц' id='numberOfPafes'/>
+                                            <TextInput className='form-text_input' text='Перечень документов' id='documentsList'/>
+                                        </div>
+                                    </>
+                                }
                             </>
                         }
 
@@ -262,40 +271,43 @@ const FillInputs = () => {
                         <div className='form-general_info'>
                         <div className='form-header'>
                                 <InfoLabel text='Блок подписи документа' className='form-info_label' />
+                                <button className='is-open' onClick={(e) => {e.preventDefault();setIsSignature(!isSignature)}}>{isSignature ? 'Свернуть' : 'Развернуть'}</button>
                         </div>
-                            <InfoLabel text='Исполнитель/Поставщик' className='form-info_label' />
-                            <div className='form-block'>
-                                <TextInput className='form-text_input' text='Сдал (должность исполнителя)' id='executorPosition'/>
-                                <TextInput className='form-text_input' text='ФИО исполнителя (расшифровка подписи)' id='executorFullName'/>
-                                {/* <ImageInput className='form-text_input' text='Подпись исполнителя' id='executerSignature'/> */}
-                                {/* {isInvoice && 
-                                    <>
-                                        <TextInput className='form-text_input' text='ВЫДАЛ (ответственное лицо поставщика)' id='executivePersonSupplier'/>
-                                        <TextInput className='form-text_input' text='Должность (кто выдал)' id='executivePersonSupplierPosition'/>
-                                    </>
-                                } */}
-
-                            </div>
-
-                            {(isAct || isInvoice) &&
-                                <>
-                                    <InfoLabel text='Заказчик/Получатель' className='form-info_label' />
-                                    <div className='form-block'>
-                                    <TextInput className='form-text_input' text='Принял (должность заказчика)' id='clientPosition'/>
-                                    <TextInput className='form-text_input' text='ФИО заказчика (расшифровка подписи)' id='clientFullName'/>
-                                    {/* <ImageInput className='form-text_input' text='Подпись заказчика' id='clientSignature'/> */}
-                                    {isInvoice && 
+                        {isSignature &&
+                            <>
+                                <InfoLabel text='Исполнитель/Поставщик' className='form-info_label' />
+                                <div className='form-block'>
+                                    <TextInput className='form-text_input' text='Сдал (должность исполнителя)' id='executorPosition'/>
+                                    <TextInput className='form-text_input' text='ФИО исполнителя (расшифровка подписи)' id='executorFullName'/>
+                                    <ImageInput className='form-text_input' text='Подпись исполнителя' id='executerSignature'/>
+                                    {/* {isInvoice && 
                                         <>
-                                            <TextInput className='form-text_input' text='Главный бухгалтер ФИО' id='сhiefAccountant'/>
-                                        {/* <ImageInput className='form-text_input' text='Подпись бухгалтера' id='executerSignature'/> */}
+                                            <TextInput className='form-text_input' text='ВЫДАЛ (ответственное лицо поставщика)' id='executivePersonSupplier'/>
+                                            <TextInput className='form-text_input' text='Должность (кто выдал)' id='executivePersonSupplierPosition'/>
                                         </>
-                                    }
-                                    {isAct && 
-                                        <TextInput className='form-text_input' text='Дата подписания' id='dateOfSigning'/>
-                                    }
-                                    </div>
-                                </>
-                            }
+                                    } */}
+                                </div>
+                                {(isAct || isInvoice) &&
+                                    <>
+                                        <InfoLabel text='Заказчик/Получатель' className='form-info_label' />
+                                        <div className='form-block'>
+                                        <TextInput className='form-text_input' text='Принял (должность заказчика)' id='clientPosition'/>
+                                        <TextInput className='form-text_input' text='ФИО заказчика (расшифровка подписи)' id='clientFullName'/>
+                                        {/* <ImageInput className='form-text_input' text='Подпись заказчика' id='clientSignature'/> */}
+                                        {isInvoice && 
+                                            <>
+                                                <TextInput className='form-text_input' text='Главный бухгалтер ФИО' id='сhiefAccountant'/>
+                                            {/* <ImageInput className='form-text_input' text='Подпись бухгалтера' id='executerSignature'/> */}
+                                            </>
+                                        }
+                                        {isAct && 
+                                            <TextInput className='form-text_input' text='Дата подписания' id='dateOfSigning'/>
+                                        }
+                                        </div>
+                                    </>
+                                }
+                            </>
+                        }
                         </div>
                         
                         <div className='form-button_block'>

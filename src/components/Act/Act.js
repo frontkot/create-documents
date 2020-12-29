@@ -3,6 +3,7 @@ import { Page, Text, View, Document, StyleSheet, Font, Image } from '@react-pdf/
 import Regular from '../../utils/font/Roboto/Roboto-Regular.ttf';
 import Bold from '../../utils/font/Roboto/Roboto-Bold.ttf';
 import Italic from '../../utils/font/Roboto/Roboto-Italic.ttf';
+import img from '../../utils/img/img.png';
 
 
 Font.register({
@@ -533,15 +534,19 @@ const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, c
     var file = new File([fileContent], "file name here", {type: fileFormat});
 
     var reader = new FileReader();
+    console.log(file)
 
     var imgtag = document.getElementById("imgSign");
-    imgtag.title = file.name;
+    // imgtag.setAttribute(
+    //   'src', `${base64}`
+    // )
+    // imgtag.title = file.name;
   
-    reader.onload = function(event) {
-      imgtag.src = event.target.result;
-    };
+    // reader.onload = function(event) {
+    //   imgtag.src = event.target.result;
+    // };
   
-    reader.readAsDataURL(file);
+    // reader.readAsDataURL(file);
 
     // return file;
   }
@@ -550,6 +555,11 @@ const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, c
   return (
     <Document>
         <Page size='A4' style={styles.page}>
+        {/* <View style={styles}>
+          <Image src={imgSignature} id='imgSign'/>
+        </View>
+ */}
+
         <View style={styles.title}>
           <View style={styles.titleText}><Text>Приложение 50</Text></View>
           <View style={styles.titleText}><Text>к приказу Министра финансов</Text></View>
@@ -748,9 +758,6 @@ const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, c
         </View>
 
 
-        {/* <View style={styles.signature}>
-          <Image src={imgSignature} id='imgSign'/>
-        </View> */}
         </Page>
     </Document>
   );
