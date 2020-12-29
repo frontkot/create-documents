@@ -69,17 +69,170 @@
         margin: 0 50px;
     }
     &-table_item {
-        padding: 5px;
-        margin: 5px 50px;
-        border-radius: 5px;
-        border: 2px dotted rgb(0, 0, 0);
-        background-color: rgb(180, 199, 253);
-        display: grid;
-        grid-template-columns: 10% 82% 8%;
-        justify-items: center;
-        align-items: center;
+        // padding: 5px;
+        // margin: 5px 50px;
+        // border-radius: 5px;
+        // border: 2px dotted rgb(0, 0, 0);
+        // background-color: rgb(180, 199, 253);
+        // display: grid;
+        // grid-template-columns: 10% 82% 8%;
+        // justify-items: center;
+        // align-items: center;
+        // display: flex;
+
     }
 }
+
+.table-header {
+    margin-top: 10px;
+    margin-left: 47px;
+    margin-right: 50px;
+    font-size: 13px;
+    font-weight: bold;
+    vertical-align: bottom;
+    margin-bottom: 3px;
+    &_item{
+        &-number {
+            width: 3%;
+            padding-left: 7px;
+        }
+        &-name {
+            width: 35%;
+        }
+        &-code {
+            width: 7%;
+        }
+        &-date {
+            width: 13%;
+        }
+        &-measure {
+            width: 7%;
+        }
+        &-quantity {
+            width: 7%;
+        }
+        &-price {
+            width: 12%;
+        }
+        &-vat {
+            width: 8%;
+        }
+        &-excise {
+            width: 8%;
+        }
+        &-number, &-name, &-code, &-date, &-measure, &-quantity, &-price, &-vat, &-excise {
+            // border: 1px solid rgb(66, 66, 66);
+        }
+    }
+}
+.table-body {
+    margin: 0 50px;
+    font-size: 13px;
+    display: table;
+    &_item {
+        &-number {
+            width: 3%;
+            &__area{
+                width: 100%;
+                font-weight: bold;
+                text-align: center;
+            }
+        }
+        &-name {
+            width: 35%;
+            &__area{
+                width: 100%;
+            }
+        }
+        &-code {
+            width: 7%;
+            &__area{
+                width: 100%;
+            }
+        }
+        &-date {
+            width: 13%;
+            &__area{
+                width: 100%;
+            }
+        }
+        &-measure {
+            width: 7%;
+            &__area{
+                width: 100%;
+            }
+        }
+        &-quantity {
+            width: 7%;
+            &__area{
+                width: 100%;
+            }
+        }
+        &-price {
+            width: 12%;
+            &__area{
+                width: 100%;
+            }
+        }
+        &-vat {
+            width: 8%;
+            &__area{
+                width: 100%;
+            }
+        }
+        &-excise {
+            width: 8%;
+            &__area{
+                width: 100%;
+            }
+        }
+        &-number, &-name, &-code, &-date, &-measure, &-quantity, &-price, &-vat, &-excise {
+            
+        }
+        &-number__area, &-name__area, &-code__area, &-date__area, &-measure__area, &-quantity__area, &-price__area, &-vat__area, &-excise__area {
+            background-image:none;
+            padding: 2px;
+            outline: 0.5px solid black;
+            border: 0.5px solid rgb(66, 66, 66);
+            // margin: -1px;
+        }
+    }
+}
+.delete-button {
+    position: absolute;
+    right: 25px;
+    top: -18px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+    &::before, &::after {
+        content: ".";
+        width: 3px;
+        color: red;
+        background-color: red;
+        border-radius: 5px;
+        display: inline-block;
+    }
+    &::after {
+        transform: rotate(45deg);
+        margin-left: -3px;
+    }
+    &::before {
+        transform: rotate(135deg);
+    }
+    &:hover {
+        transform: scale(1.2);
+    }
+
+
+
+    &_block {
+        position: relative;
+    }
+
+}
+
 
 .checkbox {
     &-label {
@@ -97,7 +250,7 @@
     }
 }
 
-.go-button, .clear-form_button, .form-submit, .delete-item, .add-item {
+.go-button, .clear-form_button, .form-submit, .add-item {
     outline: none;
     padding: 5px 10px;
     text-decoration: none;
@@ -122,6 +275,7 @@
     
         }
 }
+
 .go-button {
     max-width: 240px;
     padding: 10px 10px;
@@ -161,12 +315,8 @@
 }
 .add-item {
     margin: 0 auto;
+    margin-top: 10px;
     margin-bottom: 7px;
-}
-
-.delete-item {
-    font-size: 13px;
-    padding: 3px 6px;
 }
 
 @media screen and (max-width: 968px) {

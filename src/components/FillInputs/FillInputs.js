@@ -10,6 +10,7 @@ import { getData, getIsAct, getIsInvoice, getIsPayment } from '../../store/input
 import { updateData, deleteData } from '../../store/inputData/actions';
 import { toggleIsAct, toggleIsInvoice, toggleIsPayment } from '../../store/inputData/actions';
 import ImageInput from '../form/ImageInput/ImageInput';
+import TableItem from '../form/TableItem/TableItem';
 
 const FillInputs = () => {
     const dataFromDb = useSelector(getData);
@@ -45,6 +46,9 @@ const FillInputs = () => {
         setData(dataFromDb);
         window.location.reload();
     }
+
+    console.log();
+
 
     
     return (
@@ -164,54 +168,89 @@ const FillInputs = () => {
                             </div>
 
                         </div>
+                        
                         {/* Таблица */}
-                        <div className='form-header'>
-                            <InfoLabel text='Таблица товаров и услуг' className='form-info_label' />
-                        </div>
-                        <FieldArray 
-                            name='tableInfo'>
-                            {arrayHelpers => (
-                                <>
-                                    {values.tableInfo.length !==0 ? values.tableInfo.map((item, index) => (
-                                            <div className='form-table_item' id={`tableData[${index}].item`} key={index}>
-                                                <InfoLabel text={`${index+1} товар`} className='form-info_label' />
-                                                <div className='form-table_block'>
-                                                    <TextInput className='form-text_input' text='Наименование товаров (работ, услуг)' id={`tableInfo[${index}].nameOfGoods`}/>
-                                                    {isPayment &&
-                                                        <TextInput className='form-text_input' text='Код товара' id={`tableInfo[${index}].productCode`}/>
-                                                    }
-                                                    {isAct && 
-                                                        <TextInput className='form-text_input' text='Дата выполнения работ' id={`tableInfo[${index}].dateOfWorks`}/>
-                                                    }
-                                                    <TextInput className='form-text_input' text='Единица измерения' id={`tableInfo[${index}].measure`} placeholder='ед./шт.'/>
-                                                    <TextInput className='form-text_input' text='Количество товаров' id={`tableInfo[${index}].quantity`} />
-                                                    <TextInput className='form-text_input' text='Цена за единицу' id={`tableInfo[${index}].unitPrice`}/>
-                                                    {(isInvoice || isPayment)&&
-                                                        <>
-                                                        {/* <TextInput className='form-text_input' text='Стоимость товаров без НДС' id={`[${index}].withoutVAT`}/> */}
-                                                        <TextInput className='form-text_input' text='Ставка НДС' id={`tableInfo[${index}].VATRate`}/>
-                                                        {/* <TextInput className='form-text_input' text='Сумма НДС' id={`tableInfo[${index}].VATTax`}/> */}
-                                                        {isInvoice &&
-                                                            <TextInput className='form-text_input' text='Ставка акциза' id={`tableInfo[${index}].exciseRate`}/>
-                                                        }
-                                                        {/* <TextInput className='form-text_input' text='Сумма акциза' id={`tableInfo[${index}].exciseTax`}/> */}
-                                                        </>
-                                                    }
-                                                    {/* <TextInput className='form-text_input' text='Стоимость' id={`tableInfo[${index}].price`}/>  */}
-                                                </div>
-                                                <button className='delete-item' type="button" onClick={() => arrayHelpers.remove(index)}>
-                                                    удалить
-                                                </button>
-                                            </div>
-                                    ))
-                                    : null
+                        {(isAct || isPayment || isInvoice) &&
+                            <>
+                                <div className='form-header'>
+                                    <InfoLabel text='Таблица товаров и услуг' className='form-info_label' />
+                                </div>
+                                <tr className='table-header'>
+                                    <td className='table-header_item-number'><span>№</span></td>
+                                    <td className='table-header_item-name'><span>Товар или услуга</span></td>
+                                    {/* text='Наименование товаров (работ, услуг)' */}
+                                    {isPayment &&
+                                        <td className='table-header_item-code'><span>Код товара</span></td>
                                     }
-                                    <button className='add-item' type='button' onClick={() => arrayHelpers.push(emptyItem)}>
-                                        Добавить товар(услугу)
-                                    </button>
-                                </>
-                            )}
-                        </FieldArray>
+                                    {/* text='Код товара' */}
+                                    {isAct && 
+                                        <td className='table-header_item-date'><span>Дата выполнения работ</span></td>
+                                    }
+                                    {/* text='Дата выполнения работ' */}
+                                    <td className='table-header_item-measure'><span>Единица измерения</span></td>
+                                    {/* text='Единица измерения' */}
+                                    <td className='table-header_item-quantity'><span>Кол-во</span></td>
+                                    {/* text='Количество товаров' */}
+                                    <td className='table-header_item-price'><span>Цена</span></td>
+                                    {/* text='Цена за единицу'  */}
+                                    {(isInvoice || isPayment) &&
+                                        <>
+                                            <td className='table-header_item-vat'><span>НДС</span></td>
+                                            {/* text='Ставка НДС' */}
+                                            {isInvoice &&
+                                                <>
+                                                    <td className='table-header_item-excise'><span>Акциз</span></td>
+                                                    {/* text='Ставка акциза' */}
+                                                </>
+                                            }
+                                        </>
+                                    }
+                                </tr>
+                                <FieldArray 
+                                    name='tableInfo'
+                                    >
+                                    {arrayHelpers => (
+                                        <>
+                                            {values.tableInfo.length !==0 ? values.tableInfo.map((item, index) => (
+                                                <>
+                                                    <tr className='table-body' id={`tableData[${index}].item`} key={index}>
+                                                        <TableItem text={`${index+1}`} className='table-body_item-number' />
+                                                        <TableItem className='table-body_item-name'  id={`tableInfo[${index}].nameOfGoods`} placeholder='Название'/>
+                                                        {isPayment &&
+                                                            <TableItem className='table-body_item-code'  id={`tableInfo[${index}].productCode`} placeholder='Код'/>
+                                                        }
+                                                        {isAct && 
+                                                            <TableItem className='table-body_item-date' id={`tableInfo[${index}].dateOfWorks`} placeholder='Дата'/>
+                                                        }
+                                                        <TableItem className='table-body_item-measure'  id={`tableInfo[${index}].measure`} placeholder='ед./шт.'/>
+                                                        <TableItem className='table-body_item-quantity'  id={`tableInfo[${index}].quantity`} placeholder='Кол-во'/>
+                                                        <TableItem className='table-body_item-price' id={`tableInfo[${index}].unitPrice`} placeholder='Цена'/>
+                                                        {(isInvoice || isPayment)&&
+                                                            <>
+                                                            <TableItem className='table-body_item-vat'  id={`tableInfo[${index}].VATRate`} placeholder='НДС'/>
+                                                            {isInvoice &&
+                                                                <TableItem className='table-body_item-excise'  id={`tableInfo[${index}].exciseRate`} placeholder='Акциз'/>
+                                                            }
+                                                            </>
+                                                        }
+                                                    </tr>
+                                                    <div className='delete-button_block'>
+                                                        <button className='delete-button' type="button" onClick={() => arrayHelpers.remove(index)}></button>
+                                                    </div>
+                                                </>
+                                            ))
+                                            : null
+                                            }
+                                            <button className='add-item' type='button' onClick={() => arrayHelpers.push(emptyItem)}>
+                                                Добавить товар(услугу)
+                                            </button>
+                                        </>
+                                    )}
+                                </FieldArray>
+                            </>
+                        }
+
+                        {/* <input name='total' value={data.tableInfo}>Итого</input> */}
 
                         {/* Счет на оплату */}
                         <div className='form-header'>

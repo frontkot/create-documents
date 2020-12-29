@@ -6,6 +6,7 @@ const ImageInput = ({
 }) => {
     const getBase64Image = (file) => {
         var reader = new FileReader()
+        
         reader.onload = function(base64) {
             localStorage["file"] = base64;
         }
@@ -19,6 +20,7 @@ const ImageInput = ({
                 id={id} 
                 name={id} 
                 type='file'
+                
                 onChange={(e) => getBase64Image(e.currentTarget.files[0])}    
             />
         </label>
