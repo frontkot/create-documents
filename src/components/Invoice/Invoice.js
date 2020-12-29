@@ -388,7 +388,6 @@ const Invoice = ({ procedureDate, invoiceNumber, invoiceDate, client, clientBINN
 
     const sumOfArrItems = (arr) => {
         let sum=0; 
-        console.log(arr)
         if(arr.length !== 0) {
             for(let i=0; i<arr.length; i++) {
             sum = sum+arr[i];
@@ -397,8 +396,8 @@ const Invoice = ({ procedureDate, invoiceNumber, invoiceDate, client, clientBINN
         return sum;
     }
 
-    const fullCost = sumOfArrItems(allCosts);
-    const totalVAT = Math.ceil(sumOfArrItems(allVAT)) === 0 ? ' ' : sumOfArrItems(allVAT);
+    const fullCost = Math.round(sumOfArrItems(allCosts));
+    const totalVAT = Math.ceil(sumOfArrItems(allVAT)) === 0 ? ' ' :  Math.round(sumOfArrItems(allVAT));
     const totalExciseRate = Math.ceil(sumOfArrItems(allExciseRate)) === 0 ? ' ' : sumOfArrItems(allExciseRate);
 
     const TableRow = ({ num, nameOfGoods, VATRate, measure, quantity, unitPrice, exciseRate}) => (

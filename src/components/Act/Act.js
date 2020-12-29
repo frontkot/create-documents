@@ -298,12 +298,16 @@ const styles = StyleSheet.create({
     borderStyle: 'solid',
     margin: -0.5,
     textAlign: 'right',
+    fontSize: 8,
+
   },
   numsRowBottom: {
     border: 1,
     borderStyle: 'solid',
     borderColor: 'black',
     margin: -0.5,
+    fontSize: 8,
+
   },
   mainRow: {
     height: 70,

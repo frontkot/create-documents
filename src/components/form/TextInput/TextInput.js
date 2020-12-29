@@ -13,7 +13,6 @@ const TextInput = ({
                 type='text'
                 placeholder={placeholder}
                 className={`${className}-area`}
-                onChange={(e) => console.log(e.target.value)}
             />
         </label>
     );

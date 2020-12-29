@@ -298,7 +298,7 @@ const Payment = ({ actNumber, actDate, invoiceNumber, invoiceDate, procedureDate
     }
     const fullCost = sumOfArrItems(allCosts);
     const total = sumOfArrItems(allQuantity);
-    const totalVAT = Math.ceil(sumOfArrItems(allVAT)) === 0 ? 0 : sumOfArrItems(allVAT);
+    const totalVAT = Math.ceil(sumOfArrItems(allVAT)) === 0 ? 0 :  Math.round(sumOfArrItems(allVAT));
 
 
     const TableRow = ({ num, nameOfGoods, measure, quantity, unitPrice, productCode}) => (

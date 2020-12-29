@@ -37,6 +37,7 @@ const FillInputs = () => {
     );
 
     const submitForm = (values) => {
+        console.log(values)
         dispatch(updateData(values));
         history.push('/preview');
     }
@@ -46,8 +47,6 @@ const FillInputs = () => {
         setData(dataFromDb);
         window.location.reload();
     }
-
-    console.log();
 
 
     
@@ -175,54 +174,53 @@ const FillInputs = () => {
                                 <div className='form-header'>
                                     <InfoLabel text='Таблица товаров и услуг' className='form-info_label' />
                                 </div>
-                                <tr className='table-header'>
-                                    <td className='table-header_item-number'><span>№</span></td>
-                                    <td className='table-header_item-name'><span>Товар или услуга</span></td>
+                                <div className='table-header'>
+                                    <div className='table-header_item-number'><span>№</span></div>
+                                    <div className='table-header_item-name'><span>Товар или услуга</span></div>
                                     {/* text='Наименование товаров (работ, услуг)' */}
                                     {isPayment &&
-                                        <td className='table-header_item-code'><span>Код товара</span></td>
+                                        <div className='table-header_item-code'><span>Код товара</span></div>
                                     }
                                     {/* text='Код товара' */}
                                     {isAct && 
-                                        <td className='table-header_item-date'><span>Дата выполнения работ</span></td>
+                                        <div className='table-header_item-date'><span>Дата выполнения работ</span></div>
                                     }
                                     {/* text='Дата выполнения работ' */}
-                                    <td className='table-header_item-measure'><span>Единица измерения</span></td>
+                                    <div className='table-header_item-measure'><span>Единица измерения</span></div>
                                     {/* text='Единица измерения' */}
-                                    <td className='table-header_item-quantity'><span>Кол-во</span></td>
+                                    <div className='table-header_item-quantity'><span>Кол-во</span></div>
                                     {/* text='Количество товаров' */}
-                                    <td className='table-header_item-price'><span>Цена</span></td>
+                                    <div className='table-header_item-price'><span>Цена</span></div>
                                     {/* text='Цена за единицу'  */}
                                     {(isInvoice || isPayment) &&
                                         <>
-                                            <td className='table-header_item-vat'><span>НДС</span></td>
+                                            <div className='table-header_item-vat'><span>НДС</span></div>
                                             {/* text='Ставка НДС' */}
                                             {isInvoice &&
                                                 <>
-                                                    <td className='table-header_item-excise'><span>Акциз</span></td>
+                                                    <div className='table-header_item-excise'><span>Акциз</span></div>
                                                     {/* text='Ставка акциза' */}
                                                 </>
                                             }
                                         </>
                                     }
-                                </tr>
+                                </div>
                                 <FieldArray 
                                     name='tableInfo'
                                     >
                                     {arrayHelpers => (
                                         <>
                                             {values.tableInfo.length !==0 ? values.tableInfo.map((item, index) => (
-                                                <>
-                                                    <tr className='table-body' id={`tableData[${index}].item`} key={index}>
+                                                    <div className='table-body' id={`tableData[${index}].item`} key={index}>
                                                         <TableItem text={`${index+1}`} className='table-body_item-number' />
-                                                        <TableItem className='table-body_item-name'  id={`tableInfo[${index}].nameOfGoods`} placeholder='Название'/>
+                                                        <TableItem className='table-body_item-name' id={`tableInfo[${index}].nameOfGoods`} placeholder='Название'/>
                                                         {isPayment &&
-                                                            <TableItem className='table-body_item-code'  id={`tableInfo[${index}].productCode`} placeholder='Код'/>
+                                                            <TableItem className='table-body_item-code' id={`tableInfo[${index}].productCode`} placeholder='Код'/>
                                                         }
                                                         {isAct && 
                                                             <TableItem className='table-body_item-date' id={`tableInfo[${index}].dateOfWorks`} placeholder='Дата'/>
                                                         }
-                                                        <TableItem className='table-body_item-measure'  id={`tableInfo[${index}].measure`} placeholder='ед./шт.'/>
+                                                        <TableItem className='table-body_item-measure' id={`tableInfo[${index}].measure`} placeholder='ед./шт.'/>
                                                         <TableItem className='table-body_item-quantity'  id={`tableInfo[${index}].quantity`} placeholder='Кол-во'/>
                                                         <TableItem className='table-body_item-price' id={`tableInfo[${index}].unitPrice`} placeholder='Цена'/>
                                                         {(isInvoice || isPayment)&&
@@ -233,11 +231,10 @@ const FillInputs = () => {
                                                             }
                                                             </>
                                                         }
-                                                    </tr>
-                                                    <div className='delete-button_block'>
-                                                        <button className='delete-button' type="button" onClick={() => arrayHelpers.remove(index)}></button>
+                                                        <div className='delete-button_block'>
+                                                            <button className='delete-button' type="button" onClick={() => arrayHelpers.remove(index)}></button>
+                                                        </div>
                                                     </div>
-                                                </>
                                             ))
                                             : null
                                             }
