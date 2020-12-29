@@ -279,7 +279,7 @@ const FillInputs = () => {
                                 <div className='form-block'>
                                     <TextInput className='form-text_input' text='Сдал (должность исполнителя)' id='executorPosition'/>
                                     <TextInput className='form-text_input' text='ФИО исполнителя (расшифровка подписи)' id='executorFullName'/>
-                                    <ImageInput className='form-text_input' text='Подпись исполнителя' id='executerSignature'/>
+                                    {/* <ImageInput className='form-text_input' text='Подпись исполнителя' id='executerSignature'/> */}
                                     {/* {isInvoice && 
                                         <>
                                             <TextInput className='form-text_input' text='ВЫДАЛ (ответственное лицо поставщика)' id='executivePersonSupplier'/>
