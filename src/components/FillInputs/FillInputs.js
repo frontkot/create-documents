@@ -12,6 +12,7 @@ import { toggleIsAct, toggleIsInvoice, toggleIsPayment } from '../../store/input
 import ImageInput from '../form/ImageInput/ImageInput';
 import TableItem from '../form/TableItem/TableItem';
 
+
 const FillInputs = () => {
     const dataFromDb = useSelector(getData);
     const [data, setData] = useState(dataFromDb);
@@ -56,7 +57,7 @@ const FillInputs = () => {
         const excise = excisePrice(values);
         return sum+VAT+excise;
     }
-    
+
     const emptyItem = () => (
         {
             item: '',
@@ -65,8 +66,6 @@ const FillInputs = () => {
             measure: '',
             quantity: '',
             unitPrice: '',
-            // VATRate: '',
-            // exciseRate: '',
         }
     );
 
@@ -136,9 +135,6 @@ const FillInputs = () => {
 
                         {/* Общие поля */}
                         <div className='form-general_info'>
-                            {/* <div className='form-header'>
-                                <InfoLabel text='Общие поля' className='form-info_label' />
-                            </div> */}
                             <InfoLabel text='Заказчик/Покупатель' className='form-info_label' />
                             <div className='form-block'>
                                 <TextInput className='form-text_input' text='Заказчик/Покупатель' id='client'/>
@@ -176,13 +172,9 @@ const FillInputs = () => {
                                 }
                                 {isPayment &&
                                     <>
-                                    {/* <div className='form-block'> */}
-                                        {/* <TextInput className='form-text_input' text='Бенефициар' id='beneficiary'/>  Одно и то же, что и Исполнитель*/}
-                                        {/* <TextInput className='form-text_input' text='БИН бенефициара' id='beneficiaryTaxNumber'/>  Бин ИСПОЛНИТЕЛЯ*/}
                                     <TextInput className='form-text_input' text='Кбе бенефициара (исполнителя)' id='executorKbe'/>
                                     <TextInput className='form-text_input' text='БИК Банка бенефициара (исполнителя)' id='executorBankBIK'/>
                                     <TextInput className='form-text_input' text='Код заключения платежа банка бенефициара (исполнителя)' id='executorBankCode'/>
-                                    {/* </div> */}
                                     </>
                                 }
                             </div>
@@ -244,14 +236,6 @@ const FillInputs = () => {
                                                         <TableItem className='table-body_item-measure' id={`tableInfo[${index}].measure`} placeholder='ед./шт.'/>
                                                         <TableItem className='table-body_item-quantity'  id={`tableInfo[${index}].quantity`} placeholder='Кол-во'/>
                                                         <TableItem className='table-body_item-price' id={`tableInfo[${index}].unitPrice`} placeholder='Цена'/>
-                                                        {/* 
-                                                            <>
-                                                            <TableItem className='table-body_item-vat'  id={`tableInfo[${index}].VATRate`} placeholder='НДС'/>
-                                                            {isInvoice &&
-                                                                <TableItem className='table-body_item-excise'  id={`tableInfo[${index}].exciseRate`} placeholder='Акциз'/>
-                                                            }
-                                                            </>
-                                                        } */}
                                                         <div className='delete-button_block'>
                                                             <button className='delete-button' type="button" onClick={() => arrayHelpers.remove(index)}></button>
                                                         </div>
@@ -317,8 +301,6 @@ const FillInputs = () => {
                                             <TextInput className='form-text_input' text='Поставка по довренности' id='proxy'/>
                                             <TextInput className='form-text_input' text='Способ отправления' id='departureMethod'/>
                                             <TextInput className='form-text_input' text='Товарно-транспортная накладная' id='CMR'/>
-                                            {/* <TextInput className='form-text_input' text='Грузоотправитель' id='shipper'/> Брать инфо из Исполнителя! */}
-                                            {/* <TextInput className='form-text_input' text='Грузополучатель' id='consignee'/>  Брать инфо из Заказчика!*/}
                                         </div>
                                     </>
                                 }
@@ -327,9 +309,6 @@ const FillInputs = () => {
                                     <>
                                         <InfoLabel text='Итоговая инфо для счета на оплату' className='form-info_label' />
                                         <div className='form-block'>
-                                            {/* <TextInput className='form-text_input' text='В том числе НДС' id='includingVAT' value /> */}
-                                            {/* <TextInput className='form-text_input' text='Всего наименований' id='totalItems' value /> */}
-                                            {/* <TextInput className='form-text_input' text='На сумму' id='totalForAmount' value /> */}
                                             <TextInput className='form-text_input' text='Валюта' id='currency' />
                                             <TextInput className='form-text_input' text='Всего к оплате(прописью)' id='totalPayable'/>
                                         </div>
@@ -339,9 +318,6 @@ const FillInputs = () => {
                                 {/* Акт */}
                                 {isAct && 
                                     <>
-                                        {/* <div className='form-header'>
-                                            <InfoLabel text='Доп инфо для заполнения акта' className='form-info_label' />
-                                        </div> */}
                                         <InfoLabel text='Приложение' className='form-info_label' />
                                         <div className='form-block'>
                                             <TextInput className='form-text_input' text='Сведения об использовании запасов, полученных от заказчика' id='inventoryUsageInformation'/>

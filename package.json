@@ -10,6 +10,7 @@
     "formik": "^2.2.6",
     "jspdf": "^2.2.0",
     "node-sass": "^4.14.1",
+    "number-to-words-ru": "^2.2.6",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

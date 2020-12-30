@@ -3,6 +3,8 @@ import { Page, Text, View, Document, StyleSheet, Font, Image } from '@react-pdf/
 import Regular from '../../utils/font/Roboto/Roboto-Regular.ttf';
 import Bold from '../../utils/font/Roboto/Roboto-Bold.ttf';
 import Italic from '../../utils/font/Roboto/Roboto-Italic.ttf';
+import numberToWordsRu from 'number-to-words-ru';
+
 
 Font.register({
     family: 'Roboto',
@@ -282,7 +284,7 @@ const styles = StyleSheet.create({
     
 })
 
-const Payment = ({ VATRate, procedureDate, paymentNumber, paymentDate, client, clientBINNumber, clientAdress, clientBank, clientIIKNumber, clientBIKBank, executor, executorBINNumber, executorAdress, executorIIK, executorBank, beneficiary, beneficiaryTaxNumber, executorKbe, executorBankBIK, executorBankCode, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, shipper, consignee, totalPayableForAll, includingVAT, totalItems, totalForAmount, currency, totalPayable, inventoryUsageInformation, numberOfPafes, documentsList, executorPosition, executorFullName, executerSignature, executivePersonSupplier, executivePersonSupplierPosition, clientPosition, clientFullName, clientSignature, сhiefAccountant, dateOfSigning, tableInfo,}) => {
+const Payment = ({ VATRate, procedureDate, paymentNumber, paymentDate, client, clientBINNumber, clientAdress, clientBank, clientIIKNumber, clientBIKBank, executor, executorBINNumber, executorAdress, executorIIK, executorBank, beneficiary, beneficiaryTaxNumber, executorKbe, executorBankBIK, executorBankCode, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, shipper, consignee, totalPayableForAll, includingVAT, totalItems, totalForAmount, currency, inventoryUsageInformation, numberOfPafes, documentsList, executorPosition, executorFullName, executerSignature, executivePersonSupplier, executivePersonSupplierPosition, clientPosition, clientFullName, clientSignature, сhiefAccountant, dateOfSigning, tableInfo,}) => {
     const allCosts = tableInfo.map((i) => i.quantity*i.unitPrice);
     const allQuantity = tableInfo.map((i) => +i.quantity);
     // const allVAT = tableInfo.map((i) => isNaN(i.VATRate) ? 0 : (i.VATRate/100*i.quantity*i.unitPrice));
@@ -299,7 +301,18 @@ const Payment = ({ VATRate, procedureDate, paymentNumber, paymentDate, client, c
     const fullCost = sumOfArrItems(allCosts);
     const total = sumOfArrItems(allQuantity);
     const totalVAT = VATRate === '100' ? 0 :  Math.round(sumOfArrItems(allCosts)*VATRate/100);
-
+    const totalPay = fullCost + totalVAT;
+    const totalPayWord =  numberToWordsRu.convert(totalPay, {
+            currency: {
+            currencyNameCases: ['тенге', 'тенге', 'тенге'],
+            fractionalPartNameCases: ['тиын', 'тиын', 'тиын'],
+            currencyNounGender: {
+                    integer: 2,
+                    fractionalPart: 0,
+                },
+            }
+        }
+    );
 
     const TableRow = ({ num, nameOfGoods, measure, quantity, unitPrice, productCode}) => (
         <View style={styles.tableRow}>
@@ -525,7 +538,7 @@ const Payment = ({ VATRate, procedureDate, paymentNumber, paymentDate, client, c
                             <Text>Итого: </Text>
                         </View>
                         <View style={styles.totalInfo}>
-                            <Text>{`${fullCost + totalVAT}.00`}</Text>
+                            <Text>{`${totalPay}.00`}</Text>
                         </View>
                     </View>
                     <View style={styles.VATsize}>
@@ -541,12 +554,12 @@ const Payment = ({ VATRate, procedureDate, paymentNumber, paymentDate, client, c
                             <Text>Всего наименований </Text>
                             <Text>{total}, </Text>
                             <Text>на сумму </Text>
-                            <Text>{`${fullCost + totalVAT}.00`} </Text>
+                            <Text>{`${totalPay}.00`} </Text>
                             <Text>{currency}</Text>
                         </View>
                         <View style={styles.fullCostInWord}>
                             <Text>Всего к оплате: </Text>
-                            <Text>{totalPayable}</Text>
+                            <Text>{totalPayWord}</Text>
                         </View>
                     </View>
                 </View>
