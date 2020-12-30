@@ -5,7 +5,7 @@ const ImageInput = ({
     id, className, text
 }) => {
     const getBase64Image = (file) => {
-        var reader = new FileReader()
+        let reader = new FileReader()
         
         reader.onload = function(base64) {
             localStorage["file"] = base64;

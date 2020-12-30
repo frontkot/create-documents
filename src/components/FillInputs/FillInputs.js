@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Formik, Form, FieldArray } from 'formik';
+import { Formik, Form, FieldArray, Field } from 'formik';
 import TextInput from '../form/TextInput/TextInput';
 import SubmitButton from '../form/SubmitButton/SubmitButton';
 import InfoLabel from '../form/InfoLabel/InfoLabel';
@@ -14,7 +14,7 @@ import TableItem from '../form/TableItem/TableItem';
 
 const FillInputs = () => {
     const dataFromDb = useSelector(getData);
-    const [data, setData] = useState(dataFromDb)
+    const [data, setData] = useState(dataFromDb);
     const history = useHistory();
     const isAct = useSelector(getIsAct);
     const isInvoice = useSelector(getIsInvoice);
@@ -22,6 +22,40 @@ const FillInputs = () => {
     const dispatch = useDispatch();  
     const [isSignature, setIsSignature] = useState(false);
     const [isAdditionalInfo, setIsAdditionalInfo] = useState(false);
+
+    const VATRatePerc = 20;
+    const WithoutVAT = 100;
+    const ExciseRatePerc = 20;
+    const WithoutExciseRate = 100;
+
+    const sumOfPrice = (val) => {
+        let num = 0;
+        for(let i=0; i < val.length; i++) {
+            if(val[i].unitPrice !== undefined) {
+                    num = num + val[i].unitPrice*val[i].quantity
+            }
+        }
+        return num;
+    }
+
+    const VATPrice = (values) => {
+        const VAT = values.VATRate/100;
+        const totalPrice = sumOfPrice(values.tableInfo);
+        return VAT === 1 ? 0 : totalPrice*VAT
+    };
+
+    const excisePrice = (values) => {
+        const excise = values.exciseRate/100;
+        const totalPrice = sumOfPrice(values.tableInfo);
+        return excise  === 1 ? 0 : totalPrice*excise;
+    };
+
+    const totalPrice = (values) => {
+        const sum = sumOfPrice(values.tableInfo);
+        const VAT = VATPrice(values);
+        const excise = excisePrice(values);
+        return sum+VAT+excise;
+    }
     
     const emptyItem = () => (
         {
@@ -31,8 +65,8 @@ const FillInputs = () => {
             measure: '',
             quantity: '',
             unitPrice: '',
-            VATRate: '',
-            exciseRate: '',
+            // VATRate: '',
+            // exciseRate: '',
         }
     );
 
@@ -47,8 +81,6 @@ const FillInputs = () => {
         setData(dataFromDb);
         window.location.reload();
     }
-
-
     
     return (
         <>
@@ -77,7 +109,7 @@ const FillInputs = () => {
                 // validate={validate}
                 onSubmit={submitForm}
             >
-                {({ errors, touched, values }) => (
+                {({ errors, touched, values, meta }) => (
                     <Form className='form-container'>
                         <InfoLabel text='Заполните нужныe поля ввода' className='form-info_label' />
 
@@ -171,40 +203,30 @@ const FillInputs = () => {
                         {/* Таблица */}
                         {(isAct || isPayment || isInvoice) &&
                             <>
-                                <div className='form-header'>
-                                    <InfoLabel text='Таблица товаров и услуг' className='form-info_label' />
-                                </div>
-                                <div className='table-header'>
-                                    <div className='table-header_item-number'><span>№</span></div>
-                                    <div className='table-header_item-name'><span>Товар или услуга</span></div>
-                                    {/* text='Наименование товаров (работ, услуг)' */}
-                                    {isPayment &&
-                                        <div className='table-header_item-code'><span>Код товара</span></div>
-                                    }
-                                    {/* text='Код товара' */}
-                                    {isAct && 
-                                        <div className='table-header_item-date'><span>Дата выполнения работ</span></div>
-                                    }
-                                    {/* text='Дата выполнения работ' */}
-                                    <div className='table-header_item-measure'><span>Единица измерения</span></div>
-                                    {/* text='Единица измерения' */}
-                                    <div className='table-header_item-quantity'><span>Кол-во</span></div>
-                                    {/* text='Количество товаров' */}
-                                    <div className='table-header_item-price'><span>Цена</span></div>
-                                    {/* text='Цена за единицу'  */}
-                                    {(isInvoice || isPayment) &&
-                                        <>
-                                            <div className='table-header_item-vat'><span>НДС</span></div>
-                                            {/* text='Ставка НДС' */}
-                                            {isInvoice &&
-                                                <>
-                                                    <div className='table-header_item-excise'><span>Акциз</span></div>
-                                                    {/* text='Ставка акциза' */}
-                                                </>
+                            <div className='form-header'>
+                                <InfoLabel text='Таблица товаров и услуг' className='form-info_label' />
+                            </div>
+                                {values.tableInfo.length !==0 &&
+                                        <div className='table-header'>
+                                            <div className='table-header_item-number'><span>№</span></div>
+                                            <div className='table-header_item-name'><span>Товар или услуга</span></div>
+                                            {/* text='Наименование товаров (работ, услуг)' */}
+                                            {isPayment &&
+                                                <div className='table-header_item-code'><span>Код товара</span></div>
                                             }
-                                        </>
-                                    }
-                                </div>
+                                            {/* text='Код товара' */}
+                                            {isAct && 
+                                                <div className='table-header_item-date'><span>Дата выполнения работ</span></div>
+                                            }
+                                            {/* text='Дата выполнения работ' */}
+                                            <div className='table-header_item-measure'><span>Единица измерения</span></div>
+                                            {/* text='Единица измерения' */}
+                                            <div className='table-header_item-quantity'><span>Кол-во</span></div>
+                                            {/* text='Количество товаров' */}
+                                            <div className='table-header_item-price'><span>Цена</span></div>
+                                            {/* text='Цена за единицу'  */}
+                                        </div>
+                                }
                                 <FieldArray 
                                     name='tableInfo'
                                     >
@@ -223,14 +245,14 @@ const FillInputs = () => {
                                                         <TableItem className='table-body_item-measure' id={`tableInfo[${index}].measure`} placeholder='ед./шт.'/>
                                                         <TableItem className='table-body_item-quantity'  id={`tableInfo[${index}].quantity`} placeholder='Кол-во'/>
                                                         <TableItem className='table-body_item-price' id={`tableInfo[${index}].unitPrice`} placeholder='Цена'/>
-                                                        {(isInvoice || isPayment)&&
+                                                        {/* 
                                                             <>
                                                             <TableItem className='table-body_item-vat'  id={`tableInfo[${index}].VATRate`} placeholder='НДС'/>
                                                             {isInvoice &&
                                                                 <TableItem className='table-body_item-excise'  id={`tableInfo[${index}].exciseRate`} placeholder='Акциз'/>
                                                             }
                                                             </>
-                                                        }
+                                                        } */}
                                                         <div className='delete-button_block'>
                                                             <button className='delete-button' type="button" onClick={() => arrayHelpers.remove(index)}></button>
                                                         </div>
@@ -243,11 +265,41 @@ const FillInputs = () => {
                                             </button>
                                         </>
                                     )}
-                                </FieldArray>
+                                </FieldArray> 
+                                {values.tableInfo.length !==0 &&
+                                    <div className='total-data'>
+                                        <div className='total-select'>
+                                            {(isInvoice || isPayment) &&
+                                                <>
+                                                    <Field as='select' className='form-select' name='VATRate' id='VATRate'>
+                                                        <option value={WithoutVAT}>Без НДС</option>
+                                                        <option value={VATRatePerc}>НДС 20%</option>
+                                                    </Field>
+                                                    {isInvoice &&
+                                                    <Field as='select' className='form-select' name='exciseRate'>
+                                                        <option value={WithoutExciseRate}>Без Акциза</option>
+                                                        <option value={ExciseRatePerc}>Акциз 20%</option>
+                                                    </Field>
+                                                    }
+                                                </>
+                                            }
+                                        </div>
+                                        <div className='total-prices'>
+                                            {(isInvoice || isPayment) &&
+                                                <>
+                                                    <p className='total-info'><span>Итого:</span><span>{sumOfPrice(values.tableInfo)}</span></p>
+                                                    <p className='total-info'><span>Всего НДС:</span><span>{VATPrice(values)}</span></p>
+                                                        {isInvoice &&
+                                                        <p className='total-info'><span>Всего Акциз:</span><span>{excisePrice(values)}</span></p>
+                                                        }
+                                                </>
+                                            }
+                                            <p className='total-info'><span>Всего к оплате:</span><span>{totalPrice(values)}</span></p>
+                                        </div>
+                                    </div>
+                                }
                             </>
                         }
-
-                        {/* <input name='total' value={data.tableInfo}>Итого</input> */}
 
                         {/* Счет на оплату */}
                         <div className='form-header'>
@@ -276,7 +328,6 @@ const FillInputs = () => {
                                     <>
                                         <InfoLabel text='Итоговая инфо для счета на оплату' className='form-info_label' />
                                         <div className='form-block'>
-                                            <TextInput className='form-text_input' text='Итого' id='totalPayableForAll' value />
                                             {/* <TextInput className='form-text_input' text='В том числе НДС' id='includingVAT' value /> */}
                                             {/* <TextInput className='form-text_input' text='Всего наименований' id='totalItems' value /> */}
                                             {/* <TextInput className='form-text_input' text='На сумму' id='totalForAmount' value /> */}
@@ -315,7 +366,7 @@ const FillInputs = () => {
                                 <div className='form-block'>
                                     <TextInput className='form-text_input' text='Сдал (должность исполнителя)' id='executorPosition'/>
                                     <TextInput className='form-text_input' text='ФИО исполнителя (расшифровка подписи)' id='executorFullName'/>
-                                    {/* <ImageInput className='form-text_input' text='Подпись исполнителя' id='executerSignature'/> */}
+                                    <ImageInput className='form-text_input' text='Подпись исполнителя' id='executerSignature'/>
                                     {/* {isInvoice && 
                                         <>
                                             <TextInput className='form-text_input' text='ВЫДАЛ (ответственное лицо поставщика)' id='executivePersonSupplier'/>

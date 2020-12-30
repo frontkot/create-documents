@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Page, Text, View, Document, StyleSheet, Font, Image } from '@react-pdf/renderer';
 import Regular from '../../utils/font/Roboto/Roboto-Regular.ttf';
 import Bold from '../../utils/font/Roboto/Roboto-Bold.ttf';
@@ -529,6 +529,9 @@ const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, c
       />
     )
   })
+
+  const inputRef = useRef();
+
   
   const imgSignature = () => {
     var base64 = localStorage["file"];
@@ -537,32 +540,27 @@ const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, c
     var fileContent = base64Parts[1];
     var file = new File([fileContent], "file name here", {type: fileFormat});
 
-    var reader = new FileReader();
-    console.log(file)
 
-    var imgtag = document.getElementById("imgSign");
-    // imgtag.setAttribute(
-    //   'src', `${base64}`
-    // )
-    // imgtag.title = file.name;
-  
-    // reader.onload = function(event) {
-    //   imgtag.src = event.target.result;
-    // };
-  
+    // var reader  = new FileReader();
+    // reader.onloadend = function () {
+    //   inputRef.src = reader.result;
+    // }
+
     // reader.readAsDataURL(file);
-
-    // return file;
   }
+
+  // useEffect(() => {
+  //   imgSignature()
+  // }, [])
 
 
   return (
     <Document>
         <Page size='A4' style={styles.page}>
         {/* <View style={styles}>
-          <Image src={imgSignature} id='imgSign'/>
-        </View>
- */}
+          <Image id='imgSign' ref={inputRef} src='' />
+        </View> */}
+
 
         <View style={styles.title}>
           <View style={styles.titleText}><Text>Приложение 50</Text></View>

@@ -61,6 +61,8 @@ const initialState = {
     executivePersonSupplierPosition: '',
     сhiefAccountant: '',  
     tableInfo: [],
+    VATRate: 100,
+    exciseRate: 100,
   },
   isAct: JSON.parse(localStorage.getItem('is-act')) || false,
   isInvoice:  JSON.parse(localStorage.getItem('is-invoice')) || false,
