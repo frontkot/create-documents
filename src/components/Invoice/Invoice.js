@@ -398,7 +398,7 @@ const Invoice = ({ exciseRate, VATRate, procedureDate, invoiceNumber, invoiceDat
 
     const fullCost = Math.round(sumOfArrItems(allCosts));
     const totalVAT = VATRate === '100' ? 0 :  Math.round(sumOfArrItems(allCosts)*VATRate/100);
-    const totalExciseRate = exciseRate === '100' ? 0 : sumOfArrItems(allCosts*exciseRate/100);
+    const totalExciseRate = exciseRate === '100' ? 0 : Math.round(sumOfArrItems(allCosts)*exciseRate/100);
 
     const TableRow = ({ num, nameOfGoods, VATRate, measure, quantity, unitPrice, exciseRate}) => (
         <View style={styles.tableRowCell}>
@@ -454,7 +454,7 @@ const Invoice = ({ exciseRate, VATRate, procedureDate, invoiceNumber, invoiceDat
           </View>
           <View style={styles.eleventhColCell}>
             <View style={styles.tableCell}>
-              <Text>{exciseRate === '100' ? ' ' : (unitPrice*quantity + unitPrice*quantity*exciseRate/100)}</Text>
+              <Text>{exciseRate === '100' ? ' ' : (unitPrice*quantity*exciseRate/100)}</Text>
             </View>
           </View>
         </View>
@@ -695,7 +695,7 @@ const Invoice = ({ exciseRate, VATRate, procedureDate, invoiceNumber, invoiceDat
                         </View>
                         <View style={styles.eighthColBottom}>
                             <View style={styles.numsRowTotal}>
-                                <Text> </Text>
+                                <Text>{totalVAT} </Text>
                             </View>
                         </View>
                         <View style={styles.ninethColBottom}>
@@ -710,7 +710,7 @@ const Invoice = ({ exciseRate, VATRate, procedureDate, invoiceNumber, invoiceDat
                         </View>
                         <View style={styles.eleventhColBottom}>
                             <View style={styles.numsRowTotal}>
-                                <Text>{fullCost + totalExciseRate}</Text>
+                                <Text>{totalExciseRate}</Text>
                             </View>
                         </View>
 

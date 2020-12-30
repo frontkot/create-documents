@@ -42,13 +42,13 @@ const FillInputs = () => {
     const VATPrice = (values) => {
         const VAT = values.VATRate/100;
         const totalPrice = sumOfPrice(values.tableInfo);
-        return VAT === 1 ? 0 : totalPrice*VAT
+        return VAT === 1 ? 0 :  Math.round(totalPrice*VAT)
     };
 
     const excisePrice = (values) => {
         const excise = values.exciseRate/100;
         const totalPrice = sumOfPrice(values.tableInfo);
-        return excise === 1 ? 0 : totalPrice*excise;
+        return excise === 1 ? 0 :  Math.round(totalPrice*excise);
     };
 
     const totalPrice = (values) => {
