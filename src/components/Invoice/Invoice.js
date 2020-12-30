@@ -383,8 +383,6 @@ const styles = StyleSheet.create({
 
 const Invoice = ({ exciseRate, VATRate, procedureDate, invoiceNumber, invoiceDate, client, clientBINNumber, clientAdress, clientBank, clientIIKNumber, clientBIKBank, executor, executorIIK, executorBINNumber, executorAdress, executorBank, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, executorPosition, executorFullName, clientPosition, clientFullName, dateOfSigning, executivePersonSupplier, executivePersonSupplierPosition, сhiefAccountant, executerSignature, clientSignature, tableInfo,}) => {
     const allCosts = tableInfo.map((i) => i.quantity*i.unitPrice);
-    const allVAT = tableInfo.map((i) => isNaN(i.VATRate) ? 0 : (i.VATRate/100*i.quantity*i.unitPrice))
-    const allExciseRate = tableInfo.map((i) => isNaN(i.exciseRate) ? 0 : (i.exciseRate/100*i.quantity*i.unitPrice))
 
     const sumOfArrItems = (arr) => {
         let sum=0; 
@@ -439,12 +437,12 @@ const Invoice = ({ exciseRate, VATRate, procedureDate, invoiceNumber, invoiceDat
           </View>
           <View style={styles.eighthColCell}>
             <View style={styles.tableCell}>
-              <Text>{VATRate === '100' ? ' ' : unitPrice*quantity*VATRate/100}</Text>
+              <Text>{VATRate === '100' ? ' ' : Math.round(unitPrice*quantity*VATRate/100)}</Text>
             </View>
           </View>
           <View style={styles.ninethColCell}>
             <View style={styles.tableCell}>
-              <Text>{VATRate === '100' ? ' ' : ((VATRate/100 + 1)*unitPrice*quantity)}</Text>
+              <Text>{VATRate === '100' ? ' ' : Math.round(((VATRate/100 + 1)*unitPrice*quantity))}</Text>
             </View>
           </View>
           <View style={styles.tenthColCell}>
@@ -454,7 +452,7 @@ const Invoice = ({ exciseRate, VATRate, procedureDate, invoiceNumber, invoiceDat
           </View>
           <View style={styles.eleventhColCell}>
             <View style={styles.tableCell}>
-              <Text>{exciseRate === '100' ? ' ' : (unitPrice*quantity*exciseRate/100)}</Text>
+              <Text>{exciseRate === '100' ? ' ' : Math.round((unitPrice*quantity*exciseRate/100))}</Text>
             </View>
           </View>
         </View>

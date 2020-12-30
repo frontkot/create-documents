@@ -254,6 +254,43 @@
         justify-content: flex-end;
     }
 }
+.sign {
+    &_already-selected {
+        position: absolute;
+        background-color: rgb(255, 226, 147);
+        font-size: 11px;
+        max-width: 205px;
+        border-radius: 5px;
+        padding: 1px;
+        opacity: 0.9;
+        top: 0;
+        right: -10%;
+
+    }
+    &-input {
+        position: relative;
+        text-align: center;
+    }
+}
+.stamp {
+    &_already-selected {
+        position: absolute;
+        background-color: rgb(255, 253, 184);
+        font-size: 11px;
+        max-width: 220px;
+        border-radius: 5px;
+        padding: 1px;
+        opacity: 0.9;
+        top: 0;
+        right: -14%;
+    }
+    &-input {
+        position: relative;
+        text-align: center;
+
+    }
+
+}
 
 
 .checkbox {

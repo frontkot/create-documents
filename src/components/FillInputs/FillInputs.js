@@ -29,6 +29,13 @@ const FillInputs = () => {
     const ExciseRatePerc = 20;
     const WithoutExciseRate = 100;
 
+    const isClientStamp = localStorage.getItem('clientStamp') !== null;
+    const isClientSignature = localStorage.getItem('clientSignature') !== null;
+    const isExecutorStamp = localStorage.getItem('executorStamp') !== null;
+    const isExecutorSignature= localStorage.getItem('executorSignature') !== null;
+
+
+
     const sumOfPrice = (val) => {
         let num = 0;
         for(let i=0; i < val.length; i++) {
@@ -330,45 +337,64 @@ const FillInputs = () => {
 
                         {/* Общие поля */}
                         <div className='form-general_info'>
-                        <div className='form-header'>
-                                <InfoLabel text='Блок подписи документа' className='form-info_label' />
-                                <button className='is-open' onClick={(e) => {e.preventDefault();setIsSignature(!isSignature)}}>{isSignature ? 'Свернуть' : 'Развернуть'}</button>
-                        </div>
-                        {isSignature &&
-                            <>
-                                <InfoLabel text='Исполнитель/Поставщик' className='form-info_label' />
-                                <div className='form-block'>
-                                    <TextInput className='form-text_input' text='Сдал (должность исполнителя)' id='executorPosition'/>
-                                    <TextInput className='form-text_input' text='ФИО исполнителя (расшифровка подписи)' id='executorFullName'/>
-                                    <ImageInput className='form-text_input' text='Подпись исполнителя' id='executerSignature'/>
-                                    {/* {isInvoice && 
-                                        <>
-                                            <TextInput className='form-text_input' text='ВЫДАЛ (ответственное лицо поставщика)' id='executivePersonSupplier'/>
-                                            <TextInput className='form-text_input' text='Должность (кто выдал)' id='executivePersonSupplierPosition'/>
-                                        </>
-                                    } */}
-                                </div>
-                                {(isAct || isInvoice) &&
-                                    <>
-                                        <InfoLabel text='Заказчик/Получатель' className='form-info_label' />
-                                        <div className='form-block'>
-                                        <TextInput className='form-text_input' text='Принял (должность заказчика)' id='clientPosition'/>
-                                        <TextInput className='form-text_input' text='ФИО заказчика (расшифровка подписи)' id='clientFullName'/>
-                                        {/* <ImageInput className='form-text_input' text='Подпись заказчика' id='clientSignature'/> */}
-                                        {isInvoice && 
-                                            <>
-                                                <TextInput className='form-text_input' text='Главный бухгалтер ФИО' id='сhiefAccountant'/>
-                                            {/* <ImageInput className='form-text_input' text='Подпись бухгалтера' id='executerSignature'/> */}
-                                            </>
-                                        }
-                                        {isAct && 
-                                            <TextInput className='form-text_input' text='Дата подписания' id='dateOfSigning'/>
-                                        }
+                            <div className='form-header'>
+                                    <InfoLabel text='Блок подписи документа' className='form-info_label' />
+                                    <button className='is-open' onClick={(e) => {e.preventDefault();setIsSignature(!isSignature)}}>{isSignature ? 'Свернуть' : 'Развернуть'}</button>
+                            </div>
+                            {isSignature &&
+                                <>
+                                    <InfoLabel text='Исполнитель/Поставщик' className='form-info_label' />
+                                    <div className='form-block sign-block'>
+                                        <TextInput className='form-text_input' text='Сдал (должность исполнителя)' id='executorPosition'/>
+                                        <TextInput className='form-text_input' text='ФИО исполнителя (расшифровка подписи)' id='executorFullName'/>
+                                        <div className='sign-input'>
+                                            <ImageInput className='form-text_input sign-input' text='Подпись исполнителя' id='executorSignature'/>
+                                            {isExecutorSignature && <span className='sign_already-selected'>Подпись исполнителя уже выбрана, чтобы изменить, выберите новый файл</span>}
                                         </div>
-                                    </>
-                                }
-                            </>
-                        }
+                                        <div className='stamp-input'>
+                                            <ImageInput className='form-text_input' text='Печать исполнителя' id='executorStamp'/>
+                                            {isExecutorStamp && <span className='stamp_already-selected'>Штамп исполнителя уже выбран, чтобы изменить, выберите новый файл</span>}
+                                        </div>
+                                    </div>
+                                    {(isAct || isInvoice) &&
+                                        <>
+                                            <InfoLabel text='Заказчик/Получатель' className='form-info_label' />
+                                            <div className='form-block sign-block'>
+                                                <TextInput className='form-text_input' text='Принял (должность заказчика)' id='clientPosition'/>
+                                                <TextInput className='form-text_input' text='ФИО заказчика (расшифровка подписи)' id='clientFullName'/>
+                                                <div className='sign-input'>
+                                                    <ImageInput className='form-text_input' text='Подпись заказчика' id='clientSignature'/>
+                                                    {isClientSignature && <span className='sign_already-selected'>Подпись заказчика уже выбрана, чтобы изменить, выберите новый файл</span>}
+                                                </div>
+                                                <div className='stamp-input'>
+                                                    <ImageInput className='form-text_input stamp-input' text='Печать заказчика' id='clientStamp'/>
+                                                    {isClientStamp && <span className='stamp_already-selected'>Штамп заказчикa уже выбран, чтобы изменить, выберите новый файл</span>}
+                                                </div>
+                                            </div>
+
+
+                                            {isInvoice && 
+                                                <>
+                                                    <InfoLabel text='Главный бухгалтер' className='form-info_label' />
+                                                    <div className='form-block'>
+                                                        <TextInput className='form-text_input' text='Главный бухгалтер ФИО' id='сhiefAccountant'/>
+                                                        <ImageInput className='form-text_input' text='Подпись бухгалтера' id='сhiefAccountantSignature'/>
+                                                    </div>
+                                                </>
+                                                }
+
+                                            {isAct && 
+                                                <>
+                                                    <InfoLabel text='Дата подписания акта выполненых работ' className='form-info_label' />
+                                                    <div className='form-block'>
+                                                            <TextInput className='form-text_input' text='Дата подписания' id='dateOfSigning'/>
+                                                    </div>
+                                                </>
+                                            }
+                                        </>
+                                    }
+                                </>
+                            }
                         </div>
                         
                         <div className='form-button_block'>

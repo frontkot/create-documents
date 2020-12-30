@@ -5,7 +5,6 @@ import Bold from '../../utils/font/Roboto/Roboto-Bold.ttf';
 import Italic from '../../utils/font/Roboto/Roboto-Italic.ttf';
 import numberToWordsRu from 'number-to-words-ru';
 
-
 Font.register({
     family: 'Roboto',
     fonts: [
@@ -287,7 +286,6 @@ const styles = StyleSheet.create({
 const Payment = ({ VATRate, procedureDate, paymentNumber, paymentDate, client, clientBINNumber, clientAdress, clientBank, clientIIKNumber, clientBIKBank, executor, executorBINNumber, executorAdress, executorIIK, executorBank, beneficiary, beneficiaryTaxNumber, executorKbe, executorBankBIK, executorBankCode, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, shipper, consignee, totalPayableForAll, includingVAT, totalItems, totalForAmount, currency, inventoryUsageInformation, numberOfPafes, documentsList, executorPosition, executorFullName, executerSignature, executivePersonSupplier, executivePersonSupplierPosition, clientPosition, clientFullName, clientSignature, сhiefAccountant, dateOfSigning, tableInfo,}) => {
     const allCosts = tableInfo.map((i) => i.quantity*i.unitPrice);
     const allQuantity = tableInfo.map((i) => +i.quantity);
-    // const allVAT = tableInfo.map((i) => isNaN(i.VATRate) ? 0 : (i.VATRate/100*i.quantity*i.unitPrice));
 
     const sumOfArrItems = (arr) => {
       let sum=0; 

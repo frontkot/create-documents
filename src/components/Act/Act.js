@@ -1,9 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { Page, Text, View, Document, StyleSheet, Font, Image } from '@react-pdf/renderer';
 import Regular from '../../utils/font/Roboto/Roboto-Regular.ttf';
 import Bold from '../../utils/font/Roboto/Roboto-Bold.ttf';
 import Italic from '../../utils/font/Roboto/Roboto-Italic.ttf';
-import img from '../../utils/img/img.png';
 
 
 Font.register({
@@ -196,7 +195,8 @@ const styles = StyleSheet.create({
   signatureBlock: {
     flexDirection: 'row',
     fontSize: 7,
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
+    position: 'relative',
   },
   position: {
     width: 55,
@@ -452,11 +452,83 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
   },
+  executorSignature: {
+    maxWidth: 70,
+    maxHeight: 70,
+    
+  },
+  executorSignatureView: {
+    position: 'absolute',
+    top: -50,
+    left: 130,
+
+  },
+  executorStamp: {
+    maxWidth: 70,
+    maxHeight: 70,
+    
+
+  },
+  executorStampView: {
+    position: 'absolute',
+    top: -30,
+    left: 50,
+  },
+
+  clientSignature: {
+    maxWidth: 70,
+    maxHeight: 70,
+
+  },
+  clientSignatureView: {
+    position: 'absolute',
+    top: -50,
+    left: 405,
+
+  },
+
+  clientStamp: {
+    maxWidth: 70,
+    maxHeight: 70,
+
+  },
+  clientStampView: {
+    position: 'absolute',
+    top: -30,
+    left: 10,
+  },
+  exexcutorStampField: {
+    position: 'relative',
+    flexDirection: 'row',
+    marginTop: 20,
+    fontSize: 8,
+  },
+  exexcutorStampDescr: {
+    marginLeft: 40,
+    fontWeight: 700,
+  },
+  dateOfSign: {
+    marginLeft: 225,
+    flexDirection: 'row',  
+  },
+  dateOfDignData: {
+    borderBottom: 1,
+    borderColor: 'black',
+    borderStyle: 'solid',
+    width: 50
+  },
+  clientStampField: {
+    marginLeft: 280,
+    position: 'relative',
+    marginTop: 10,
+    fontWeight: 700,
+
+  }
 
 
 });
 
-const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, contractDate, actNumber, actDate, inventoryUsageInformation, numberOfPafes, documentsList, executerPosition, executerSignature, executerFullName, clientPosition, clientSignature, clientFullName, tableInfo, }) => {
+const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, contractDate, actNumber, actDate, inventoryUsageInformation, numberOfPafes, documentsList, executerPosition, executerFullName, clientPosition, clientFullName, tableInfo, dateOfSigning,}) => {
   const allCosts = tableInfo.map((i) => i.quantity*i.unitPrice);
   const allQuantity = tableInfo.map((i) => +i.quantity);
   const sumOfArrItems = (arr) => {
@@ -530,38 +602,14 @@ const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, c
     )
   })
 
-  const inputRef = useRef();
-
-  
-  const imgSignature = () => {
-    var base64 = localStorage["file"];
-    var base64Parts = base64.split(",");
-    var fileFormat = base64Parts[0].split(";")[1];
-    var fileContent = base64Parts[1];
-    var file = new File([fileContent], "file name here", {type: fileFormat});
-
-
-    // var reader  = new FileReader();
-    // reader.onloadend = function () {
-    //   inputRef.src = reader.result;
-    // }
-
-    // reader.readAsDataURL(file);
-  }
-
-  // useEffect(() => {
-  //   imgSignature()
-  // }, [])
-
+  const executorSignature = localStorage.getItem('executorSignature');
+  const executorStamp = localStorage.getItem('executorStamp');
+  const clientSignature = localStorage.getItem('clientSignature');
+  const clientStamp = localStorage.getItem('clientStamp');
 
   return (
     <Document>
         <Page size='A4' style={styles.page}>
-        {/* <View style={styles}>
-          <Image id='imgSign' ref={inputRef} src='' />
-        </View> */}
-
-
         <View style={styles.title}>
           <View style={styles.titleText}><Text>Приложение 50</Text></View>
           <View style={styles.titleText}><Text>к приказу Министра финансов</Text></View>
@@ -738,13 +786,19 @@ const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, c
           <Text >Сдал(Исполнитель)</Text>
           <Text style={styles.position}>{executerPosition}</Text>
           <Text >/</Text>
-          <Text style={styles.signature}>{executerSignature}</Text>
+          <Text style={styles.signature}>{}</Text>
+          <View style={styles.clientSignatureView}>
+            <Image id='clientSignature' src={clientSignature !== null ? clientSignature : ' '} style={styles.clientSignature} alt='clientSignature'/>
+          </View>
           <Text >/</Text>
           <Text style={styles.fullName}>{executerFullName}</Text>
           <Text >Принял(Заказчик)</Text>
           <Text style={styles.position}>{clientPosition}</Text>
           <Text >/</Text>
-          <Text style={styles.signature}>{clientSignature}</Text>
+          <Text style={styles.signature}>{}</Text>
+          <View style={styles.executorSignatureView}>
+            <Image id='executorSignature' src={executorSignature !== null ? executorSignature : ' '} style={styles.executorSignature} alt='executorSignature'/>
+          </View>
           <Text >/</Text>
           <Text style={styles.fullName}>{clientFullName}</Text>
         </View>
@@ -759,6 +813,27 @@ const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, c
           <Text style={styles.fullNameDescr}>расшифровка подписи</Text>
         </View>
 
+        <View style={styles.exexcutorStampField}>
+          <View style={styles.exexcutorStampDescr}>
+            <Text style={styles}>М.П.</Text>
+          </View>
+          <View style={styles.executorStampView}>
+            <Image id='executorStamp' src={executorStamp !== null ? executorStamp : ' '} style={styles.executorStamp} alt='executorStamp'/>
+          </View>
+          <View style={styles.dateOfSign}>
+            <Text style={styles}>Дата подписания (принятия) работ (услуг) </Text>
+            <Text style={styles.dateOfDignData}>{dateOfSigning}</Text>
+          </View>
+        </View>
+
+        <View style={styles.clientStampField}>
+          <View style={styles}>
+              <Text style={styles}>М.П.</Text>
+            </View>
+            <View style={styles.clientStampView}>
+              <Image id='clientStamp' src={clientStamp !== null ? clientStamp : ' '} style={styles.clientStamp} alt='clientStamp'/>
+            </View>
+        </View>
 
         </Page>
     </Document>
