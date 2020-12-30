@@ -310,7 +310,6 @@ const FillInputs = () => {
                                         <InfoLabel text='Итоговая инфо для счета на оплату' className='form-info_label' />
                                         <div className='form-block'>
                                             <TextInput className='form-text_input' text='Валюта' id='currency' />
-                                            <TextInput className='form-text_input' text='Всего к оплате(прописью)' id='totalPayable'/>
                                         </div>
                                     </>
                                 }
