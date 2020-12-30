@@ -65,6 +65,8 @@ const PreviewAct = () => {
         executorIIK,
         clientIIKNumber,
         clientBIKBank,
+        VATRate,
+        exciseRate
 
      } = data;
         
@@ -133,6 +135,8 @@ const PreviewAct = () => {
                     tableInfo={tableInfo}
                     procedureDate={procedureDate}
                     executorIIK={executorIIK}
+                    exciseRate={exciseRate}
+                    VATRate={VATRate}
                     
 
                 />}

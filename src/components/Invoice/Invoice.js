@@ -381,7 +381,7 @@ const styles = StyleSheet.create({
     
 })
 
-const Invoice = ({ procedureDate, invoiceNumber, invoiceDate, client, clientBINNumber, clientAdress, clientBank, clientIIKNumber, clientBIKBank, executor, executorIIK, executorBINNumber, executorAdress, executorBank, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, executorPosition, executorFullName, clientPosition, clientFullName, dateOfSigning, executivePersonSupplier, executivePersonSupplierPosition, сhiefAccountant, executerSignature, clientSignature, tableInfo,}) => {
+const Invoice = ({ exciseRate, VATRate, procedureDate, invoiceNumber, invoiceDate, client, clientBINNumber, clientAdress, clientBank, clientIIKNumber, clientBIKBank, executor, executorIIK, executorBINNumber, executorAdress, executorBank, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, executorPosition, executorFullName, clientPosition, clientFullName, dateOfSigning, executivePersonSupplier, executivePersonSupplierPosition, сhiefAccountant, executerSignature, clientSignature, tableInfo,}) => {
     const allCosts = tableInfo.map((i) => i.quantity*i.unitPrice);
     const allVAT = tableInfo.map((i) => isNaN(i.VATRate) ? 0 : (i.VATRate/100*i.quantity*i.unitPrice))
     const allExciseRate = tableInfo.map((i) => isNaN(i.exciseRate) ? 0 : (i.exciseRate/100*i.quantity*i.unitPrice))
@@ -397,8 +397,8 @@ const Invoice = ({ procedureDate, invoiceNumber, invoiceDate, client, clientBINN
     }
 
     const fullCost = Math.round(sumOfArrItems(allCosts));
-    const totalVAT = Math.ceil(sumOfArrItems(allVAT)) === 0 ? ' ' :  Math.round(sumOfArrItems(allVAT));
-    const totalExciseRate = Math.ceil(sumOfArrItems(allExciseRate)) === 0 ? ' ' : sumOfArrItems(allExciseRate);
+    const totalVAT = VATRate === '100' ? 0 :  Math.round(sumOfArrItems(allCosts)*VATRate/100);
+    const totalExciseRate = exciseRate === '100' ? 0 : sumOfArrItems(allCosts*exciseRate/100);
 
     const TableRow = ({ num, nameOfGoods, VATRate, measure, quantity, unitPrice, exciseRate}) => (
         <View style={styles.tableRowCell}>
@@ -434,42 +434,42 @@ const Invoice = ({ procedureDate, invoiceNumber, invoiceDate, client, clientBINN
           </View>
           <View style={styles.seventhColCell}>
             <View style={styles.tableCell}>
-              <Text>{VATRate} </Text>
+              <Text>{VATRate === '100' ? 'Без НДС' : `${VATRate}%`} </Text>
             </View>
           </View>
           <View style={styles.eighthColCell}>
             <View style={styles.tableCell}>
-              <Text>{(isNaN(VATRate)) ? ' ' : unitPrice*quantity*VATRate/100}</Text>
+              <Text>{VATRate === '100' ? ' ' : unitPrice*quantity*VATRate/100}</Text>
             </View>
           </View>
           <View style={styles.ninethColCell}>
             <View style={styles.tableCell}>
-              <Text>{(isNaN(+VATRate)) ? ' ' : ((VATRate/100 + 1)*unitPrice*quantity)}</Text>
+              <Text>{VATRate === '100' ? ' ' : ((VATRate/100 + 1)*unitPrice*quantity)}</Text>
             </View>
           </View>
           <View style={styles.tenthColCell}>
             <View style={styles.tableCell}>
-              <Text>{exciseRate}</Text>
+              <Text>{exciseRate === '100' ? ' ' : `${exciseRate}%`}</Text>
             </View>
           </View>
           <View style={styles.eleventhColCell}>
             <View style={styles.tableCell}>
-              <Text>{isNaN(+exciseRate) ? ' ' : (unitPrice*quantity + unitPrice*exciseRate/100)}</Text>
+              <Text>{exciseRate === '100' ? ' ' : (unitPrice*quantity + unitPrice*quantity*exciseRate/100)}</Text>
             </View>
           </View>
         </View>
-      )
+    )
 
     const tableArr = tableInfo.map((i, index) => (
       <TableRow 
         key={index}
         num={index+1}
         nameOfGoods={i.nameOfGoods}
-        VATRate={i.VATRate}
+        VATRate={VATRate}
         measure={i.measure}
         quantity={i.quantity}
         unitPrice={i.unitPrice}
-        exciseRate={i.exciseRate}
+        exciseRate={exciseRate}
       />
     )
   )
@@ -695,7 +695,7 @@ const Invoice = ({ procedureDate, invoiceNumber, invoiceDate, client, clientBINN
                         </View>
                         <View style={styles.eighthColBottom}>
                             <View style={styles.numsRowTotal}>
-                                <Text>{totalVAT}</Text>
+                                <Text> </Text>
                             </View>
                         </View>
                         <View style={styles.ninethColBottom}>
@@ -710,7 +710,7 @@ const Invoice = ({ procedureDate, invoiceNumber, invoiceDate, client, clientBINN
                         </View>
                         <View style={styles.eleventhColBottom}>
                             <View style={styles.numsRowTotal}>
-                                <Text>{totalExciseRate}</Text>
+                                <Text>{fullCost + totalExciseRate}</Text>
                             </View>
                         </View>
 

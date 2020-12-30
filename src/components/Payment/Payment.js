@@ -282,10 +282,10 @@ const styles = StyleSheet.create({
     
 })
 
-const Payment = ({ actNumber, actDate, invoiceNumber, invoiceDate, procedureDate, paymentNumber, paymentDate, client, clientBINNumber, clientAdress, clientBank, clientIIKNumber, clientBIKBank, executor, executorBINNumber, executorAdress, executorIIK, executorBank, beneficiary, beneficiaryTaxNumber, executorKbe, executorBankBIK, executorBankCode, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, shipper, consignee, totalPayableForAll, includingVAT, totalItems, totalForAmount, currency, totalPayable, inventoryUsageInformation, numberOfPafes, documentsList, executorPosition, executorFullName, executerSignature, executivePersonSupplier, executivePersonSupplierPosition, clientPosition, clientFullName, clientSignature, сhiefAccountant, dateOfSigning, tableInfo,}) => {
+const Payment = ({ VATRate, procedureDate, paymentNumber, paymentDate, client, clientBINNumber, clientAdress, clientBank, clientIIKNumber, clientBIKBank, executor, executorBINNumber, executorAdress, executorIIK, executorBank, beneficiary, beneficiaryTaxNumber, executorKbe, executorBankBIK, executorBankCode, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, shipper, consignee, totalPayableForAll, includingVAT, totalItems, totalForAmount, currency, totalPayable, inventoryUsageInformation, numberOfPafes, documentsList, executorPosition, executorFullName, executerSignature, executivePersonSupplier, executivePersonSupplierPosition, clientPosition, clientFullName, clientSignature, сhiefAccountant, dateOfSigning, tableInfo,}) => {
     const allCosts = tableInfo.map((i) => i.quantity*i.unitPrice);
     const allQuantity = tableInfo.map((i) => +i.quantity);
-    const allVAT = tableInfo.map((i) => isNaN(i.VATRate) ? 0 : (i.VATRate/100*i.quantity*i.unitPrice));
+    // const allVAT = tableInfo.map((i) => isNaN(i.VATRate) ? 0 : (i.VATRate/100*i.quantity*i.unitPrice));
 
     const sumOfArrItems = (arr) => {
       let sum=0; 
@@ -298,7 +298,7 @@ const Payment = ({ actNumber, actDate, invoiceNumber, invoiceDate, procedureDate
     }
     const fullCost = sumOfArrItems(allCosts);
     const total = sumOfArrItems(allQuantity);
-    const totalVAT = Math.ceil(sumOfArrItems(allVAT)) === 0 ? 0 :  Math.round(sumOfArrItems(allVAT));
+    const totalVAT = VATRate === '100' ? 0 :  Math.round(sumOfArrItems(allCosts)*VATRate/100);
 
 
     const TableRow = ({ num, nameOfGoods, measure, quantity, unitPrice, productCode}) => (
@@ -346,7 +346,7 @@ const Payment = ({ actNumber, actDate, invoiceNumber, invoiceDate, procedureDate
             key={index}
             num={index+1}
             nameOfGoods={i.nameOfGoods}
-            VATRate={i.VATRate}
+            VATRate={VATRate}
             measure={i.measure}
             quantity={i.quantity}
             unitPrice={i.unitPrice}
@@ -541,7 +541,7 @@ const Payment = ({ actNumber, actDate, invoiceNumber, invoiceDate, procedureDate
                             <Text>Всего наименований </Text>
                             <Text>{total}, </Text>
                             <Text>на сумму </Text>
-                            <Text>{fullCost} </Text>
+                            <Text>{`${fullCost + totalVAT}.00`} </Text>
                             <Text>{currency}</Text>
                         </View>
                         <View style={styles.fullCostInWord}>

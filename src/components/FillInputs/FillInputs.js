@@ -47,7 +47,7 @@ const FillInputs = () => {
     const excisePrice = (values) => {
         const excise = values.exciseRate/100;
         const totalPrice = sumOfPrice(values.tableInfo);
-        return excise  === 1 ? 0 : totalPrice*excise;
+        return excise === 1 ? 0 : totalPrice*excise;
     };
 
     const totalPrice = (values) => {
@@ -71,7 +71,6 @@ const FillInputs = () => {
     );
 
     const submitForm = (values) => {
-        console.log(values)
         dispatch(updateData(values));
         history.push('/preview');
     }

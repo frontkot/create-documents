@@ -234,17 +234,20 @@
         justify-content: flex-end;
     }
     &-prices {
+
         display: flex;
         flex-direction: column;
         align-items: flex-end;
     }
     &-info {
-        padding: 1px 0;
         margin: 0;
         font-size: 15px;
         text-align: right;
         display: grid;
         grid-template-columns: repeat(2, 115px);
+        & span {
+            padding: 1px;
+        }
     }
     &-select {
         display: flex;

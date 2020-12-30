@@ -61,6 +61,9 @@ const PreviewAct = () => {
         сhiefAccountant,
         dateOfSigning,
         tableInfo,
+        VATRate,
+        exciseRate,
+
      } = data;
         
     return (
@@ -123,7 +126,10 @@ const PreviewAct = () => {
                 clientSignature={clientSignature}
                 сhiefAccountant={сhiefAccountant}
                 dateOfSigning={dateOfSigning}  
-                tableInfo={tableInfo}               
+                tableInfo={tableInfo}      
+                VATRate={VATRate}   
+                exciseRate={exciseRate}
+      
                 />}
             >
                 {({ url }) => <iframe src={url} style={{ width: '100%', height: '80vh' }} />}
