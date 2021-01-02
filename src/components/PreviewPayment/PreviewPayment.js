@@ -6,7 +6,6 @@ import { BlobProvider } from '@react-pdf/renderer';
 import { Link } from 'react-router-dom';
 
 const PreviewAct = () => {
-    const docName = 'Payment.pdf';
     const data = useSelector(getData);
     const {
         actNumber,

@@ -32,7 +32,9 @@ const FillInputs = () => {
     const isClientStamp = localStorage.getItem('clientStamp') !== null;
     const isClientSignature = localStorage.getItem('clientSignature') !== null;
     const isExecutorStamp = localStorage.getItem('executorStamp') !== null;
-    const isExecutorSignature= localStorage.getItem('executorSignature') !== null;
+    const isExecutorSignature = localStorage.getItem('executorSignature') !== null;
+    const isChiefAccountantSignature = localStorage.getItem('сhiefAccountantSignature') !== null;
+
 
 
 
@@ -348,7 +350,7 @@ const FillInputs = () => {
                                         <TextInput className='form-text_input' text='Сдал (должность исполнителя)' id='executorPosition'/>
                                         <TextInput className='form-text_input' text='ФИО исполнителя (расшифровка подписи)' id='executorFullName'/>
                                         <div className='sign-input'>
-                                            <ImageInput className='form-text_input sign-input' text='Подпись исполнителя' id='executorSignature'/>
+                                            <ImageInput className='form-text_input' text='Подпись исполнителя' id='executorSignature'/>
                                             {isExecutorSignature && <span className='sign_already-selected'>Подпись исполнителя уже выбрана, чтобы изменить, выберите новый файл</span>}
                                         </div>
                                         <div className='stamp-input'>
@@ -378,8 +380,12 @@ const FillInputs = () => {
                                                     <InfoLabel text='Главный бухгалтер' className='form-info_label' />
                                                     <div className='form-block'>
                                                         <TextInput className='form-text_input' text='Главный бухгалтер ФИО' id='сhiefAccountant'/>
-                                                        <ImageInput className='form-text_input' text='Подпись бухгалтера' id='сhiefAccountantSignature'/>
+                                                        <div className='sign-input'>
+                                                            <ImageInput className='form-text_input' text='Подпись бухгалтера' id='сhiefAccountantSignature'/>
+                                                            {isChiefAccountantSignature && <span className='sign_already-selected'>Подпись бухгалтера уже выбрана, чтобы изменить, выберите новый файл</span>}
+                                                        </div>
                                                     </div>
+
                                                 </>
                                                 }
 
@@ -387,7 +393,7 @@ const FillInputs = () => {
                                                 <>
                                                     <InfoLabel text='Дата подписания акта выполненых работ' className='form-info_label' />
                                                     <div className='form-block'>
-                                                            <TextInput className='form-text_input' text='Дата подписания' id='dateOfSigning'/>
+                                                        <TextInput className='form-text_input' text='Дата подписания' id='dateOfSigning'/>
                                                     </div>
                                                 </>
                                             }

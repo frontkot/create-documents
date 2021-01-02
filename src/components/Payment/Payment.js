@@ -272,20 +272,50 @@ const styles = StyleSheet.create({
     fullCostData: {
         flexDirection: 'row',
     },
+    fullCostInfo: {
+        marginTop: 10,
+    },
     fullCostInWord: {
         fontWeight: 'bold',
         flexDirection: 'row',
     },
     signatureBlock: {
         flexDirection: 'row',
+        position: 'relative',
+        marginTop: 13,
+    },
+    executorSecondName: {
+        width: '40%',
+        borderBottom: 1,
+        borderStyle: 'solid',
+        borderColor: 'black',
+        marginLeft: 10,
+    },
+    executorSignatureView: {
+        position: 'absolute',
+        top: -30,
+        left: 320,
+        width: 70,
+    },
+    executorStampView: {
+        position: 'absolute',
+        top: -30,
+        left: 350,
+        width: 70,
     },
     
     
 })
 
-const Payment = ({ VATRate, procedureDate, paymentNumber, paymentDate, client, clientBINNumber, clientAdress, clientBank, clientIIKNumber, clientBIKBank, executor, executorBINNumber, executorAdress, executorIIK, executorBank, beneficiary, beneficiaryTaxNumber, executorKbe, executorBankBIK, executorBankCode, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, shipper, consignee, totalPayableForAll, includingVAT, totalItems, totalForAmount, currency, inventoryUsageInformation, numberOfPafes, documentsList, executorPosition, executorFullName, executerSignature, executivePersonSupplier, executivePersonSupplierPosition, clientPosition, clientFullName, clientSignature, сhiefAccountant, dateOfSigning, tableInfo,}) => {
+const Payment = ({ VATRate, procedureDate, paymentNumber, paymentDate, client, clientBINNumber, clientAdress, clientBank, clientIIKNumber, clientBIKBank, executor, executorBINNumber, executorAdress, executorIIK, executorBank, beneficiary, beneficiaryTaxNumber, executorKbe, executorBankBIK, executorBankCode, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, shipper, consignee, totalPayableForAll, includingVAT, totalItems, totalForAmount, currency, inventoryUsageInformation, numberOfPafes, documentsList, executorPosition, executorFullName, executivePersonSupplier, executivePersonSupplierPosition, clientPosition, clientFullName, сhiefAccountant, dateOfSigning, tableInfo,}) => {
     const allCosts = tableInfo.map((i) => i.quantity*i.unitPrice);
     const allQuantity = tableInfo.map((i) => +i.quantity);
+
+    const executorSignature = localStorage.getItem('executorSignature');
+    const executorStamp = localStorage.getItem('executorStamp');
+    const clientSignature = localStorage.getItem('clientSignature');
+    const clientStamp = localStorage.getItem('clientStamp');
+  
 
     const sumOfArrItems = (arr) => {
       let sum=0; 
@@ -572,11 +602,17 @@ const Payment = ({ VATRate, procedureDate, paymentNumber, paymentDate, client, c
                     <View style={styles}>
                         <Text>Исполнитель </Text>
                     </View>
-                    <View style={styles}>
+                    <View style={styles.executorSecondName}>
                         <Text>{executor}</Text>
                     </View>
-                    <View style={styles}>
-                        <Text>{}</Text>
+                    <View style={styles.executorSignatureField}>
+                        <Text> // </Text>
+                    </View>
+                    <View style={styles.executorSignatureView}>
+                        <Image id='executorSignature' src={executorSignature !== null ? executorSignature : ' '} style={styles.executorSignature} alt='executorSignature'/>
+                    </View>
+                    <View style={styles.executorStampView}>
+                        <Image id='executorStamp' src={executorStamp !== null ? executorStamp : ' '} style={styles.executorStamp} alt='executorStamp'/>
                     </View>
                 </View>
 

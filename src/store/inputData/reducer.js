@@ -66,6 +66,7 @@ const initialState = {
     clientSignature: localStorage.getItem('clientSignature') || '',
     executorStamp: localStorage.getItem('executorStamp') || '',
     clientStamp: localStorage.getItem('clientStamp') || '',
+    сhiefAccountantSignature: localStorage.getItem('сhiefAccountantSignature') || '',
   },
   isAct: JSON.parse(localStorage.getItem('is-act')) || false,
   isInvoice:  JSON.parse(localStorage.getItem('is-invoice')) || false,
@@ -83,14 +84,16 @@ const reducer = (state = initialState, action) => {
       localStorage.setItem('table-info', JSON.stringify(action.payload))
       return { ...state, tableInfo: action.payload }
     case actions.DELETE_DATA:
-      localStorage.removeItem('executorSignature')
-      localStorage.removeItem('clientSignature')
-      localStorage.removeItem('executorStamp')
-      localStorage.removeItem('clientStamp')
-      localStorage.removeItem('data-info');
-      localStorage.removeItem('is-act');
-      localStorage.removeItem('is-invoice');
-      localStorage.removeItem('is-payment');
+      localStorage.clear();
+      // localStorage.removeItem('сhiefAccountantSignature')
+      // localStorage.removeItem('executorSignature')
+      // localStorage.removeItem('clientSignature')
+      // localStorage.removeItem('executorStamp')
+      // localStorage.removeItem('clientStamp')
+      // localStorage.removeItem('data-info');
+      // localStorage.removeItem('is-act');
+      // localStorage.removeItem('is-invoice');
+      // localStorage.removeItem('is-payment');
       return { ...state, ...initialState }
     case actions.IS_ACT:
       localStorage.setItem('is-act', JSON.stringify(action.payload))

@@ -452,23 +452,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
   },
-  executorSignature: {
+  executorSignature: {   
     maxWidth: 70,
     maxHeight: 70,
-    
+ 
   },
   executorSignatureView: {
     position: 'absolute',
-    top: -50,
+    top: -30,
     left: 130,
 
   },
   executorStamp: {
     maxWidth: 70,
     maxHeight: 70,
-    
-
   },
+
   executorStampView: {
     position: 'absolute',
     top: -30,
@@ -476,21 +475,18 @@ const styles = StyleSheet.create({
   },
 
   clientSignature: {
-    maxWidth: 70,
-    maxHeight: 70,
-
   },
+
   clientSignatureView: {
     position: 'absolute',
-    top: -50,
+    top: -30,
     left: 405,
-
+    width: 70,
   },
 
   clientStamp: {
     maxWidth: 70,
     maxHeight: 70,
-
   },
   clientStampView: {
     position: 'absolute',
@@ -606,6 +602,8 @@ const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, c
   const executorStamp = localStorage.getItem('executorStamp');
   const clientSignature = localStorage.getItem('clientSignature');
   const clientStamp = localStorage.getItem('clientStamp');
+
+  
 
   return (
     <Document>
@@ -786,7 +784,7 @@ const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, c
           <Text >Сдал(Исполнитель)</Text>
           <Text style={styles.position}>{executerPosition}</Text>
           <Text >/</Text>
-          <Text style={styles.signature}>{}</Text>
+          <Text style={styles.signature}> </Text>
           <View style={styles.clientSignatureView}>
             <Image id='clientSignature' src={clientSignature !== null ? clientSignature : ' '} style={styles.clientSignature} alt='clientSignature'/>
           </View>
@@ -795,7 +793,7 @@ const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, c
           <Text >Принял(Заказчик)</Text>
           <Text style={styles.position}>{clientPosition}</Text>
           <Text >/</Text>
-          <Text style={styles.signature}>{}</Text>
+          <Text style={styles.signature}> </Text>
           <View style={styles.executorSignatureView}>
             <Image id='executorSignature' src={executorSignature !== null ? executorSignature : ' '} style={styles.executorSignature} alt='executorSignature'/>
           </View>

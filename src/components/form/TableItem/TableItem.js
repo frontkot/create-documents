@@ -2,7 +2,7 @@ import React from 'react';
 import { Field } from 'formik';
 
 const TableItem = ({
-    text, id, className, placeholder, onChange
+    text, id, className, placeholder
 }) => {
     return (
             text ?

@@ -63,12 +63,15 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         marginTop: 10,
         marginBottom: 10,
+        position: 'relative',
     },
     signatureRightSide: {
         width: '50%',
+        position: 'relative',
     },
     signatureLeftSide: {
         width: '35%',
+        position: 'relative',
     },
     signatureRowBold: {
         fontWeight: 'bold',
@@ -378,10 +381,45 @@ const styles = StyleSheet.create({
 
     },
 
+    executorSignature: {   
+        // maxWidth: 70,
+        // maxHeight: 70,
+     
+      },
+      executorSignatureView: {
+        position: 'absolute',
+        top: 12,
+        right: 0,
+        width: 70,  
+      },
+      chiefAccountantSignatureView: {
+        position: 'absolute',
+        top: 12,
+        right: 0,
+        width: 70,  
+      },
+   
+      executorStampView: {
+        position: 'absolute',
+        top: 0,
+        left: '51%',
+        width: 70,  
+
+      },
+    
+      clientSignature: {
+      },
+    
+      clientSignatureView: {
+        position: 'absolute',
+        top: -20,
+        right: 0,
+        width: 70,
+      },
     
 })
 
-const Invoice = ({ exciseRate, VATRate, procedureDate, invoiceNumber, invoiceDate, client, clientBINNumber, clientAdress, clientBank, clientIIKNumber, clientBIKBank, executor, executorIIK, executorBINNumber, executorAdress, executorBank, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, executorPosition, executorFullName, clientPosition, clientFullName, dateOfSigning, executivePersonSupplier, executivePersonSupplierPosition, сhiefAccountant, executerSignature, clientSignature, tableInfo,}) => {
+const Invoice = ({ exciseRate, VATRate, procedureDate, invoiceNumber, invoiceDate, client, clientBINNumber, clientAdress, clientBank, clientIIKNumber, clientBIKBank, executor, executorIIK, executorBINNumber, executorAdress, executorBank, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, executorPosition, executorFullName, clientPosition, clientFullName, dateOfSigning, executivePersonSupplier, executivePersonSupplierPosition, сhiefAccountant, tableInfo,}) => {
     const allCosts = tableInfo.map((i) => i.quantity*i.unitPrice);
 
     const sumOfArrItems = (arr) => {
@@ -470,7 +508,15 @@ const Invoice = ({ exciseRate, VATRate, procedureDate, invoiceNumber, invoiceDat
         exciseRate={exciseRate}
       />
     )
-  )
+  );
+
+  const executorSignature = localStorage.getItem('executorSignature');
+  const executorStamp = localStorage.getItem('executorStamp');
+  const clientSignature = localStorage.getItem('clientSignature');
+  const clientStamp = localStorage.getItem('clientStamp');
+  const сhiefAccountantSignature = localStorage.getItem('сhiefAccountantSignature');
+
+
 
     
 
@@ -724,6 +770,10 @@ const Invoice = ({ exciseRate, VATRate, procedureDate, invoiceNumber, invoiceDat
                         <View style={styles.signatureRowLine}>
                             <Text> </Text>
                         </View>
+                        <View style={styles.clientSignatureView}>
+                            <Image id='clientSignature' src={clientSignature !== null ? clientSignature : ' '} style={styles.clientSignature} alt='clientSignature'/>
+                        </View>
+
                         <View style={styles.signatureUnderRow}>
                             <Text>(Ф.И.О., подпись)</Text>
                         </View>
@@ -734,9 +784,15 @@ const Invoice = ({ exciseRate, VATRate, procedureDate, invoiceNumber, invoiceDat
                         <View style={styles.signatureRowLine}>
                             <Text> </Text>
                         </View>
+                        <View style={styles.chiefAccountantSignatureView}>
+                            <Image id='сhiefAccountantSignature' src={сhiefAccountantSignature !== null ? сhiefAccountantSignature : ' '} style={styles.сhiefAccountantSignature} alt='сhiefAccountantSignature'/>
+                        </View>
                         <View style={styles.signatureUnderRow}>
                             <Text>(Ф.И.О., подпись)</Text>
                         </View>
+                    </View>
+                    <View style={styles.executorStampView}>
+                        <Image id='executorStamp' src={executorStamp !== null ? executorStamp : ' '} style={styles.executorStamp} alt='executorStamp'/>
                     </View>
 
                     <View style={styles.signatureLeftSide}>
@@ -755,7 +811,9 @@ const Invoice = ({ exciseRate, VATRate, procedureDate, invoiceNumber, invoiceDat
                         <View style={styles.signatureRowLine}> 
                             <Text>{executorFullName} </Text>
                         </View>
-
+                        <View style={styles.executorSignatureView}>
+                            <Image id='executorSignature' src={executorSignature !== null ? executorSignature : ' '} style={styles.executorSignature} alt='executorSignature'/>
+                        </View>
                         <View style={styles.signatureUnderRow}>
                             <Text>(Ф.И.О., подпись)</Text>
                         </View>
