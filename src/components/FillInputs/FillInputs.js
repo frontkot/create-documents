@@ -149,18 +149,18 @@ const FillInputs = () => {
                                     <button className={isDocumentAddInfo ? 'hide-info_button' : 'add-info_button'} onClick={(e) => {e.preventDefault();setIsDocumentAddInfo(!isDocumentAddInfo)}}>+</button>
                                 }
                                 {isDocumentAddInfo && 
-                                <>
-                                {isInvoice && 
                                     <>
-                                        <TextInput className='form-text_input' text='Дата совершения процедуры' id='procedureDate'/>
+                                        {isInvoice && 
+                                            <>
+                                                <TextInput className='form-text_input' text='Дата совершения процедуры' id='procedureDate'/>
+                                            </>
+                                        }
+                                        {isAct && 
+                                            <>
+                                                <TextInput className='form-text_input' text='Дата подписания акта' id='dateOfSigning'/>
+                                            </>
+                                        }
                                     </>
-                                }
-                                {isAct && 
-                                    <>
-                                        <TextInput className='form-text_input' text='Дата подписания акта' id='dateOfSigning'/>
-                                    </>
-                                }
-                                </>
                                 }
 
                             </div>
@@ -179,7 +179,7 @@ const FillInputs = () => {
                                         <TextInput className='form-text_input' text='БИН Заказчика/Покупателя' id='clientBINNumber' placeholder='123456789012'/>
                                         {(isInvoice || isPayment) &&
                                             <>
-                                                <TextInput className='form-text_input' text='Адрес Поупателя/Получателя' id='clientAdress' placeholder='Город, улица...'/>
+                                                <TextInput className='form-text_input' text='Адрес Поупателя/Получателя' id='clientAdress' placeholder='Страна, регион, город, район'/>
                                                 <TextInput className='form-text_input' text='Банк получателя' id='clientBank' placeholder=''/>
                                                 <TextInput className='form-text_input' text='ИИК Заказчика/Покупателя' id='clientIIKNumber' placeholder='098765432109'/>
                                                 <TextInput className='form-text_input' text='БИКбанка' id='clientBIKBank' placeholder=''/>
@@ -200,7 +200,7 @@ const FillInputs = () => {
                                         <TextInput className='form-text_input' text='БИН Исполнителя/Поставщика' id='executorBINNumber' placeholder='123456789012'/>
                                         {(isPayment || isInvoice) &&
                                             <>
-                                                <TextInput className='form-text_input' text='Адрес Исполнителя/Поставщика' id='executorAdress' placeholder='Город, улица...'/>
+                                                <TextInput className='form-text_input' text='Адрес Исполнителя/Поставщика' id='executorAdress' placeholder='Страна, регион, город, район'/>
                                             </>
                                         }
                                         {(isPayment || isInvoice) &&

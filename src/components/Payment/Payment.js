@@ -313,8 +313,8 @@ const Payment = ({ docDate, docNumber, VATRate, procedureDate, paymentNumber, pa
 
     const executorSignature = localStorage.getItem('executorSignature');
     const executorStamp = localStorage.getItem('executorStamp');
-    const clientSignature = localStorage.getItem('clientSignature');
-    const clientStamp = localStorage.getItem('clientStamp');
+    // const clientSignature = localStorage.getItem('clientSignature');
+    // const clientStamp = localStorage.getItem('clientStamp');
   
 
     const sumOfArrItems = (arr) => {

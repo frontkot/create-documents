@@ -514,7 +514,7 @@ const Invoice = ({ docDate, docNumber, exciseRate, VATRate, procedureDate, clien
   const executorSignature = localStorage.getItem('executorSignature');
   const executorStamp = localStorage.getItem('executorStamp');
   const clientSignature = localStorage.getItem('clientSignature');
-  const clientStamp = localStorage.getItem('clientStamp');   
+//   const clientStamp = localStorage.getItem('clientStamp');   
 
     return (
         <Document>
