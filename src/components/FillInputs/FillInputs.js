@@ -146,11 +146,10 @@ const FillInputs = () => {
                                 <TextInput className='form-text_input' text='Номер документа(-ов)' id='docNumber'/>
                                 <TextInput className='form-text_input' text='Дата документа' id='docDate'/>
                                 {(isInvoice || isAct) &&
-                                    <button className={isAdditionalInfo ? 'hide-info_button' : 'add-info_button'} onClick={(e) => {e.preventDefault();setIsDocumentAddInfo(!isDocumentAddInfo)}}>+</button>
+                                    <button className={isDocumentAddInfo ? 'hide-info_button' : 'add-info_button'} onClick={(e) => {e.preventDefault();setIsDocumentAddInfo(!isDocumentAddInfo)}}>+</button>
                                 }
                                 {isDocumentAddInfo && 
                                 <>
-
                                 {isInvoice && 
                                     <>
                                         <TextInput className='form-text_input' text='Дата совершения процедуры' id='procedureDate'/>
