@@ -392,13 +392,7 @@ const styles = StyleSheet.create({
         right: 0,
         width: 70,  
       },
-      chiefAccountantSignatureView: {
-        position: 'absolute',
-        top: 12,
-        right: 0,
-        width: 70,  
-      },
-   
+  
       executorStampView: {
         position: 'absolute',
         top: 0,
@@ -419,7 +413,7 @@ const styles = StyleSheet.create({
     
 })
 
-const Invoice = ({ exciseRate, VATRate, procedureDate, invoiceNumber, invoiceDate, client, clientBINNumber, clientAdress, clientBank, clientIIKNumber, clientBIKBank, executor, executorIIK, executorBINNumber, executorAdress, executorBank, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, executorPosition, executorFullName, clientPosition, clientFullName, dateOfSigning, executivePersonSupplier, executivePersonSupplierPosition, сhiefAccountant, tableInfo,}) => {
+const Invoice = ({ docDate, docNumber, exciseRate, VATRate, procedureDate, client, clientBINNumber, clientAdress, clientBank, clientIIKNumber, clientBIKBank, executor, executorIIK, executorBINNumber, executorAdress, executorBank, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, executorPosition, executorFullName, clientPosition, clientFullName, dateOfSigning, executivePersonSupplier, executivePersonSupplierPosition, сhiefAccountant, tableInfo,}) => {
     const allCosts = tableInfo.map((i) => i.quantity*i.unitPrice);
 
     const sumOfArrItems = (arr) => {
@@ -510,24 +504,26 @@ const Invoice = ({ exciseRate, VATRate, procedureDate, invoiceNumber, invoiceDat
     )
   );
 
+    const month = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+    const date = docDate.slice(0, 2);
+    const monthInWorld = month[+docDate.slice(3, 5) - 1]
+    const year = docDate.slice(6);
+    const fullDate = date + ' ' + monthInWorld + ' ' + year + ' г.';
+
+
   const executorSignature = localStorage.getItem('executorSignature');
   const executorStamp = localStorage.getItem('executorStamp');
   const clientSignature = localStorage.getItem('clientSignature');
-  const clientStamp = localStorage.getItem('clientStamp');
-  const сhiefAccountantSignature = localStorage.getItem('сhiefAccountantSignature');
-
-
-
-    
+  const clientStamp = localStorage.getItem('clientStamp');   
 
     return (
         <Document>
             <Page size='A4' style={styles.page}>
                 <View style={styles.docHeader}>
                     <Text>Счет-фактура № </Text>
-                    <Text>{invoiceNumber} </Text>
+                    <Text>{docNumber} </Text>
                     <Text>от </Text>
-                    <Text>{invoiceDate}</Text>
+                    <Text>{fullDate}</Text>
                 </View>
                 <View style={styles.simpleRow}>
                     <Text>Дата совершения оборота: </Text>
@@ -778,14 +774,11 @@ const Invoice = ({ exciseRate, VATRate, procedureDate, invoiceNumber, invoiceDat
                             <Text>(Ф.И.О., подпись)</Text>
                         </View>
                         <View style={styles.signatureRowBold}>
-                            <Text>Главный бухгалтер: </Text>
+                            <Text>Главный бухгалтер: Не предусмотрен</Text>
                             <Text>{сhiefAccountant} </Text>
                         </View>
                         <View style={styles.signatureRowLine}>
                             <Text> </Text>
-                        </View>
-                        <View style={styles.chiefAccountantSignatureView}>
-                            <Image id='сhiefAccountantSignature' src={сhiefAccountantSignature !== null ? сhiefAccountantSignature : ' '} style={styles.сhiefAccountantSignature} alt='сhiefAccountantSignature'/>
                         </View>
                         <View style={styles.signatureUnderRow}>
                             <Text>(Ф.И.О., подпись)</Text>

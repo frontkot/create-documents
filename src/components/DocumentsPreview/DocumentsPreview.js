@@ -12,23 +12,23 @@ const DocumentsPreview = () => {
     return (
         <>  
             <div className='doc-preview'>
-                <Link to='/filling' className='go-button'>Вернуться к редактированию документов</Link>
+                <Link to='/filling' className='go-button'>К заполнению</Link>
                 {isAct && 
                     <Link to={'/preview-act'} className='go-button'>
-                        Перейти к предпросмотру акта выполненых работ
+                        Акт выполненых работ
                     </Link>
                 }
                 {isInvoice &&
                     <>
                     <Link to={'/preview-invoice'} className='go-button'>
-                        Перейти к предпросмотру cчета-фактуры
+                        Счет-фактура
                     </Link>
                     </>
                 }
                 {isPayment &&
                     <>
                     <Link to={'/preview-payment'} className='go-button'>
-                        Перейти к предпросмотру счета на оплату
+                        Счета на оплату
                     </Link>
                     </>
                 }

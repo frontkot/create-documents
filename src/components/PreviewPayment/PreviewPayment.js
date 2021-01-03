@@ -8,13 +8,9 @@ import { Link } from 'react-router-dom';
 const PreviewAct = () => {
     const data = useSelector(getData);
     const {
-        actNumber,
-        actDate,
-        invoiceNumber,
-        invoiceDate,
+        docNumber,
+        docDate,
         procedureDate,
-        paymentNumber,
-        paymentDate,
         client,
         clientBINNumber,
         clientAdress,
@@ -68,19 +64,15 @@ const PreviewAct = () => {
     return (
         <>
             <div className='preview-button_block'>
-                <Link to='/filling' className='go-button'>На страницу заполнения документов</Link>
-                <Link to='/preview' className='go-button'>Обратно к предпросмотру документов</Link>
+                <Link to='/filling' className='go-button'>Заполнение</Link>
+                <Link to='/preview' className='go-button'>Предпросмотр</Link>
             </div>
 
             <BlobProvider document={
             <Payment
-                actNumber={actNumber}
-                actDate={actDate}
-                invoiceNumber={invoiceNumber}
-                invoiceDate={invoiceDate}
+                docNumber={docNumber}
+                docDate={docDate}
                 procedureDate={procedureDate}
-                paymentNumber={paymentNumber}
-                paymentDate={paymentDate}
                 client={client}
                 clientBINNumber={clientBINNumber}
                 clientAdress={clientAdress}

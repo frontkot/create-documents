@@ -39,8 +39,8 @@ const PreviewAct = () => {
         exciseRate,
         exciseTax,
         price,
-        actNumber,
-        actDate,
+        docNumber,
+        docDate,
         inventoryUsageInformation,
         numberOfPafes,
         documentsList,
@@ -75,12 +75,14 @@ const PreviewAct = () => {
     return (
         <>
             <div className='preview-button_block'>
-                <Link to='/filling' className='go-button'>На страницу заполнения документов</Link>
-                <Link to='/preview' className='go-button'>Обратно к предпросмотру документов</Link>
+                <Link to='/filling' className='go-button'>Заполнение</Link>
+                <Link to='/preview' className='go-button'>Предпросмотр</Link>
             </div>
 
             <BlobProvider document={
                 <Act
+                    docNumber={docNumber}
+                    docDate={docDate}
                     fileName={docName}
                     client={client}
                     clientTaxNumber={clientTaxNumber}
@@ -112,8 +114,6 @@ const PreviewAct = () => {
                     exciseRate={exciseRate}
                     exciseTax={exciseTax}
                     price={price}
-                    actNumber={actNumber}
-                    actDate={actDate}
                     inventoryUsageInformation={inventoryUsageInformation}
                     numberOfPafes={numberOfPafes}
                     documentsList={documentsList}

@@ -524,7 +524,7 @@ const styles = StyleSheet.create({
 
 });
 
-const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, contractDate, actNumber, actDate, inventoryUsageInformation, numberOfPafes, documentsList, executerPosition, executerFullName, clientPosition, clientFullName, tableInfo, dateOfSigning,}) => {
+const Act = ({ docDate, docNumber, client, clientTaxNumber, executor, executorTaxNumber, contract, contractDate, actNumber, actDate, inventoryUsageInformation, numberOfPafes, documentsList, executerPosition, executerFullName, clientPosition, clientFullName, tableInfo, dateOfSigning,}) => {
   const allCosts = tableInfo.map((i) => i.quantity*i.unitPrice);
   const allQuantity = tableInfo.map((i) => +i.quantity);
   const sumOfArrItems = (arr) => {
@@ -651,7 +651,7 @@ const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, c
                 <Text>Номер документа</Text>
               </View>
               <View style={styles.actInfoContent}>
-                <Text>{actNumber} </Text>
+                <Text>{docNumber} </Text>
               </View>
             </View>
             <View style={styles.actDataLeft}>
@@ -659,7 +659,7 @@ const Act = ({ client, clientTaxNumber, executor, executorTaxNumber, contract, c
                 <Text>Дата составления</Text>
               </View>
               <View style={styles.actInfoContent}>
-                <Text>{actDate} </Text>
+                <Text>{docDate} </Text>
               </View>
             </View>
           </View>

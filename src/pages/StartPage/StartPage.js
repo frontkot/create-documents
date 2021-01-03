@@ -19,10 +19,10 @@ const StartPage = () => {
         <>
             <div className='start-page'>
                 <Link to={'/filling'} className='start-page_link' onClick={(e) => clearForm(e)}>
-                    Перейти к заполнению нового документа
+                    Hовый документ
                 </Link>
                 {oldInfo && <Link to={'/filling'} className='start-page_link'>
-                    Использовать последние введенные данные
+                    Последние данные
                 </Link>}
             </div>
         </>

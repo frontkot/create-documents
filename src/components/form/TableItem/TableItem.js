@@ -2,13 +2,14 @@ import React from 'react';
 import { Field } from 'formik';
 
 const TableItem = ({
-    text, id, className, placeholder
+    text, id, className, placeholder, readOnly
 }) => {
     return (
             text ?
                 <>
                     <div className={className}>
                         <Field
+                            readOnly
                             value={text}
                             id={id}
                             name={id}

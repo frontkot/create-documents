@@ -1,14 +1,22 @@
 import * as actions from './types';
 
 const newDate = new Date();
-const month = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
-const currentMonth = newDate.getMonth() + 1;
-const today = newDate.getDate() + '.' + currentMonth + '.' + newDate.getFullYear();
-const todayWithMonth = newDate.getDate() + ' ' + month[newDate.getMonth()] + ' ' + newDate.getFullYear();
+const checkDate = (date) => {
+  let num = date ? newDate.getDate() : newDate.getMonth() + 1;
+  if(num < 10) {
+    num = '0' + num;
+  }
+  return num
+}
+const thatDate = checkDate(true);
+const thatMonth = checkDate();
 
+const today = thatDate + '.' + thatMonth + '.' + newDate.getFullYear();
 
 const initialState = {
   data: JSON.parse(localStorage.getItem('data-info')) || {
+    docNumber: '1',
+    docDate: today,
     client: '',
     clientTaxNumber: '',
     clientBINNumber: '',
@@ -28,10 +36,7 @@ const initialState = {
     CMR: '',
     shipper: '',
     consignee: '',
-    actNumber: '1',
-    actDate: today,
-    invoiceNumber: '1',
-    invoiceDate: `${todayWithMonth} г.`,
+    procedureDate: today,
     inventoryUsageInformation: '',
     numberOfPafes: '',
     documentsList: '',
@@ -42,8 +47,6 @@ const initialState = {
     beneficiaryBank: '',
     beneficiaryBIK: '',
     beneficiaryBankCode: '',
-    paymentNumber: '1',
-    paymentDate: today,
     totalPayableForAll: '',
     includingVAT: '',
     totalItems: '',
@@ -66,7 +69,6 @@ const initialState = {
     clientSignature: localStorage.getItem('clientSignature') || '',
     executorStamp: localStorage.getItem('executorStamp') || '',
     clientStamp: localStorage.getItem('clientStamp') || '',
-    сhiefAccountantSignature: localStorage.getItem('сhiefAccountantSignature') || '',
   },
   isAct: JSON.parse(localStorage.getItem('is-act')) || false,
   isInvoice:  JSON.parse(localStorage.getItem('is-invoice')) || false,
@@ -85,7 +87,6 @@ const reducer = (state = initialState, action) => {
       return { ...state, tableInfo: action.payload }
     case actions.DELETE_DATA:
       localStorage.clear();
-      // localStorage.removeItem('сhiefAccountantSignature')
       // localStorage.removeItem('executorSignature')
       // localStorage.removeItem('clientSignature')
       // localStorage.removeItem('executorStamp')

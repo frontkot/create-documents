@@ -307,7 +307,7 @@ const styles = StyleSheet.create({
     
 })
 
-const Payment = ({ VATRate, procedureDate, paymentNumber, paymentDate, client, clientBINNumber, clientAdress, clientBank, clientIIKNumber, clientBIKBank, executor, executorBINNumber, executorAdress, executorIIK, executorBank, beneficiary, beneficiaryTaxNumber, executorKbe, executorBankBIK, executorBankCode, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, shipper, consignee, totalPayableForAll, includingVAT, totalItems, totalForAmount, currency, inventoryUsageInformation, numberOfPafes, documentsList, executorPosition, executorFullName, executivePersonSupplier, executivePersonSupplierPosition, clientPosition, clientFullName, сhiefAccountant, dateOfSigning, tableInfo,}) => {
+const Payment = ({ docDate, docNumber, VATRate, procedureDate, paymentNumber, paymentDate, client, clientBINNumber, clientAdress, clientBank, clientIIKNumber, clientBIKBank, executor, executorBINNumber, executorAdress, executorIIK, executorBank, beneficiary, beneficiaryTaxNumber, executorKbe, executorBankBIK, executorBankCode, contract, contractDate, contractСonditions, destination, proxy, departureMethod, CMR, shipper, consignee, totalPayableForAll, includingVAT, totalItems, totalForAmount, currency, inventoryUsageInformation, numberOfPafes, documentsList, executorPosition, executorFullName, executivePersonSupplier, executivePersonSupplierPosition, clientPosition, clientFullName, сhiefAccountant, dateOfSigning, tableInfo,}) => {
     const allCosts = tableInfo.map((i) => i.quantity*i.unitPrice);
     const allQuantity = tableInfo.map((i) => +i.quantity);
 
@@ -342,7 +342,7 @@ const Payment = ({ VATRate, procedureDate, paymentNumber, paymentDate, client, c
         }
     );
 
-    const TableRow = ({ num, nameOfGoods, measure, quantity, unitPrice, productCode}) => (
+    const TableRow = ({ docDate, docNumber, num, nameOfGoods, measure, quantity, unitPrice, productCode}) => (
         <View style={styles.tableRow}>
           <View style={styles.firstCol}>
             <View style={styles.tableCell}>
@@ -473,9 +473,9 @@ const Payment = ({ VATRate, procedureDate, paymentNumber, paymentDate, client, c
                 <View style={styles.paymentTitle}>
                     <View style={styles.paymentTitleText}>
                         <Text>Счет на оплату №</Text>
-                        <Text>{paymentNumber} </Text>
+                        <Text>{docNumber} </Text>
                         <Text>от </Text>
-                        <Text>{paymentDate}</Text>
+                        <Text>{docDate}</Text>
                     </View>
                 </View>
 
