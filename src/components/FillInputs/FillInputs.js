@@ -29,14 +29,19 @@ const FillInputs = () => {
     const [isContractAddInfo, setIsContractAddInfo] = useState(false);
     const [isDocumentAddInfo, setIsDocumentAddInfo] = useState(false);
 
+    const [isVAT, setIsVAT] = useState(false);
+    const [isExcise, setIsExcise] = useState(false);
 
 
-
+    
+    
+    
+    
     const VATRatePerc = 20;
     const WithoutVAT = 100;
     const ExciseRatePerc = 20;
     const WithoutExciseRate = 100;
-
+    
     const isClientStamp = localStorage.getItem('clientStamp') !== null;
     const isClientSignature = localStorage.getItem('clientSignature') !== null;
     const isExecutorStamp = localStorage.getItem('executorStamp') !== null;
@@ -71,6 +76,8 @@ const FillInputs = () => {
         const sum = sumOfPrice(values.tableInfo);
         const VAT = VATPrice(values);
         const excise = excisePrice(values);
+        VAT === 0 ? setIsVAT(false) : setIsVAT(true);
+        excise === 0 ? setIsExcise(false) : setIsExcise(true);
         return sum+VAT+excise;
     }
 
@@ -305,10 +312,10 @@ const FillInputs = () => {
                                                         <option value={VATRatePerc}>НДС 20%</option>
                                                     </Field>
                                                     {isInvoice &&
-                                                    <Field as='select' className='form-select' name='exciseRate'>
-                                                        <option value={WithoutExciseRate}>Без Акциза</option>
-                                                        <option value={ExciseRatePerc}>Акциз 20%</option>
-                                                    </Field>
+                                                        <Field as='select' className='form-select' name='exciseRate'>
+                                                            <option value={WithoutExciseRate}>Без Акциза</option>
+                                                            <option value={ExciseRatePerc}>Акциз 20%</option>
+                                                        </Field>
                                                     }
                                                 </>
                                             }
@@ -317,10 +324,12 @@ const FillInputs = () => {
                                             {(isInvoice || isPayment) &&
                                                 <>
                                                     <p className='total-info'><span>Итого:</span><span>{sumOfPrice(values.tableInfo)}</span></p>
-                                                    <p className='total-info'><span>Всего НДС:</span><span>{VATPrice(values)}</span></p>
-                                                        {isInvoice &&
+                                                    {isVAT &&
+                                                        <p className='total-info'><span>Всего НДС:</span><span>{VATPrice(values)}</span></p>
+                                                    }
+                                                    {(isInvoice && isExcise) &&
                                                         <p className='total-info'><span>Всего Акциз:</span><span>{excisePrice(values)}</span></p>
-                                                        }
+                                                    }
                                                 </>
                                             }
                                             <p className='total-info'><span>Всего к оплате:</span><span>{totalPrice(values)}</span></p>
