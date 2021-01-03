@@ -54,7 +54,6 @@
             outline: none;
             border: 1px solid rgb(200, 200, 200);
             padding: 5px;
-            
             &:focus {
                 border: 1px solid rgb(116, 179, 255);
             }
@@ -174,9 +173,12 @@
         &-number__area, &-name__area, &-code__area, &-date__area, &-measure__area, &-quantity__area, &-price__area, &-total__area {
             background-image:none;
             padding: 3px;
-            // outline: 0.5px solid rgb(209, 209, 209);
+            outline: none;
             border: 0.5px solid rgb(148, 148, 148);
             margin: -1px 0;
+            &:focus {
+                background-color: rgb(235, 244, 255);        
+            }
         }
     }
 }

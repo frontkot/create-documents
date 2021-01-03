@@ -4,7 +4,7 @@ import TextInput from '../form/TextInput/TextInput';
 import SubmitButton from '../form/SubmitButton/SubmitButton';
 import InfoLabel from '../form/InfoLabel/InfoLabel';
 import './FillInputs.scss';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getData, getIsAct, getIsInvoice, getIsPayment } from '../../store/inputData/selectors';
 import { updateData, deleteData } from '../../store/inputData/actions';
@@ -53,7 +53,7 @@ const FillInputs = () => {
     const sumOfPrice = (val) => {
         let num = 0;
         for(let i=0; i < val.length; i++) {
-            if(val[i].unitPrice !== undefined) {
+            if(val[i].unitPrice !== undefined && val[i].quantity !== undefined) {
                     num = num + val[i].unitPrice*val[i].quantity
             }
         }
@@ -76,24 +76,19 @@ const FillInputs = () => {
         const sum = sumOfPrice(values.tableInfo);
         const VAT = VATPrice(values);
         const excise = excisePrice(values);
+
         VAT === 0 ? setIsVAT(false) : setIsVAT(true);
         excise === 0 ? setIsExcise(false) : setIsExcise(true);
         return sum+VAT+excise;
     }
 
-    const totalUnitPrice = (values, index) => {
-        // const i = values.tableInfo[index].unitPrice.length > 0 && values.tableInfo[index].quantity.length > 0;
-        const y = values.tableInfo[index].unitPrice !== undefined && values.tableInfo[index].quantity !== undefined
-        // console.log(i)
-        console.log(y)
-
-
-        return (values.tableInfo[index].unitPrice !== undefined && values.tableInfo[index].quantity !== undefined) ?
+    const totalUnitPrice = (values, index) => (
+        (values.tableInfo[index].unitPrice !== undefined && values.tableInfo[index].quantity !== undefined) ?
             (values.tableInfo[index].unitPrice.length > 0 && values.tableInfo[index].quantity.length > 0) ?
                 values.tableInfo[index].unitPrice*values.tableInfo[index].quantity
                 : '0'
             : '0'
-    }
+    )
 
     const emptyItem = () => (
         {
