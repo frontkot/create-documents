@@ -303,6 +303,14 @@ const styles = StyleSheet.create({
         left: 350,
         width: 70,
     },
+    template: {
+        position: 'absolute',
+        fontSize: 100,
+        top: '30%',
+        left: '20%',
+        opacity: 0.5,
+    },
+    
     
     
 })
@@ -400,6 +408,10 @@ const Payment = ({ docDate, docNumber, VATRate, procedureDate, paymentNumber, pa
     return (
         <Document>
             <Page size='A4' style={styles.page}>
+                <View style={styles.template}>
+                    <Text>Образец</Text>
+                </View>
+
                 <View style={styles.pageInfo}>
                     <View style={styles.pageInfoDescription}>
                         <Text>Внимание! Оплата данного счета означает согласие с условиями поставки товара. Уведомление об оплате обязательно, в противном случае не гарантируется наличие товара на складе. Товар отпускается по факту прихода денег на р/с Поставщика, самовывозом, при наличии доверенности и документов удостоверяющих личность.</Text>

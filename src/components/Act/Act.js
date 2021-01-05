@@ -519,7 +519,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontWeight: 700,
 
-  }
+  },
+  template: {
+    position: 'absolute',
+    fontSize: 100,
+    top: '30%',
+    left: '20%',
+    opacity: 0.5,
+  },
 
 
 });
@@ -608,6 +615,10 @@ const Act = ({ docDate, docNumber, client, clientTaxNumber, executor, executorTa
   return (
     <Document>
         <Page size='A4' style={styles.page}>
+        <View style={styles.template}>
+          <Text>Образец</Text>
+        </View>
+
         <View style={styles.title}>
           <View style={styles.titleText}><Text>Приложение 50</Text></View>
           <View style={styles.titleText}><Text>к приказу Министра финансов</Text></View>

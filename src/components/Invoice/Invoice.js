@@ -410,6 +410,14 @@ const styles = StyleSheet.create({
         right: 0,
         width: 70,
       },
+      template: {
+        position: 'absolute',
+        fontSize: 100,
+        top: '30%',
+        left: '20%',
+        opacity: 0.5,
+      },
+    
     
 })
 
@@ -519,6 +527,10 @@ const Invoice = ({ docDate, docNumber, exciseRate, VATRate, procedureDate, clien
     return (
         <Document>
             <Page size='A4' style={styles.page}>
+                <View style={styles.template}>
+                    <Text>Образец</Text>
+                </View>
+
                 <View style={styles.docHeader}>
                     <Text>Счет-фактура № </Text>
                     <Text>{docNumber} </Text>
