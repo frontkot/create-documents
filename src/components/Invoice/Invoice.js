@@ -514,7 +514,7 @@ const Invoice = ({ docDate, docNumber, exciseRate, VATRate, procedureDate, clien
 
     const month = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
     const date = docDate.slice(0, 2);
-    const monthInWorld = month[+docDate.slice(3, 5) - 1]
+    const monthInWorld = month[+docDate.slice(3, 5) - 1];
     const year = docDate.slice(6);
     const fullDate = date + ' ' + monthInWorld + ' ' + year + ' г.';
 
